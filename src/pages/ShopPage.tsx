@@ -3,10 +3,15 @@ import React from 'react'
 
 import ProductCard from 'src/components/ProductCard'
 import useProducts from 'src/hooks/useProducts'
+import Container from 'src/components/Container'
 
 const storeId = '7ec840a066d21812'
 
-const Wrapper = styled.div``
+const ProductsList = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 22px;
+`
 
 export default function ShopPage() {
   const q_products = useProducts({
@@ -18,10 +23,12 @@ export default function ShopPage() {
   console.log('PRODUCTS', q_products)
 
   return (
-    <Wrapper>
-      {q_products.data?.data.map((p) => {
-        return <ProductCard key={p.id} product={p} />
-      })}
-    </Wrapper>
+    <Container>
+      <ProductsList>
+        {q_products.data?.data.map((p) => {
+          return <ProductCard key={p.id} product={p} />
+        })}
+      </ProductsList>
+    </Container>
   )
 }

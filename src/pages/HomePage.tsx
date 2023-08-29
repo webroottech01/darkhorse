@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 import React from 'react'
+import { Link } from '@tanstack/react-router'
 
-const Wrapper = styled.div`
-  background-color: red;
-`
+import Container from 'src/components/Container'
 
 export default function HomePage() {
-  return <Wrapper>Hello World</Wrapper>
+  return <Container>Home Page</Container>
 }

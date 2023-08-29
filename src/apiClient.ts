@@ -20,7 +20,9 @@ export async function request<T extends object>({
   const fullUrl = joinUrl(baseUrl, path)
 
   const res = await fetch(
-    !!params ? fullUrl + '?' + new URLSearchParams(params) : fullUrl,
+    !!params && Object.keys(params).length
+      ? fullUrl + '?' + new URLSearchParams(params)
+      : fullUrl,
     {
       method: type ?? 'GET',
       headers: {
@@ -28,6 +30,10 @@ export async function request<T extends object>({
       },
     }
   )
+
+  if (!res.ok) {
+    throw new Error(`api-error - ${res.statusText}`)
+  }
 
   return res.json()
 }

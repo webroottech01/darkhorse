@@ -1,35 +1,29 @@
-import { useState, useEffect } from 'react'
+import { UseQueryOptions, useQuery } from '@tanstack/react-query'
+
+import { request } from 'src/apiClient'
 import { Product } from 'src/types'
 
-export default function useProducts(storeId: string) {
-  const [status, setStatus] = useState('idle')
-  const [data, setData] = useState<{
-    data: Product[]
-  }>({
-    data: [],
-  })
+type ProductsResponse = { data: Product[] }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setStatus('fetching')
-      const response = await fetch(
-        'http://localhost:3030/2023-03/products?' +
-          new URLSearchParams({
-            storeId,
-          }),
-        {
-          headers: {
-            'x-dispense-api-key': '4e098e6b-8e87-459f-bae4-84101618caff',
-          },
-        }
-      )
-      const data = await response.json()
-      setData(data)
-      setStatus('fetched')
+export default function useProducts({
+  params,
+  options,
+}: {
+  params: {
+    storeId: string
+  }
+  options?: UseQueryOptions<ProductsResponse>
+}) {
+  return useQuery<ProductsResponse>(
+    ['products', params],
+    () => {
+      return request<ProductsResponse>({
+        path: '/products',
+        params,
+      })
+    },
+    {
+      ...options,
     }
-
-    fetchData()
-  }, [])
-
-  return data
+  )
 }

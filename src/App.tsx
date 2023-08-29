@@ -1,25 +1,15 @@
 import React from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import styled from 'styled-components'
 
-import useProducts from './hooks/useProducts'
-import ProductCard from './components/ProductCard'
+import HomePage from './pages/HomePage'
 
-const storeId = '7ec840a066d21812'
-
-const Wrapper = styled.div`
-  background-color: red;
-`
+const queryClient = new QueryClient()
 
 export default function App() {
-  const q_products = useProducts(storeId)
-
-  console.log('PRODUCTS', q_products)
- 
   return (
-    <Wrapper>
-      {q_products.data.map((p) => {
-        return <ProductCard key={p.id} product={p} />
-      })}
-    </Wrapper>
+    <QueryClientProvider client={queryClient}>
+      <HomePage />
+    </QueryClientProvider>
   )
 }

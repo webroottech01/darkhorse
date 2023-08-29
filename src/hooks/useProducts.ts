@@ -10,7 +10,7 @@ export default function useProducts({
   options,
 }: {
   params: {
-    storeId: string
+    venueId: string
   }
   options?: UseQueryOptions<ProductsResponse>
 }) {

@@ -4,8 +4,7 @@ import React from 'react'
 import ProductCard from 'src/components/ProductCard'
 import useProducts from 'src/hooks/useProducts'
 import Container from 'src/components/Container'
-
-const storeId = '7ec840a066d21812'
+import useVenueId from 'src/hooks/useVenueId'
 
 const ProductsList = styled.div`
   display: grid;
@@ -14,9 +13,10 @@ const ProductsList = styled.div`
 `
 
 export default function ShopPage() {
+  const venueId = useVenueId()
   const q_products = useProducts({
     params: {
-      storeId,
+      venueId,
     },
   })
 

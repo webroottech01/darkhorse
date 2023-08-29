@@ -26,7 +26,7 @@ export async function request<T extends object>({
     {
       method: type ?? 'GET',
       headers: {
-        'x-dispense-api-key': '4e098e6b-8e87-459f-bae4-84101618caff',
+        'x-dispense-api-key': process.env.API_KEY!,
       },
     }
   )

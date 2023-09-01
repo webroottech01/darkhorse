@@ -127,37 +127,35 @@ export const createByVenueId = async (
   //   return null
   // }
 
-  // try {
-  //   const newCart = (
-  //     await getApiClient().request<{
-  //       data: OrderCartWithItemsPopulated
-  //     }>('POST', `/v1/venues/${venueId}/order-carts`, {
-  //       body: {
-  //         ...options,
-  //         items,
-  //       },
-  //     })
-  //   ).data as OrderCartWithItemsPopulated
+  options.items = [...(options.items ?? []), ...(options.newItems ?? [])]
+  delete options.newItems
 
-  //   return _saveNewCart(newCart, {
-  //     disableNotifications: options.disableNotifications,
-  //   })
-  // } catch (error: any) {
-  //   if (
-  //     error.message === PricingError.PROMO_ERROR ||
-  //     error.message === PricingError.PROMO_INVALID
-  //   ) {
-  //     if (previousCart) {
-  //       clearCart()
-  //     }
-  //   } else if (error.message === 'venueReward') {
-  //     throw new Error('Sorry, the reward you selected is no longer available')
-  //   }
+  const cartData = {
+    ...options,
+    date: new Date().toISOString(),
+  }
 
-  //   throw error
-  // }
+  try {
+    const newCart = await request<OrderCart>({
+      type: 'POST',
+      path: `/venues/${venueId}/carts`,
+      body: cartData,
+    })
 
-  throw new Error('Not implemented')
+    console.log('newCart', newCart)
+
+    cookie.set(COOKIE, newCart.id, cookieAttributes)
+
+    // return _saveNewCart(newCart, {
+    //   disableNotifications: options.disableNotifications,
+    // })
+
+    queryClient.setQueryData(QueryClientKey.CART, newCart)
+
+    return newCart
+  } catch (error: any) {
+    throw error
+  }
 }
 
 function getStoredCart() {

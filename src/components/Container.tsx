@@ -8,11 +8,11 @@ const Container = styled.div<ContainerProps>`
   margin-inline: auto;
   position: relative;
 
-  @media (min-width: 1300px) {
-    width: 1300px;
+  @media (min-width: 1200px) {
+    width: 1200px;
   }
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1200px) {
     width: 100%;
   }
 `

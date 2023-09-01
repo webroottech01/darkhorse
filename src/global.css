@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap');
+
 :root {
-  --brand-primary: hsl(var(--brand-primary-h), var(--brand-primary-s), var(--brand-primary-l));
-  --brand-primary-darker: hsl(var(--brand-primary-h), var(--brand-primary-s), calc(var(--brand-primary-l) * 0.9));
-  --brand-primary-darkest: hsl(var(--brand-primary-h), var(--brand-primary-s), calc(var(--brand-primary-l) * 0.8));
-  --brand-secondary: hsl(var(--brand-secondary-h), var(--brand-secondary-s), var(--brand-secondary-l));
-  --brand-secondary-darker: hsl(var(--brand-secondary-h), var(--brand-secondary-s), calc(var(--brand-secondary-l) * 0.9));
-  --brand-secondary-darkest: hsl(var(--brand-secondary-h), var(--brand-secondary-s), calc(var(--brand-secondary-l) * 0.8));
+  --brand-primary: #2d69d5;
+  --brand-secondary: hsl(
+    var(--brand-secondary-h),
+    var(--brand-secondary-s),
+    var(--brand-secondary-l)
+  );
   /* Colors */
   --brand-danger: #ef4d61;
   --brand-danger-lightest: #fbe9ec;
@@ -32,15 +34,21 @@
   --card-border-color: #e2e6ed;
   --dropdown-backdrop: rgba(0, 0, 0, 0.3);
   --box-shadow: rgba(0, 0, 0, 0.15);
+
+  --font-family-primary: 'Source Sans 3';
+  --font-family-secondary: 'Source Sans 3';
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Source Sans 3', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f8fd;
+}
+
+a {
+  text-decoration: none;
 }
 
 code {

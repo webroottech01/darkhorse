@@ -88,7 +88,7 @@ export default function TopNav() {
       >
         <LeftCol>
           <Logo to="/" search={{}} params={{}}>
-            <Icon type="LOGO" />
+            <Icon type="LOGO" width="193" height="24" viewBox="0 0 193 24" />
           </Logo>
           <Links />
         </LeftCol>

@@ -1,10 +1,32 @@
 import React from 'react'
+import styled from 'styled-components'
 
-type IconProps = {
-  type: 'LOGO' | 'CART' | 'SEARCH'
+type IconType =
+  | 'LOGO'
+  | 'CART'
+  | 'SEARCH'
+  | 'CLOSE_X_CIRCLED'
+  | 'INFO_CIRCLED'
+  | 'CHECK_MARK_CIRCLED'
+  | 'CLOSE_X'
+
+type IconArgs = {
+  type: IconType
+  height?: number | string
+  width?: number | string
+  viewBox?: string
+  color?: string
 }
 
-export default function Icon({ type }: IconProps) {
+const Svg = styled.svg<IconArgs>`
+  outline: none;
+`
+
+export type IconProps = IconArgs & React.ComponentProps<typeof Svg>
+
+const getIconByType = (type: IconType, color?: string) => {
+  const fill = color ?? 'currentColor'
+
   switch (type) {
     case 'LOGO':
       return (
@@ -87,7 +109,64 @@ export default function Icon({ type }: IconProps) {
           />
         </svg>
       )
+    case 'CLOSE_X':
+      return (
+        <>
+          <path
+            d="M12.2028 10.0815L10.0815 12.2028L23.163 25.2843L10.0815 38.3658L12.2028 40.4871L25.2843 27.4056L38.3658 40.4871L40.4871 38.3658L27.4056 25.2843L40.4871 12.2028L38.3657 10.0815L25.2843 23.163L12.2028 10.0815Z"
+            fill={fill}
+          />
+        </>
+      )
+    case 'CHECK_MARK_CIRCLED':
+      return (
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M25 41.5C34.1127 41.5 41.5 34.1127 41.5 25C41.5 15.8873 34.1127 8.5 25 8.5C15.8873 8.5 8.5 15.8873 8.5 25C8.5 34.1127 15.8873 41.5 25 41.5ZM32.8595 21.5283C33.4482 20.8326 33.3614 19.7915 32.6658 19.2029C31.9701 18.6143 30.929 18.701 30.3404 19.3967L22.5861 28.5608L19.7078 24.8189C19.1522 24.0967 18.1162 23.9615 17.3939 24.5171C16.6716 25.0728 16.5365 26.1087 17.0921 26.831L21.2171 32.1935C21.5212 32.5889 21.9879 32.8254 22.4865 32.837C22.9852 32.8486 23.4624 32.634 23.7845 32.2533L32.8595 21.5283Z"
+          fill={fill}
+        />
+      )
+    case 'CLOSE_X_CIRCLED':
+      return (
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M25 41.5C34.1127 41.5 41.5 34.1127 41.5 25C41.5 15.8873 34.1127 8.5 25 8.5C15.8873 8.5 8.5 15.8873 8.5 25C8.5 34.1127 15.8873 41.5 25 41.5ZM32.292 20.6248C33.0975 19.8194 33.0975 18.5135 32.292 17.708C31.4866 16.9026 30.1807 16.9026 29.3752 17.708L25 22.0832L20.6248 17.708C19.8193 16.9026 18.5134 16.9026 17.708 17.708C16.9025 18.5135 16.9025 19.8194 17.708 20.6248L22.0832 25.0001L17.708 29.3753C16.9025 30.1807 16.9025 31.4866 17.708 32.2921C18.5134 33.0976 19.8193 33.0976 20.6248 32.2921L25 27.9169L29.3752 32.2921C30.1807 33.0976 31.4866 33.0976 32.292 32.2921C33.0975 31.4866 33.0975 30.1807 32.292 29.3753L27.9168 25.0001L32.292 20.6248Z"
+          fill={fill}
+        />
+      )
+    case 'INFO_CIRCLED':
+      return (
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M41.5 25C41.5 34.1127 34.1127 41.5 25 41.5C15.8873 41.5 8.5 34.1127 8.5 25C8.5 15.8873 15.8873 8.5 25 8.5C34.1127 8.5 41.5 15.8873 41.5 25ZM27.0625 17.7812C27.0625 18.9203 26.1391 19.8438 25 19.8438C23.8609 19.8438 22.9375 18.9203 22.9375 17.7812C22.9375 16.6422 23.8609 15.7188 25 15.7188C26.1391 15.7188 27.0625 16.6422 27.0625 17.7812ZM25 22.9375C23.8609 22.9375 22.9375 23.8609 22.9375 25V33.25C22.9375 34.3891 23.8609 35.3125 25 35.3125C26.1391 35.3125 27.0625 34.3891 27.0625 33.25V25C27.0625 23.8609 26.1391 22.9375 25 22.9375Z"
+          fill={fill}
+        />
+      )
     default:
       return null
   }
+}
+
+export default function Icon({
+  type,
+  width,
+  height,
+  viewBox,
+  color,
+}: IconProps) {
+  return (
+    <Svg
+      type={type}
+      width={width ?? 50}
+      height={height ?? 50}
+      viewBox={viewBox ?? '0 0 50 50'}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {getIconByType(type, color)}
+    </Svg>
+  )
 }

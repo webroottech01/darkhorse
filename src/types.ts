@@ -1,3 +1,5 @@
+export type Venue = {}
+
 export type Product = {
   id: string
   name: string
@@ -14,4 +16,8 @@ export type User = {
   name: string
   firstName: string
   lastName: string
+}
+
+export type OrderCart = {
+  id: string
 }

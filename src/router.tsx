@@ -11,7 +11,7 @@ import { css } from 'styled-components'
 
 import { User } from './types'
 import useAuth from './hooks/useAuth'
-import Layout from './pages/Layout'
+import App from './pages/App'
 
 type AuthContext = {
   loggedIn?: boolean
@@ -47,7 +47,7 @@ function AuthProvider(props: { children: React.ReactNode }) {
 //     : () => null
 
 const rootRoute = routerContext.createRootRoute({
-  component: Layout,
+  component: App,
 })
 
 export const indexRoute = new Route({

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-type IconType =
+export type IconType =
   | 'LOGO'
   | 'CART'
   | 'SEARCH'

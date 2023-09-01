@@ -1,11 +1,16 @@
 import { useParams } from '@tanstack/react-router'
 import React from 'react'
+import Button from 'src/components/Button'
 import Container from 'src/components/Container'
+import Typography from 'src/components/Typography'
 
 import useProduct from 'src/hooks/useProduct'
+import useVenueId from 'src/hooks/useVenueId'
+import { addProduct } from 'src/utils/cartUtils'
 import { css } from 'styled-components'
 
 export default function ProductPage() {
+  const venueId = useVenueId()
   const params = useParams()
 
   const q_product = useProduct({
@@ -37,14 +42,41 @@ export default function ProductPage() {
         >
           {q_product.data?.image ? <img src={q_product.data?.image} /> : null}
         </div>
-        <div css={css``}>
-          <h1>{q_product.data?.name}</h1>
-          <h2>{q_product.data?.brand?.name}</h2>
-          <h3
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+          `}
+        >
+          <Typography variant="body-sm" style={{ margin: 0 }}>
+            {q_product.data?.brand?.name}
+          </Typography>
+          <Typography variant="h1" style={{ margin: 0 }}>
+            {q_product.data?.name}
+          </Typography>
+          <Typography
+            variant="body"
             dangerouslySetInnerHTML={{
               __html: q_product.data?.description ?? '',
             }}
-          ></h3>
+          ></Typography>
+          <div>
+            <Button
+              variant="primary"
+              onClick={(e) => {
+                e.preventDefault()
+
+                addProduct({
+                  venueId,
+                  productId: q_product.data?.id!,
+                  quantity: 1,
+                })
+              }}
+            >
+              Add to Cart
+            </Button>
+          </div>
         </div>
       </div>
     </Container>

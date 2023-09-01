@@ -5,6 +5,7 @@ import { Link } from '@tanstack/react-router'
 import Container from 'src/components/Container'
 import { imageUrl } from 'src/utils/imgix'
 import Typography from 'src/components/Typography'
+import Button from 'src/components/Button'
 
 const Hero = styled.div`
   height: 700px;
@@ -16,7 +17,7 @@ const Hero = styled.div`
   gap: 20px;
   padding: 100px 0;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
 `
 
 export default function HomePage() {
@@ -46,6 +47,15 @@ export default function HomePage() {
       >
         Blazing Stories. Legendary Strains.
       </Typography>
+      <Link to="/shop">
+        <Button
+          size="default"
+          variant="tertiary"
+          style={{ paddingInline: '60px' }}
+        >
+          SHOP
+        </Button>
+      </Link>
     </Hero>
   )
 }

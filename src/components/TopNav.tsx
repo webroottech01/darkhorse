@@ -33,6 +33,7 @@ const LeftCol = styled.div`
   flex-direction: row;
   align-items: center;
   height: 100%;
+  gap: 50px;
 `
 
 const RightCol = styled.div`
@@ -93,7 +94,9 @@ export default function TopNav() {
         </LeftCol>
         <RightCol>
           <Icon type="SEARCH" />
-          <Icon type="CART" />
+          <Link to="/cart">
+            <Icon type="CART" />
+          </Link>
         </RightCol>
       </Container>
     </TopNavEl>

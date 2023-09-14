@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import React from 'react'
 import { Link } from '@tanstack/react-router'
 
-import { imageUrl } from 'dispense-blueprint-sdk'
+import { imageUrl } from 'src/sdk'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 

@@ -10,8 +10,6 @@ const useCart = (
 ) => {
   const venueId = useVenueId()
 
-  console.log('venueId', venueId)
-
   return useQuery<OrderCart | null>({
     ...((options ?? {}) as any),
     queryKey: QueryClientKey.CART,

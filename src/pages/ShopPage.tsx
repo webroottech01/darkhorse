@@ -20,8 +20,6 @@ export default function ShopPage() {
     },
   })
 
-  console.log('PRODUCTS', q_products)
-
   return (
     <Container>
       <ProductsList>

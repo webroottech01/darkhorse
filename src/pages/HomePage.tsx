@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from '@tanstack/react-router'
 
 import Container from 'src/components/Container'
-import { imageUrl } from 'src/utils/imgix'
+import { imageUrl } from 'src/sdk/utils/imageUtils'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 

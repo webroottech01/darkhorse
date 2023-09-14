@@ -3,6 +3,7 @@ import React from 'react'
 import Button from 'src/components/Button'
 import Container from 'src/components/Container'
 import Typography from 'src/components/Typography'
+import useCheckout from 'src/hooks/useCheckout'
 
 import useProduct from 'src/hooks/useProduct'
 import useVenueId from 'src/hooks/useVenueId'
@@ -18,6 +19,8 @@ export default function ProductPage() {
       productId: params.productId!,
     },
   })
+
+  const { checkout } = useCheckout()
 
   return (
     <Container>
@@ -64,14 +67,16 @@ export default function ProductPage() {
           <div>
             <Button
               variant="primary"
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault()
 
-                addProduct({
+                const cart = await addProduct({
                   venueId,
                   productId: q_product.data?.id!,
                   quantity: 1,
                 })
+
+                if (cart) checkout(cart.id, venueId)
               }}
             >
               Add to Cart

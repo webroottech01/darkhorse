@@ -2,8 +2,9 @@ import cookie, { CookieAttributes } from 'js-cookie'
 import { request } from 'src/apiClient'
 import { QueryClientKey, queryClient } from 'src/queryClient'
 
-import { CartItem, OrderCart } from 'src/types'
+import { OrderCart } from 'src/types'
 import topBarNotificationUtils from './topBarNotificationUtils'
+import { getCartById } from 'src/api/cartService'
 
 const cookieAttributes: CookieAttributes = {
   sameSite: 'strict',
@@ -13,13 +14,7 @@ const cookieAttributes: CookieAttributes = {
 const COOKIE = 'leaf-lore-cart-id'
 
 export const getFromStoredByVenueId = async (
-  venueId: string,
-  options?: {
-    firstName?: string
-    lastName?: string
-    phone?: string
-    email?: string
-  }
+  venueId: string
 ): Promise<OrderCart | null> => {
   if (!venueId) throw new Error('venueId is required')
 
@@ -31,14 +26,17 @@ export const getFromStoredByVenueId = async (
 
   if (cart) return cart
 
-  const _cart = await request<OrderCart>({
-    path: `/carts/${cartId}`,
-    params: {},
-  })
+  try {
+    const _cart = await getCartById(cartId)
 
-  queryClient.setQueryData(QueryClientKey.CART, _cart)
+    queryClient.setQueryData(QueryClientKey.CART, _cart)
 
-  return _cart
+    return _cart
+  } catch (error) {
+    queryClient.setQueryData(QueryClientKey.CART, null)
+
+    return null
+  }
 }
 
 export const addProduct = async ({

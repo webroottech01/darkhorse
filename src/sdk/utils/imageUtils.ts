@@ -40,7 +40,5 @@ export const imageUrl = (
 
   const _url = new URL(url)
 
-  console.log('URL', _url)
-
   return imgixClient.buildURL(_url.pathname, params)
 }

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { Product } from 'src/types'
 import Typography from './Typography'
-import { imageUrl } from 'src/sdk/utils/imageUtils'
+import { imageUrl } from 'dispense-blueprint-sdk'
 
 const Card = styled(Link)`
   border: 1px solid var(--gray-light, #e2e6ed);

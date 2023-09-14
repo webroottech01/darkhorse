@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "src/*": ["src/*"]
+      "src/*": ["src/*", "packages/sdk/*"]
     },
     "jsx": "react",
     "outDir": "dist/",
@@ -29,6 +29,6 @@
     "sourceMap": true,
     "moduleResolution": "node"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "packages/sdk/**/*.ts", "packages/sdk/**/*.tsx"],
   "exclude": ["node_modules"]
 }

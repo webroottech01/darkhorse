@@ -42,6 +42,7 @@ const RightCol = styled.div`
   flex-direction: row;
   align-items: center;
   height: 100%;
+  gap: 20px;
 `
 
 const Links = () => {

@@ -1,44 +1,61 @@
-import ImgixClient from 'imgix-core-js'
-
-const imgixClient = new ImgixClient({
-  domain: 'dispense-images.imgix.net',
-  useHTTPS: true,
-})
-
 export const imageUrl = (
   url: string,
-  imgxOptions?: {
+  options?: {
     height?: number | string
-    maxHeight?: number | string
     width?: number | string
-    auto?: string
-    fit?:
-      | 'clamp'
-      | 'crop'
-      | 'clip'
-      | 'facearea'
-      | 'fill'
-      | 'fillmax'
-      | 'max'
-      | 'min'
-      | 'scale'
-    dpr?: string
-    ar?: string
+    // auto?: string
+    // fit?:
+    //   | 'clamp'
+    //   | 'crop'
+    //   | 'clip'
+    //   | 'facearea'
+    //   | 'fill'
+    //   | 'fillmax'
+    //   | 'max'
+    //   | 'min'
+    //   | 'scale'
+    // dpr?: string
+    // ar?: string
   }
 ) => {
-  imgxOptions = imgxOptions || {}
+  options = options ?? {}
 
-  const params: any = {}
+  // const params: any = {}
 
-  if (imgxOptions.fit) params.fit = imgxOptions.fit
-  if (imgxOptions.height) params.h = imgxOptions.height
-  if (imgxOptions.width) params.w = imgxOptions.width
-  if (imgxOptions.dpr) params.dpr = imgxOptions.dpr
-  params.auto = imgxOptions.auto ?? 'format,compress'
+  // if (imgxOptions.fit) params.fit = imgxOptions.fit
+  // if (imgxOptions.height) params.h = imgxOptions.height
+  // if (imgxOptions.width) params.w = imgxOptions.width
+  // if (imgxOptions.dpr) params.dpr = imgxOptions.dpr
+  // params.auto = imgxOptions.auto ?? 'format,compress'
 
-  if (imgxOptions.maxHeight) params['max-h'] = imgxOptions.maxHeight
+  // if (imgxOptions.maxHeight) params['max-h'] = imgxOptions.maxHeight
 
-  const _url = new URL(url)
+  const imageUrl = new URL(url)
+  // imageUrl.searchParams.append('h', options.height)
+  // imageUrl.searchParams.append('h', '100px')
+  // imageUrl.searchParams.append('h', '100px')
+  // imageUrl.searchParams.append('h', '100px')
 
-  return imgixClient.buildURL(_url.pathname, params)
+  Object.keys(options).forEach((key: keyof typeof options) => {
+    const value = options?.[key]
+
+    let _key: string = key
+
+    if (key === 'height') {
+      _key = 'h'
+    } else if (key === 'weight') {
+      _key = 'w'
+    }
+
+    if (value) {
+      imageUrl.searchParams.append(_key, value)
+    }
+  })
+
+  imageUrl.searchParams.append('fit', 'crop')
+  imageUrl.searchParams.append('auto', 'format,compress')
+
+  // return imgixClient.buildURL(imageUrl.pathname, params)
+
+  return imageUrl.toString()
 }

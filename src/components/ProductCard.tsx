@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { Product } from 'src/types'
 import Typography from './Typography'
+import { imageUrl } from 'src/sdk/utils/imageUtils'
 
 const Card = styled(Link)`
   border: 1px solid var(--gray-light, #e2e6ed);
@@ -39,7 +40,12 @@ export default function ProductCard({ product }: { product: Product }) {
       }}
     >
       {product.image ? (
-        <ProductImage src={product.image} alt={product.name} />
+        <ProductImage
+          src={imageUrl(product.image, {
+            height: '186px',
+          })}
+          alt={product.name}
+        />
       ) : null}
       {!!product.brand?.name && (
         <Typography variant="h3">{product.brand.name}</Typography>

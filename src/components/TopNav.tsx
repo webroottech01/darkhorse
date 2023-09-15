@@ -4,6 +4,9 @@ import styled, { css } from 'styled-components'
 
 import Container from 'src/components/Container'
 import Icon from './Icon'
+import Badge from './Badge'
+import useCart from 'src/hooks/useCart'
+import { getTotalItemCount } from 'src/utils/cartUtils'
 
 const topNavLinks = [
   {
@@ -75,6 +78,8 @@ const Links = () => {
 }
 
 export default function TopNav() {
+  const q_cart = useCart()
+
   return (
     <TopNavEl>
       <Container
@@ -95,8 +100,25 @@ export default function TopNav() {
         </LeftCol>
         <RightCol>
           <Icon type="SEARCH" />
-          <Link to="/cart">
+          <Link
+            to="/cart"
+            css={css`
+              display: flex;
+              flex-direction: row;
+              gap: 4px;
+              align-items: center;
+              justify-content: center;
+            `}
+          >
             <Icon type="CART" />
+            {q_cart?.data?.items && q_cart?.data?.items.length ? (
+              <Badge
+                style={{ position: 'absolute', top: '14px', right: '10px' }}
+                variant="primary"
+              >
+                {getTotalItemCount()}
+              </Badge>
+            ) : null}
           </Link>
         </RightCol>
       </Container>

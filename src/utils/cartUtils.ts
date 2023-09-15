@@ -101,6 +101,20 @@ export const addProduct = async ({
   }
 }
 
+export const getTotalItemCount = () => {
+  const cart = getCart()
+
+  if (!cart || !cart.items) return 0
+
+  let total = 0
+
+  cart.items.forEach((i) => {
+    total += i.quantity
+  })
+
+  return total
+}
+
 function getCart() {
   return queryClient.getQueryData<OrderCart>(QueryClientKey.CART)
 }

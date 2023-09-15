@@ -3,11 +3,12 @@ import { QueryClientKey, queryClient } from 'src/queryClient'
 
 import { OrderCart } from 'src/types'
 import topBarNotificationUtils from './topBarNotificationUtils'
-import { createCart, getCartById } from 'src/api/cartService'
+import { createCart } from 'src/api/cartService'
 
 const cookieAttributes: CookieAttributes = {
   sameSite: 'strict',
   secure: false,
+  session: false,
 }
 
 const CART_KEY = 'leaf_lore_cart'
@@ -84,7 +85,10 @@ export const addProduct = async ({
           }
         })
       ),
-      cookieAttributes
+      {
+        ...cookieAttributes,
+        expires: 7,
+      }
     )
 
     queryClient.setQueryData(QueryClientKey.CART, {

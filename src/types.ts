@@ -1,5 +1,7 @@
+/* --- Venue --- */
 export type Venue = {}
 
+/* --- Product --- */
 export type Product = {
   id: string
   name: string
@@ -24,9 +26,30 @@ export enum ProductType {
   MERCHANDISE = 'MERCHANDISE',
 }
 
+/* --- Pricing/Discounts/Fees --- */
 export enum DiscountType {
   PERCENT = 'PERCENT',
   FLAT = 'FLAT',
+}
+
+export type Discount = {
+  name: string
+  value: number
+  amount: number
+  type: DiscountType
+  appliesTo: 'CART' | 'ITEM'
+}
+
+export enum FeeType {
+  PERCENT = 'PERCENT',
+  FLAT = 'FLAT',
+}
+
+export type Fee = {
+  name: string
+  value: number
+  amount: number
+  type: FeeType
 }
 
 /* --- User --- */
@@ -85,5 +108,18 @@ export type CartItem = {
 
 export type OrderCart = {
   id: string
+  created: string
   items: CartItem[]
+  date: string
+  discountTotal?: number
+  discounts?: Discount[]
+  feeTotal?: number
+  fees?: Fee[]
+  organization: string
+  venue: string
+  subtotal: number
+  subtotalWithoutDiscounts: number
+  tax?: number
+  taxPercent?: number
+  total: number
 }

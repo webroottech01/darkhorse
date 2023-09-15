@@ -68,12 +68,6 @@ export const productRoute = new Route({
   component: lazyRouteComponent(() => import('src/pages/ProductPage')),
 })
 
-export const cartRoute = new Route({
-  getParentRoute: () => rootRoute,
-  path: 'cart',
-  component: lazyRouteComponent(() => import('src/pages/CartPage')),
-})
-
 export const notFoundRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '*',
@@ -93,7 +87,7 @@ export const notFoundRoute = new Route({
 })
 
 const routeTree = rootRoute.addChildren([
-  indexRoute.addChildren([shopRoute, productRoute, cartRoute]),
+  indexRoute.addChildren([shopRoute, productRoute]),
   notFoundRoute,
 ])
 

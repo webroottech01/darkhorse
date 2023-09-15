@@ -7,6 +7,8 @@ import Icon from './Icon'
 import Badge from './Badge'
 import useCart from 'src/hooks/useCart'
 import { getTotalItemCount } from 'src/utils/cartUtils'
+import Cart from 'src/components/Cart'
+import SlideOutPanel from './SlideOutPanel'
 
 const topNavLinks = [
   {
@@ -79,49 +81,64 @@ const Links = () => {
 
 export default function TopNav() {
   const q_cart = useCart()
+  const [cartSlideOutOpen, setCartSlideOutOpen] = React.useState(false)
 
   return (
-    <TopNavEl>
-      <Container
-        css={css`
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 20px;
-          padding-block: 0;
-          height: 100%;
-        `}
+    <>
+      <TopNavEl>
+        <Container
+          css={css`
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            padding-block: 0;
+            height: 100%;
+          `}
+        >
+          <LeftCol>
+            <Logo to="/" search={{}} params={{}}>
+              <Icon type="LOGO" width="193" height="24" viewBox="0 0 193 24" />
+            </Logo>
+            <Links />
+          </LeftCol>
+          <RightCol>
+            <Icon type="SEARCH" />
+            <a
+              href="#"
+              css={css`
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+                align-items: center;
+                justify-content: center;
+              `}
+              onClick={(e) => {
+                e.preventDefault()
+
+                setCartSlideOutOpen(true)
+              }}
+            >
+              <Icon type="CART" />
+              {q_cart?.data?.items && q_cart?.data?.items.length ? (
+                <Badge
+                  style={{ position: 'absolute', top: '14px', right: '10px' }}
+                  variant="primary"
+                >
+                  {getTotalItemCount()}
+                </Badge>
+              ) : null}
+            </a>
+          </RightCol>
+        </Container>
+      </TopNavEl>
+      <SlideOutPanel
+        width="600px"
+        open={cartSlideOutOpen}
+        onClose={() => setCartSlideOutOpen(false)}
       >
-        <LeftCol>
-          <Logo to="/" search={{}} params={{}}>
-            <Icon type="LOGO" width="193" height="24" viewBox="0 0 193 24" />
-          </Logo>
-          <Links />
-        </LeftCol>
-        <RightCol>
-          <Icon type="SEARCH" />
-          <Link
-            to="/cart"
-            css={css`
-              display: flex;
-              flex-direction: row;
-              gap: 4px;
-              align-items: center;
-              justify-content: center;
-            `}
-          >
-            <Icon type="CART" />
-            {q_cart?.data?.items && q_cart?.data?.items.length ? (
-              <Badge
-                style={{ position: 'absolute', top: '14px', right: '10px' }}
-                variant="primary"
-              >
-                {getTotalItemCount()}
-              </Badge>
-            ) : null}
-          </Link>
-        </RightCol>
-      </Container>
-    </TopNavEl>
+        <Cart onClose={() => setCartSlideOutOpen(false)} />
+      </SlideOutPanel>
+    </>
   )
 }

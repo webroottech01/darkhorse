@@ -1,39 +1,39 @@
 import cookie, { CookieAttributes } from 'js-cookie'
-import { request } from 'src/apiClient'
 import { QueryClientKey, queryClient } from 'src/queryClient'
 
 import { OrderCart } from 'src/types'
 import topBarNotificationUtils from './topBarNotificationUtils'
-import { getCartById } from 'src/api/cartService'
+import { createCart, getCartById } from 'src/api/cartService'
 
 const cookieAttributes: CookieAttributes = {
   sameSite: 'strict',
   secure: false,
 }
 
-const COOKIE = 'leaf-lore-cart-id'
+const CART_KEY = 'leaf_lore_cart'
 
 export const getFromStoredByVenueId = async (
   venueId: string
 ): Promise<OrderCart | null> => {
   if (!venueId) throw new Error('venueId is required')
 
-  const cartId = cookie.get(COOKIE)
-
-  if (!cartId) return null
-
-  const cart = getStoredCart()
+  const cart = getCart()
 
   if (cart) return cart
 
   try {
-    const _cart = await getCartById(cartId)
+    const cartItems = JSON.parse(cookie.get(CART_KEY) ?? '[]')
 
-    queryClient.setQueryData(QueryClientKey.CART, _cart)
+    if (!cartItems || !cartItems.length) return null
 
-    return _cart
-  } catch (error) {
-    queryClient.setQueryData(QueryClientKey.CART, null)
+    const result = await createCart({
+      venueId,
+      items: cartItems,
+    })
+
+    return result
+  } catch (error: any) {
+    console.log('error creating cart', error)
 
     return null
   }
@@ -50,19 +50,21 @@ export const addProduct = async ({
   quantity: number
   purchaseWeight?: number
 }) => {
-  const cart = getStoredCart()
+  const cart = getCart()
 
-  const items = cart?.items ?? []
+  const items = (cart?.items ?? []).map((i) => {
+    return {
+      productId: i.product.id,
+      quantity: i.quantity,
+      purchaseWeight: i.purchaseWeight,
+    }
+  })
 
   try {
-    const result = await createByVenueId(venueId, {
-      items: items.map((i) => {
-        return {
-          ...i,
-          productId: i.product.id,
-        }
-      }),
-      newItems: [
+    const cart = await createCart({
+      venueId,
+      items: [
+        ...items,
         {
           productId,
           quantity,
@@ -71,7 +73,25 @@ export const addProduct = async ({
       ],
     })
 
-    return result
+    cookie.set(
+      CART_KEY,
+      JSON.stringify(
+        cart.items.map((i) => {
+          return {
+            productId: i.product.id,
+            quantity: i.quantity,
+            purchaseWeight: i.purchaseWeight,
+          }
+        })
+      ),
+      cookieAttributes
+    )
+
+    queryClient.setQueryData(QueryClientKey.CART, {
+      ...cart,
+    })
+
+    return cart
   } catch (error: any) {
     topBarNotificationUtils.show({
       text: error.message,
@@ -81,81 +101,6 @@ export const addProduct = async ({
   }
 }
 
-type CartItemCreate = {
-  productId: string
-  quantity: number
-  purchaseWeight?: number
-}
-
-export const createByVenueId = async (
-  venueId: string,
-  options: {
-    items: CartItemCreate[]
-    newItems?: CartItemCreate[]
-    disableNotifications?: boolean
-    sessionId?: string
-    promoCode?: string | null
-    firstName?: string
-    lastName?: string
-    phone?: string
-    email?: string
-  }
-): Promise<OrderCart | null> => {
-  if (!venueId) throw new Error('venueId is required')
-  if (!options) throw new Error('options is required')
-  if (!options.items) throw new Error('options.items.length')
-
-  options.sessionId = Math.random().toString(36).substring(2, 15)
-
-  // if (options.newItems) validateItems(options.newItems)
-
-  // const previousCart = getStoredCart()
-
-  // const items = getItems(options)
-
-  // if (options.promoCode === undefined && previousCart?.promoCode) {
-  //   const previousPromoCode = getPreviousPromoCode(previousCart)
-
-  //   if (previousPromoCode) options.promoCode = previousPromoCode
-  // }
-
-  // if (!items.length) {
-  //   clearCart()
-
-  //   return null
-  // }
-
-  options.items = [...(options.items ?? []), ...(options.newItems ?? [])]
-  delete options.newItems
-
-  const cartData = {
-    ...options,
-    date: new Date().toISOString(),
-  }
-
-  try {
-    const newCart = await request<OrderCart>({
-      type: 'POST',
-      path: `/venues/${venueId}/carts`,
-      body: cartData,
-    })
-
-    console.log('newCart', newCart)
-
-    cookie.set(COOKIE, newCart.id, cookieAttributes)
-
-    // return _saveNewCart(newCart, {
-    //   disableNotifications: options.disableNotifications,
-    // })
-
-    queryClient.setQueryData(QueryClientKey.CART, newCart)
-
-    return newCart
-  } catch (error: any) {
-    throw error
-  }
-}
-
-function getStoredCart() {
+function getCart() {
   return queryClient.getQueryData<OrderCart>(QueryClientKey.CART)
 }

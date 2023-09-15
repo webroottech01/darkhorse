@@ -29,11 +29,26 @@ export enum DiscountType {
   FLAT = 'FLAT',
 }
 
+/* --- User --- */
+
 export type User = {
   id: string
   name: string
   firstName: string
   lastName: string
+}
+
+/* --- Cart + Order --- */
+
+export type CartCreateArgs = {
+  venueId: string
+  items: {
+    productId: string
+    quantity: number
+    purchaseWeight?: number
+  }[]
+  promoCode?: string
+  sessionId: string
 }
 
 export enum OrderItemStatus {

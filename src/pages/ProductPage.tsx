@@ -3,12 +3,13 @@ import React from 'react'
 import Button from 'src/components/Button'
 import Container from 'src/components/Container'
 import Typography from 'src/components/Typography'
-import useCheckout from 'src/hooks/useCheckout'
+// import useCheckout from 'src/hooks/useCheckout'
+import { css } from 'styled-components'
 
 import useProduct from 'src/hooks/useProduct'
 import useVenueId from 'src/hooks/useVenueId'
 import { addProduct } from 'src/utils/cartUtils'
-import { css } from 'styled-components'
+import { imageUrl } from 'src/sdk'
 
 export default function ProductPage() {
   const venueId = useVenueId()
@@ -19,8 +20,6 @@ export default function ProductPage() {
       productId: params.productId!,
     },
   })
-
-  const { checkout } = useCheckout()
 
   return (
     <Container>
@@ -43,7 +42,13 @@ export default function ProductPage() {
             }
           `}
         >
-          {q_product.data?.image ? <img src={q_product.data?.image} /> : null}
+          {q_product.data?.image ? (
+            <img
+              src={imageUrl(q_product.data?.image, {
+                height: '600px',
+              })}
+            />
+          ) : null}
         </div>
         <div
           css={css`
@@ -70,13 +75,11 @@ export default function ProductPage() {
               onClick={async (e) => {
                 e.preventDefault()
 
-                const cart = await addProduct({
+                await addProduct({
                   venueId,
                   productId: q_product.data?.id!,
                   quantity: 1,
                 })
-
-                if (cart) checkout(cart.id, venueId)
               }}
             >
               Add to Cart

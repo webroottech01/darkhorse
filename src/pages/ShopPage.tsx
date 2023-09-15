@@ -5,6 +5,7 @@ import ProductCard from 'src/components/ProductCard'
 import useProducts from 'src/hooks/useProducts'
 import Container from 'src/components/Container'
 import useVenueId from 'src/hooks/useVenueId'
+import { ProductType } from 'src/types'
 
 const ProductsList = styled.div`
   display: grid;
@@ -17,6 +18,7 @@ export default function ShopPage() {
   const q_products = useProducts({
     params: {
       venueId,
+      type: ProductType.FLOWER,
     },
   })
 

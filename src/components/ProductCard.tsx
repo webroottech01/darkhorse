@@ -2,9 +2,10 @@ import { Link } from '@tanstack/react-router'
 import React from 'react'
 import styled from 'styled-components'
 
-import { Product } from 'src/types'
+import { CannabisType, Product } from 'src/types'
 import Typography from './Typography'
 import { imageUrl } from 'src/sdk'
+import Tag from './Tag'
 
 const Card = styled(Link)`
   border: 1px solid var(--gray-light, #e2e6ed);
@@ -47,6 +48,9 @@ export default function ProductCard({ product }: { product: Product }) {
           alt={product.name}
         />
       ) : null}
+      {(!!product.cannabisType && product.cannabisType !== CannabisType.NA) && (
+        <Tag cannabisType={product.cannabisType}></Tag>
+      )}
       {!!product.brand?.name && (
         <Typography variant="h3">{product.brand.name}</Typography>
       )}

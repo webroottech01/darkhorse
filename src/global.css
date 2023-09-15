@@ -14,15 +14,15 @@
   --brand-warning-lightest: #fbf5e8;
   --brand-info: #3ac4ff;
   --brand-info-lightest: #e9f5fc;
-  --brand-success: #34d39d;
+  --brand-success: #13b510;
   --brand-success-lightest: #e9f6f2;
   --blue: var(--brand-info);
   --green: var(--brand-success);
-  --orange: #fd8000;
+  --orange: #ee870f;
   --yellow: var(--brand-warning);
   --yellow-darker: #c4921c;
   --pink: #eb4892;
-  --purple-dark: #4d32ae;
+  --purple: #6c43ff;
   --brown: #6c3628;
   /* Grays + Blacks */
   --gray-lightest: #fafbfc;

@@ -1,7 +1,7 @@
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 
 import { request } from 'src/apiClient'
-import { Product } from 'src/types'
+import { Product, ProductType } from 'src/types'
 
 type ProductsResponse = { data: Product[] }
 
@@ -11,6 +11,7 @@ export default function useProducts({
 }: {
   params: {
     venueId: string
+    type?: ProductType
   }
   options?: UseQueryOptions<ProductsResponse>
 }) {

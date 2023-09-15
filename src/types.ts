@@ -11,6 +11,8 @@ export type Product = {
   brand?: {
     name?: string
   }
+  type: ProductType
+  cannabisType?: CannabisType
 }
 
 export enum ProductType {
@@ -24,6 +26,26 @@ export enum ProductType {
   ACCESSORIES = 'ACCESSORIES',
   BEVERAGES = 'BEVERAGES',
   MERCHANDISE = 'MERCHANDISE',
+}
+
+export enum CannabisType {
+  INDICA = 'INDICA',
+  SATIVA = 'SATIVA',
+  HYBRID = 'HYBRID',
+  HYBRID_SATIVA = 'HYBRID_SATIVA',
+  HYBRID_INDICA = 'HYBRID_INDICA',
+  CBD = 'CBD',
+  NA = 'NA',
+}
+
+export enum CannabisTypeName {
+  INDICA = 'Indica',
+  HYBRID_INDICA = 'Indica Hybrid',
+  SATIVA = 'Sativa',
+  HYBRID_SATIVA = 'Sativa Hybrid',
+  HYBRID = 'Hybrid',
+  CBD = 'CBD',
+  NA = 'N/A',
 }
 
 /* --- Pricing/Discounts/Fees --- */

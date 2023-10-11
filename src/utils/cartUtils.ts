@@ -3,7 +3,7 @@ import { QueryClientKey, queryClient } from 'src/queryClient'
 
 import { OrderCart } from 'src/types'
 import topBarNotificationUtils from './topBarNotificationUtils'
-import { createCart } from 'src/api/cartService'
+import { createCart, getCartById } from 'src/api/cartService'
 
 const cookieAttributes: CookieAttributes = {
   sameSite: 'strict',
@@ -11,28 +11,23 @@ const cookieAttributes: CookieAttributes = {
   session: false,
 }
 
-const CART_KEY = 'leaf_lore_cart'
+const CART_ID_KEY = 'leaf-and-lore-cart-id'
 
-export const getFromStoredByVenueId = async (
-  venueId: string
-): Promise<OrderCart | null> => {
-  if (!venueId) throw new Error('venueId is required')
-
-  const cart = getCart()
+export const getCart = async (): Promise<OrderCart | null> => {
+  const cart = getCartFromStore()
 
   if (cart) return cart
 
   try {
-    const cartItems = JSON.parse(cookie.get(CART_KEY) ?? '[]')
+    const cartId = cookie.get(CART_ID_KEY)
 
-    if (!cartItems || !cartItems.length) return null
+    if (!cartId) {
+      return {
+        items: [],
+      } as unknown as OrderCart
+    }
 
-    const result = await createCart({
-      venueId,
-      items: cartItems,
-    })
-
-    return result
+    return getCartById(cartId)
   } catch (error: any) {
     console.log('error creating cart', error)
 
@@ -51,7 +46,7 @@ export const addProduct = async ({
   quantity: number
   purchaseWeight?: number
 }) => {
-  const cart = getCart()
+  const cart = getCartFromStore()
 
   const items = (cart?.items ?? []).map((i) => {
     return {
@@ -74,22 +69,10 @@ export const addProduct = async ({
       ],
     })
 
-    cookie.set(
-      CART_KEY,
-      JSON.stringify(
-        cart.items.map((i) => {
-          return {
-            productId: i.product.id,
-            quantity: i.quantity,
-            purchaseWeight: i.purchaseWeight,
-          }
-        })
-      ),
-      {
-        ...cookieAttributes,
-        expires: 7,
-      }
-    )
+    cookie.set(CART_ID_KEY, cart.id, {
+      ...cookieAttributes,
+      expires: 7,
+    })
 
     queryClient.setQueryData(QueryClientKey.CART, {
       ...cart,
@@ -106,7 +89,7 @@ export const addProduct = async ({
 }
 
 export const getTotalItemCount = () => {
-  const cart = getCart()
+  const cart = getCartFromStore()
 
   if (!cart || !cart.items) return 0
 
@@ -119,6 +102,6 @@ export const getTotalItemCount = () => {
   return total
 }
 
-function getCart() {
+function getCartFromStore() {
   return queryClient.getQueryData<OrderCart>(QueryClientKey.CART)
 }

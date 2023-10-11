@@ -1,9 +1,0 @@
-{
-  "name": "dispense-blueprint-sdk",
-  "author": "Dispense Inc.",
-  "version": "0.1.0",
-  "description": "Dispense Blueprint SDK",
-  "main": "index.ts",
-  "dependencies": {},
-  "devDependencies": {}
-}

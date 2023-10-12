@@ -7,6 +7,9 @@ import Typography from './Typography'
 import { imageUrl } from 'src/sdk'
 import Tag from './Tag'
 import Skeleton from './Skeleton'
+import Image from './Image'
+import CardImage from './CardImage'
+import { MediaQuery } from 'src/utils/mediaQueries'
 
 const Card = styled(Link)`
   border: 1px solid var(--gray-light, #e2e6ed);
@@ -23,7 +26,7 @@ const Card = styled(Link)`
   justify-content: center;
 `
 
-const ProductImage = styled.img`
+const ProductImage = styled(Image)`
   width: 100%;
   height: 186px;
   object-fit: contain;
@@ -44,7 +47,7 @@ export default function ProductCard({
       search={{}}
       //@ts-ignore
       params={{
-        productId: product?.id,
+        productId: product?.slug,
       }}
     >
       {variant === 'loading' || !product ? (
@@ -57,11 +60,32 @@ export default function ProductCard({
       ) : (
         <>
           {product.image ? (
-            <ProductImage
+            <CardImage
               src={imageUrl(product.image, {
                 height: '186px',
               })}
               alt={product.name}
+              css={css`
+                margin-bottom: 'auto';
+                justify-content: 'center';
+                height: 160px;
+                width: 100%;
+
+                @media (max-width: ${MediaQuery.screenMd}) {
+                  height: auto;
+                }
+
+                img {
+                  height: 160px;
+                  max-width: 100%;
+                  margin: 0 auto;
+
+                  @media (max-width: ${MediaQuery.screenMd}) {
+                    height: auto;
+                  }
+                }
+              `}
+              height={160}
             />
           ) : null}
           {!!product.cannabisType &&

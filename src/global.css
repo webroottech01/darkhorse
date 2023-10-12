@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap');
 
 :root {
-  --brand-primary: #2d69d5;
+  --brand-primary: #007a4b;
   --brand-secondary: hsl(
     var(--brand-secondary-h),
     var(--brand-secondary-s),

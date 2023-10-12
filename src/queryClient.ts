@@ -9,4 +9,12 @@ export const QueryClientKey = {
   PRODUCTS: ['products'],
 }
 
-export const queryClient = new QueryClient()
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: process.env.ENV !== 'local',
+      refetchOnWindowFocus: process.env.ENV !== 'local',
+      staleTime: 60 * 20000, // 20 minutes
+    },
+  },
+})

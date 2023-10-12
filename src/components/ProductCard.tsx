@@ -1,11 +1,12 @@
 import { Link } from '@tanstack/react-router'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { CannabisType, Product } from 'src/types'
 import Typography from './Typography'
 import { imageUrl } from 'src/sdk'
 import Tag from './Tag'
+import Skeleton from './Skeleton'
 
 const Card = styled(Link)`
   border: 1px solid var(--gray-light, #e2e6ed);
@@ -30,31 +31,49 @@ const ProductImage = styled.img`
   mix-blend-mode: darken;
 `
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  variant,
+}: {
+  product?: Product
+  variant?: 'default' | 'loading'
+}) {
   return (
     <Card
       to={'/products/$productId'}
       search={{}}
       //@ts-ignore
       params={{
-        productId: product.id,
+        productId: product?.id,
       }}
     >
-      {product.image ? (
-        <ProductImage
-          src={imageUrl(product.image, {
-            height: '186px',
-          })}
-          alt={product.name}
-        />
-      ) : null}
-      {(!!product.cannabisType && product.cannabisType !== CannabisType.NA) && (
-        <Tag cannabisType={product.cannabisType}></Tag>
+      {variant === 'loading' || !product ? (
+        <>
+          <Skeleton style={{ height: '186px', width: '80%' }} />
+          <Skeleton style={{ height: '26px', width: '60px' }} />
+          <Skeleton style={{ height: '24px', width: '64px' }} />
+          <Skeleton style={{ height: '25px', width: '85px' }} />
+        </>
+      ) : (
+        <>
+          {product.image ? (
+            <ProductImage
+              src={imageUrl(product.image, {
+                height: '186px',
+              })}
+              alt={product.name}
+            />
+          ) : null}
+          {!!product.cannabisType &&
+            product.cannabisType !== CannabisType.NA && (
+              <Tag cannabisType={product.cannabisType}></Tag>
+            )}
+          {!!product.brand?.name && (
+            <Typography variant="h3">{product.brand.name}</Typography>
+          )}
+          <Typography variant="body">{product.name}</Typography>
+        </>
       )}
-      {!!product.brand?.name && (
-        <Typography variant="h3">{product.brand.name}</Typography>
-      )}
-      <Typography variant="body">{product.name}</Typography>
     </Card>
   )
 }

@@ -25,9 +25,13 @@ export default function ShopPage() {
   return (
     <Container>
       <ProductsList>
-        {q_products.data?.data.map((p) => {
-          return <ProductCard key={p.id} product={p} />
-        })}
+        {q_products.isFetching
+          ? [1, 2, 3, 4, 5, 6].map((n) => (
+              <ProductCard key={n} variant="loading" />
+            ))
+          : q_products.data?.data.map((p) => {
+              return <ProductCard key={p.id} product={p} />
+            })}
       </ProductsList>
     </Container>
   )

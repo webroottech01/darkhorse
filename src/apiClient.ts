@@ -17,7 +17,7 @@ export async function request<T extends object>({
   params?: Record<string, string>
   body?: Record<string, any>
 }): Promise<T> {
-  const fullUrl = joinUrl(process.env.DISPENSE_BASE_URL!, path)
+  const fullUrl = joinUrl(process.env.REACT_APP_DISPENSE_BASE_URL!, path)
 
   const response = await fetch(
     !!params && Object.keys(params).length
@@ -26,7 +26,7 @@ export async function request<T extends object>({
     {
       method: type ?? 'GET',
       headers: {
-        'x-dispense-api-key': process.env.API_KEY!,
+        'x-dispense-api-key': process.env.REACT_APP_API_KEY!,
         'content-type': 'application/json',
       },
       body: !!body ? JSON.stringify(body) : undefined,

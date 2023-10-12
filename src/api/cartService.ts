@@ -14,9 +14,6 @@ export const createCart = async (
   return request<OrderCart>({
     type: 'POST',
     path: `/venues/${data.venueId}/carts`,
-    body: {
-      ...data,
-      sessionId: Math.random().toString(36).substring(2, 15), //TODO: remove this from public API
-    },
+    body: data,
   })
 }

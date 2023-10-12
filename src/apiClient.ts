@@ -1,5 +1,3 @@
-const baseUrl = 'http://localhost:3030/2023-03'
-
 function joinUrl(...parts: string[]): string {
   return parts
     .map((p) => {
@@ -19,7 +17,7 @@ export async function request<T extends object>({
   params?: Record<string, string>
   body?: Record<string, any>
 }): Promise<T> {
-  const fullUrl = joinUrl(baseUrl, path)
+  const fullUrl = joinUrl(process.env.DISPENSE_BASE_URL!, path)
 
   const response = await fetch(
     !!params && Object.keys(params).length

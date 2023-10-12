@@ -9,6 +9,7 @@ import useCart from 'src/hooks/useCart'
 import { getTotalItemCount } from 'src/utils/cartUtils'
 import Cart from 'src/components/Cart'
 import SlideOutPanel from './SlideOutPanel'
+import Image from './Image'
 
 const topNavLinks = [
   {
@@ -38,7 +39,7 @@ const LeftCol = styled.div`
   flex-direction: row;
   align-items: center;
   height: 100%;
-  gap: 50px;
+  gap: 20px;
 `
 
 const RightCol = styled.div`
@@ -98,7 +99,10 @@ export default function TopNav() {
         >
           <LeftCol>
             <Logo to="/" search={{}} params={{}}>
-              <Icon type="LOGO" width="193" height="24" viewBox="0 0 193 24" />
+              <Image
+                height="55px"
+                src="https://assets.dispenseapp.com/highscore-logo.png"
+              />
             </Logo>
             <Links />
           </LeftCol>

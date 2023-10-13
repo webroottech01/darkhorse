@@ -20,10 +20,12 @@ export default function ProductPage() {
 
   const q_product = useProduct({
     params: {
+      venueId,
       productId: params.productId!,
     },
     options: {
       enabled: !!params.productId,
+      keepPreviousData: true,
     },
   })
 

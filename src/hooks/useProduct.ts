@@ -10,6 +10,7 @@ export default function useProducts({
   options,
 }: {
   params: {
+    venueId: string
     productId: string
   }
   options?: UseQueryOptions<ProductResponse>

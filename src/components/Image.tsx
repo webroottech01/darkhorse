@@ -70,7 +70,7 @@ export default function Image(props: ImageProps) {
           transition: opacity 200ms ease-out;
         `}
       >
-        {status === 'error' ? 'Error loading image' : null}
+        {/* {status === 'error' ? 'Error loading image' : null} */}
       </Shimmer>
     </div>
   )

@@ -11,7 +11,7 @@ const cookieAttributes: CookieAttributes = {
   session: false,
 }
 
-const CART_ID_KEY = 'leaf-and-lore-cart-id'
+const CART_ID_KEY = 'highscore-id'
 
 export const getCart = async (): Promise<OrderCart | null> => {
   const cart = getCartFromStore()

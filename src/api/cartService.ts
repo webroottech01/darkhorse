@@ -13,7 +13,7 @@ export const createCart = async (
 ): Promise<OrderCart> => {
   return request<OrderCart>({
     type: 'POST',
-    path: `/venues/${data.venueId}/carts`,
+    path: '/carts',
     body: data,
   })
 }

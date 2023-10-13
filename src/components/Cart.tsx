@@ -54,9 +54,6 @@ const CartFooter = styled.div`
 export default function Cart({ onClose }: { onClose: () => void }) {
   const q_cart = useCart()
   const { checkout } = useCheckout()
-  const venueId = useVenueId()
-
-  console.log('CART', q_cart.data)
 
   return (
     <Wrapper>
@@ -117,7 +114,7 @@ export default function Cart({ onClose }: { onClose: () => void }) {
           onClick={(e) => {
             e.preventDefault()
 
-            checkout(q_cart.data?.id ?? '', venueId)
+            checkout(q_cart.data?.checkoutUrl!)
           }}
           style={{ width: '100%' }}
         >

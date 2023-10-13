@@ -145,4 +145,5 @@ export type OrderCart = {
   tax?: number
   taxPercent?: number
   total: number
+  checkoutUrl?: string
 }

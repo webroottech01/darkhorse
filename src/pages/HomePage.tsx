@@ -24,7 +24,7 @@ export default function HomePage() {
     <Hero
       style={{
         backgroundImage: `url(${imageUrl(
-          'https://dispense-images.imgix.net/dispense-sample-app/hero-2.png',
+          'https://dispense-images.imgix.net/highscore-hero-1.png',
           {
             height: 1200,
           }

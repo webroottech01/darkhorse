@@ -10,6 +10,7 @@ import { getTotalItemCount } from 'src/utils/cartUtils'
 import Cart from 'src/components/Cart'
 import SlideOutPanel from './SlideOutPanel'
 import Image from './Image'
+import router from 'src/router'
 
 const topNavLinks = [
   {
@@ -83,6 +84,14 @@ const Links = () => {
 export default function TopNav() {
   const q_cart = useCart()
   const [cartSlideOutOpen, setCartSlideOutOpen] = React.useState(false)
+
+  React.useEffect(() => {
+    const unsub = router.subscribe('onLoad', () => {
+      setCartSlideOutOpen(false)
+    })
+
+    return unsub
+  }, [])
 
   return (
     <>

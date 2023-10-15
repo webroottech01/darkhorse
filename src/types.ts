@@ -14,6 +14,7 @@ export type Product = {
   }
   type: ProductType
   cannabisType?: CannabisType
+  variants?: Product[]
 }
 
 export enum ProductType {

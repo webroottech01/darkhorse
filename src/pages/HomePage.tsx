@@ -5,6 +5,7 @@ import { Link } from '@tanstack/react-router'
 import { imageUrl } from 'src/sdk'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
+import Container from 'src/components/Container'
 
 const Hero = styled.div`
   height: 700px;
@@ -21,40 +22,55 @@ const Hero = styled.div`
 
 export default function HomePage() {
   return (
-    <Hero
-      style={{
-        backgroundImage: `url(${imageUrl(
-          'https://dispense-images.imgix.net/highscore-hero-1.png',
-          {
-            height: 1200,
-          }
-        )})`,
-      }}
-    >
-      <Typography
-        variant="body"
+    <>
+      <Hero
+        style={{
+          backgroundImage: `url(${imageUrl(
+            'https://dispense-images.imgix.net/highscore-hero-1.png',
+            {
+              height: 1200,
+            }
+          )})`,
+        }}
+      >
+        <Typography
+          variant="body"
+          as="h1"
+          css={css`
+            max-width: 600px;
+            color: #fff;
+            text-align: center;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            font-size: 60px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 65px;
+          `}
+        >
+          Blazing Stories. Legendary Strains.
+        </Typography>
+        <Link to="/shop">
+          <Button
+            size="default"
+            variant="tertiary"
+            style={{ paddingInline: '60px' }}
+          >
+            SHOP
+          </Button>
+        </Link>
+      </Hero>
+      <Container
         css={css`
-          max-width: 600px;
-          color: #fff;
-          text-align: center;
-          text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          font-size: 60px;
-          font-style: normal;
-          font-weight: 700;
-          line-height: 65px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
         `}
       >
-        Blazing Stories. Legendary Strains.
-      </Typography>
-      <Link to="/shop">
-        <Button
-          size="default"
-          variant="tertiary"
-          style={{ paddingInline: '60px' }}
-        >
-          SHOP
-        </Button>
-      </Link>
-    </Hero>
+        <Typography variant="h2" as="h2" style={{ fontWeight: 'bold' }}>
+          Shop by Category
+        </Typography>
+      </Container>
+    </>
   )
 }

@@ -1,50 +1,15 @@
 import * as React from 'react'
 import {
-  Outlet,
   Router,
   Route,
-  RootRoute,
   lazyRouteComponent,
   RouterContext,
 } from '@tanstack/react-router'
 import { css } from 'styled-components'
 
-import { User } from './types'
-import useAuth from './hooks/useAuth'
 import App from './pages/App'
 
-type AuthContext = {
-  loggedIn?: boolean
-  user?: User
-}
-
-export const routerContext = new RouterContext<{
-  auth: AuthContext
-}>()
-
-const AuthContext = React.createContext<AuthContext>(null!)
-
-function AuthProvider(props: { children: React.ReactNode }) {
-  const { loggedIn } = useAuth()
-
-  const contextValue = React.useMemo(
-    () => ({
-      loggedIn,
-    }),
-    [loggedIn]
-  )
-
-  return <AuthContext.Provider value={contextValue} children={props.children} />
-}
-
-// const TanStackRouterDevtools =
-//   process.env.ENV === 'local'
-//     ? React.lazy(() =>
-//         import('@tanstack/router-devtools').then((res) => ({
-//           default: res.TanStackRouterDevtools,
-//         }))
-//       )
-//     : () => null
+export const routerContext = new RouterContext<{}>()
 
 const rootRoute = routerContext.createRootRoute({
   component: App,
@@ -110,9 +75,7 @@ const router = new Router({
       </div>
     )
   },
-  context: {
-    auth: undefined!, // We'll inject this when we render
-  },
+  context: {},
 })
 
 declare module '@tanstack/react-router' {

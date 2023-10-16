@@ -8,11 +8,22 @@ import {
 import { css } from 'styled-components'
 
 import App from './pages/App'
+import { queryClient } from './queryClient'
+import useVenueId from './hooks/useVenueId'
+import { getVenueById } from './api/venueService'
 
 export const routerContext = new RouterContext<{}>()
 
 const rootRoute = routerContext.createRootRoute({
   component: App,
+  loader: async () => {
+    const venueId = process.env.REACT_APP_VENUE_ID!
+
+    return queryClient.prefetchQuery({
+      queryKey: ['venue'],
+      queryFn: () => getVenueById(venueId),
+    })
+  },
 })
 
 export const indexRoute = new Route({

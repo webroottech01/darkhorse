@@ -10,7 +10,7 @@ import { ProductType } from 'src/types'
 const ProductsList = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 22px;
+  gap: 0;
 `
 
 export default function ShopPage() {

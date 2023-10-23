@@ -14,14 +14,22 @@ export async function request<T extends object>({
 }: {
   type?: 'GET' | 'POST' | 'PUT' | 'DELETE'
   path: string
-  params?: Record<string, string>
+  params?: Record<string, string | boolean | string[] | undefined | null>
   body?: Record<string, any>
 }): Promise<T> {
   const fullUrl = joinUrl(process.env.REACT_APP_DISPENSE_BASE_URL!, path)
 
+  const urlParams = new URLSearchParams()
+
+  if (params) {
+    Object.keys(params).forEach((key) => {
+      urlParams.append(key, params[key] as string)
+    })
+  }
+
   const response = await fetch(
     !!params && Object.keys(params).length
-      ? fullUrl + '?' + new URLSearchParams(params)
+      ? fullUrl + '?' + urlParams
       : fullUrl,
     {
       method: type ?? 'GET',

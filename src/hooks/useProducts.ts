@@ -12,7 +12,9 @@ export default function useProducts({
 }: {
   params: {
     venueId: string
-    type?: ProductType
+    featured?: boolean
+    new?: boolean
+    type?: ProductType | ProductType[]
   }
   options?: UseQueryOptions<ProductsResponse>
 }) {

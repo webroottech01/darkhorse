@@ -9,7 +9,6 @@ import { css } from 'styled-components'
 
 import App from './pages/App'
 import { queryClient } from './queryClient'
-import useVenueId from './hooks/useVenueId'
 import { getVenueById } from './api/venueService'
 
 export const routerContext = new RouterContext<{}>()

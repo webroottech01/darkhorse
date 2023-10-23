@@ -1,7 +1,7 @@
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 
 import { request } from 'src/apiClient'
-import { Product } from 'src/types'
+import { Product, ProductType } from 'src/types'
 
 type ProductResponse = Product
 

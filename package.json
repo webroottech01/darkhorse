@@ -15,10 +15,11 @@
     "js-cookie": "^2.2.1",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
+    "react-aria": "3.19.1-nightly.3483",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
+    "react-glider": "^4.0.2",
     "react-hook-form": "^7.30.0",
-    "react-aria": "3.19.1-nightly.3483",
     "styled-components": "^5.3.8"
   },
   "devDependencies": {

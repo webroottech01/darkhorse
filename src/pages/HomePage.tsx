@@ -6,6 +6,7 @@ import { imageUrl } from 'src/sdk'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 import Container from 'src/components/Container'
+import ProductList from 'src/components/ProductList'
 
 const Hero = styled.div`
   height: 700px;
@@ -59,17 +60,20 @@ export default function HomePage() {
           </Button>
         </Link>
       </Hero>
-      <Container
-        css={css`
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        `}
-      >
-        <Typography variant="h2" as="h2" style={{ fontWeight: 'bold' }}>
-          Shop by Category
-        </Typography>
+      <Container>
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          `}
+        >
+          <Typography variant="h2" as="h2" style={{ fontWeight: 'bold' }}>
+            Shop by Category
+          </Typography>
+          <ProductList />
+        </div>
       </Container>
     </>
   )

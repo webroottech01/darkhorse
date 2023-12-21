@@ -3,7 +3,7 @@ import { QueryClientKey, queryClient } from 'src/queryClient'
 
 import { OrderCart } from 'src/types'
 import topBarNotificationUtils from './topBarNotificationUtils'
-import { createCart, getCartById } from 'src/api/cartService'
+import { createCart } from 'src/api/cartService'
 
 const cookieAttributes: CookieAttributes = {
   sameSite: 'strict',
@@ -11,23 +11,45 @@ const cookieAttributes: CookieAttributes = {
   session: false,
 }
 
-const CART_ID_KEY = 'highscore-id'
+const CART_ITEMS_KEY = 'highscore_cart_items'
 
-export const getCart = async (): Promise<OrderCart | null> => {
+export const getCart = async (venueId: string): Promise<OrderCart | null> => {
+  if (!venueId) throw new Error('venueId is required')
+
   const cart = getCartFromStore()
 
-  if (cart) return cart
+  if (cart) {
+    return cart
+  }
 
   try {
-    const cartId = cookie.get(CART_ID_KEY)
+    const cartItems = (
+      JSON.parse(cookie.get(CART_ITEMS_KEY) ?? '[]' ?? []) as {
+        productId: string
+        quantity: number
+        venueId?: string
+      }[]
+    ).filter((i) => {
+      if (!('venueId' in i)) {
+        return true
+      }
 
-    if (!cartId) {
+      return i.venueId === venueId
+    })
+
+    if (!cartItems || !cartItems.length) {
       return {
         items: [],
       } as unknown as OrderCart
     }
 
-    return getCartById(cartId)
+    console.log('venueId', venueId)
+    console.log('cartItems', cartItems)
+
+    return createCart({
+      venueId,
+      items: cartItems,
+    })
   } catch (error: any) {
     console.log('error creating cart', error)
 
@@ -50,7 +72,7 @@ export const addProduct = async ({
 
   const items = (cart?.items ?? []).map((i) => {
     return {
-      productId: i.product.id,
+      productId: i.product,
       quantity: i.quantity,
       purchaseWeight: i.purchaseWeight,
     }
@@ -69,10 +91,16 @@ export const addProduct = async ({
       ],
     })
 
-    cookie.set(CART_ID_KEY, cart.id, {
-      ...cookieAttributes,
-      expires: 7,
-    })
+    setCartCookie(
+      venueId,
+      cart.items.map((i) => {
+        return {
+          productId: i.product,
+          quantity: i.quantity,
+          purchaseWeight: i.purchaseWeight,
+        }
+      })
+    )
 
     queryClient.setQueryData(QueryClientKey.CART, {
       ...cart,
@@ -104,4 +132,22 @@ export const getTotalItemCount = () => {
 
 function getCartFromStore() {
   return queryClient.getQueryData<OrderCart>(QueryClientKey.CART)
+}
+
+function setCartCookie(
+  venueId: string,
+  items: {
+    productId: string
+    quantity: number
+    purchaseWeight?: number
+  }[]
+) {
+  items = items.map((i) => {
+    return {
+      ...i,
+      venueId: 'venueId' in i ? i.venueId : venueId,
+    }
+  })
+
+  cookie.set(CART_ITEMS_KEY, JSON.stringify(items), cookieAttributes)
 }

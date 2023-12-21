@@ -107,7 +107,7 @@ export enum OrderItemStatus {
 
 export type CartItem = {
   id: string
-  product: Product
+  product: string
   slug: string
   image: string
   name: string

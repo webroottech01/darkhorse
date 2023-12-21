@@ -14,6 +14,55 @@ import Skeleton from 'src/components/Skeleton'
 import Image from 'src/components/Image'
 import { MediaQuery } from 'src/utils/mediaQueries'
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  justify-content: space-between;
+  padding-top: 60px;
+`
+
+const LeftCol = styled.div`
+  width: 58.3333%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    border-radius: 60px;
+    border: 1px solid var(--gray-light);
+    max-height: 500px;
+    min-height: 300px;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+`
+
+const RightCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 0 0 auto;
+  width: 41.6667%;
+`
+
+const ImageWrapper = styled.div`
+  position: relative;
+  max-height: 500px;
+  min-height: 300px;
+  max-width: 100%;
+
+  img {
+    max-width: 100%;
+  }
+
+  @media (max-width: ${MediaQuery.screenSm}) {
+    max-height: 100%;
+    min-height: 0;
+  }
+`
+
 export default function ProductPage() {
   const venueId = useVenueId()
   const params = useParams()
@@ -28,55 +77,6 @@ export default function ProductPage() {
       keepPreviousData: true,
     },
   })
-
-  const Wrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 60px;
-    justify-content: space-between;
-    padding-top: 60px;
-  `
-
-  const LeftCol = styled.div`
-    width: 58.3333%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      border-radius: 60px;
-      border: 1px solid var(--gray-light);
-      max-height: 500px;
-      min-height: 300px;
-      margin: 0 auto;
-      max-width: 100%;
-    }
-  `
-
-  const RightCol = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 0 0 auto;
-    width: 41.6667%;
-  `
-
-  const ImageWrapper = styled.div`
-    position: relative;
-    max-height: 500px;
-    min-height: 300px;
-    max-width: 100%;
-
-    img {
-      max-width: 100%;
-    }
-
-    @media (max-width: ${MediaQuery.screenSm}) {
-      max-height: 100%;
-      min-height: 0;
-    }
-  `
 
   return (
     <Container>

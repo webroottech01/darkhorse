@@ -80,6 +80,7 @@ export function ProductsGlider({ loading, products }: ProductsGliderProps) {
           products?.map((product) => (
             <Link
               key={product.id}
+              style={{ height: '100%' }}
               //   to={RouteName.MENU_APP_PRODUCT}
               //   params={{
               //     ...getProductLinkRouteParams(product),

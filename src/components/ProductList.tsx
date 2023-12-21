@@ -3,6 +3,7 @@ import React from 'react'
 import useProducts from 'src/hooks/useProducts'
 import { ProductsGlider } from './ProductsGlider'
 import useVenueId from 'src/hooks/useVenueId'
+import Container from './Container'
 
 export default function ProductList() {
   const venueId = useVenueId()
@@ -15,9 +16,11 @@ export default function ProductList() {
   })
 
   return (
-    <ProductsGlider
-      loading={q_listProducts.isFetching}
-      products={q_listProducts?.data?.data}
-    />
+    <Container>
+      <ProductsGlider
+        loading={q_listProducts.isFetching}
+        products={q_listProducts?.data?.data}
+      />
+    </Container>
   )
 }

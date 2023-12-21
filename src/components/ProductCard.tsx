@@ -36,6 +36,7 @@ export default function ProductCard({
     <div
       css={css`
         padding: 15px 7.5px 20px;
+        height: 100%;
       `}
     >
       <Card

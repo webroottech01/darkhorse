@@ -1,0 +1,42 @@
+
+> blueprint-sample-app-nextjs@1.0.0 build /Users/timofficer/Documents/code/js/dispense/dispense/apps/blueprint-sample-app-nextjs
+> next build
+
+   ▲ Next.js 14.1.0
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+
+./src/components/Glider.tsx
+146:29  Warning: The ref value 'gliderContainerRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'gliderContainerRef.current' to a variable inside the effect, and use that variable in the cleanup function.  react-hooks/exhaustive-deps
+149:6  Warning: React Hook React.useEffect has a missing dependency: 'props.autoplay'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/hooks/useKeyPress.ts
+18:6  Warning: React Hook React.useEffect has missing dependencies: 'key' and 'onKeyPress'. Either include them or remove the dependency array. If 'onKeyPress' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/5) ...
+   Generating static pages (1/5) 
+   Generating static pages (2/5) 
+   Generating static pages (3/5) 
+ ✓ Generating static pages (5/5) 
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    9.74 kB         124 kB
+├ ○ /_not-found                          886 B          85.1 kB
+├ λ /products/[productId]                3.69 kB         111 kB
+└ ○ /shop                                136 B          84.4 kB
++ First Load JS shared by all            84.2 kB
+  ├ chunks/237-724319369e8b9f38.js       29 kB
+  ├ chunks/a130e3cb-bc56d3afde755879.js  53.4 kB
+  └ other shared chunks (total)          1.9 kB
+
+
+○  (Static)   prerendered as static content
+λ  (Dynamic)  server-rendered on demand using Node.js
+

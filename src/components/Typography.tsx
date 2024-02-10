@@ -114,23 +114,25 @@ export const getVariantStyles = (variant?: Variant) => {
       return `
         font-size: 0.8125rem;
         color: var(--gray);
-        font-weight: 700;
+        font-weight: 800;
       `
     case 'h1':
       return `
-        font-size: 2.25rem;
+        font-size: 3.75rem;
         color: var(--black);
+        font-weight: 800;
       `
     case 'h2':
       return `
-        font-size: 1.5rem;
+        font-size: 2.00rem;
         color: var(--black);
+        font-weight: 800;
       `
     case 'h3':
       return `
         font-size: 1rem;
         color: var(--black);
-        font-weight: 700;
+        font-weight: 800;
       `
     case 'h4':
       return `
@@ -149,18 +151,12 @@ export const getVariantStyles = (variant?: Variant) => {
   }
 }
 
-export const getFont = (variant?: Variant) =>
-  variant?.startsWith('number')
-    ? 'var(--font-family-secondary)'
-    : 'var(--font-family-primary)'
-
 export type TypographyProps = {
   variant?: Variant
 }
 
 export const getTypographyStyles = (variant?: Variant) =>
   `
-  font-family: ${getFont(variant)}, sans-serif;
   font-weight: 400;
   font-style: normal;
   font-stretch: normal;

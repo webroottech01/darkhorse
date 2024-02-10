@@ -1,5 +1,6 @@
 {
-  "name": "blueprint-sample-app-nextjs",
+  "name": "dispense-sample-app",
+  "description": "Dispense Sample App",
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev -p 1313",

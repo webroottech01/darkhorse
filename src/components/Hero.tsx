@@ -74,9 +74,9 @@ export default function Hero() {
           <Button
             size="default"
             variant="primary"
-            style={{ paddingInline: '60px' }}
+            style={{ paddingInline: '80px' }}
           >
-            SHOP
+            Shop
           </Button>
         </Link>
       </HeroInner>

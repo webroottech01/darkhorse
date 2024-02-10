@@ -30,7 +30,7 @@ export async function generateMetadata(
   }
 }
 
-export default async function Home() {
+export default async function HomePageSSR() {
   const venue = await getVenueById(process.env.NEXT_PUBLIC_VENUE_ID!)
   const productsResponse = await listProducts({
     venueId: venue.id,

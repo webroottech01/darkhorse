@@ -167,29 +167,43 @@ function Button(
       css={css`
         color: var(--brand-primary);
         position: relative;
-        overflow: hidden;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        height: 50px;
-        margin-bottom: 0;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
-        transition-property: background-color, box-shadow, color;
-        border-radius: 0;
-        border-width: 3px;
-        border-style: solid;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        touch-action: manipulation;
         cursor: pointer;
         user-select: none;
-        background-image: none;
-        padding: 0 30px;
-        outline: none;
+        padding: 10px 10px;
+        position: relative;
+        height: 50px;
+        width: auto;
+        z-index: 2;
+        border: none;
+        box-sizing: border-box;
+
+        &:active {
+          top: 2px;
+        }
+
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 10px;
+          bottom: 10px;
+          left: -10px;
+          right: -10px;
+          z-index: -1;
+        }
+
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 4px;
+          bottom: 4px;
+          left: -6px;
+          right: -6px;
+          z-index: -1;
+        }
+
+        /* ---------------- */
 
         &:disabled {
           opacity: 0.6;
@@ -244,7 +258,12 @@ function Button(
     ${variant === 'primary' &&
         css`
           background-color: var(--brand-primary);
-          border-color: var(--brand-primary);
+
+          &:before,
+          &:after {
+            background-color: var(--brand-primary);
+          }
+
           color: var(--white);
 
           &:not(:disabled) {

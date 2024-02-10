@@ -37,14 +37,10 @@
   --card-border-color: #e2e6ed;
   --dropdown-backdrop: rgba(0, 0, 0, 0.3);
   --box-shadow: rgba(0, 0, 0, 0.15);
-
-  --font-family-primary: 'Source Sans 3';
-  --font-family-secondary: 'Source Sans 3';
 }
 
 body {
   margin: 0;
-  font-family: 'Source Sans 3', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f5f8fd;

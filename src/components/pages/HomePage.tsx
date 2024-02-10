@@ -1,6 +1,6 @@
 'use client'
 
-import { ProductsGlider } from '@/components/ProductsGlider'
+import { ProductsList } from '@/components/ProductsList'
 import Hero from '../Hero'
 import { Product } from '@/types'
 import Typography from '../Typography'
@@ -88,7 +88,7 @@ export default function HomePage({ products }: { products: Product[] }) {
       <Section>
         <Typography variant="h2">Shop Most Popular</Typography>
       </Section>
-      <ProductsGlider products={products} />
+      <ProductsList products={products} />
     </main>
   )
 }

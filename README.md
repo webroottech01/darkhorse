@@ -6,7 +6,14 @@
 
 ## Description
 
-This sample app is built using React and Next.js. You can use this as a starter template to build your own Next.js app, or use it as a reference to build your own custom retailer site on another platform (Wordpress, etc...)
+This sample app is built using:
+
+- [React](https://react.dev/)
+- [NextJS](https://nextjs.org/)
+- [Styled Components](https://styled-components.com/)
+- [TanStack Query](https://tanstack.com/query/latest)
+
+You can use this as a starter template to build your own Next.js app, or use it as a reference to build your own custom retailer site on another platform (Wordpress, etc...)
 This app follows the guidelines of the [Dispense Blueprint](https://api-docs.dispenseapp.com/docs/blueprint) docs to build a fully custom retailer site.
 
 A live version of this repo can be found here <br />

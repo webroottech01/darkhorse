@@ -14,7 +14,7 @@ This sample app is built using:
 - [TanStack Query](https://tanstack.com/query/latest) - Data fetching and caching, and state management
 
 You can use this as a starter template to build your own Next.js app, or use it as a reference to build your own custom retailer site on another platform (Wordpress, etc...)
-This app follows the guidelines of the [Dispense Blueprint](https://api-docs.dispenseapp.com/docs/blueprint) docs to build a fully custom retailer site.
+This app follows the guidelines of the [Dispense Blueprint docs](https://api-docs.dispenseapp.com/docs/blueprint) to build a fully custom retailer site.
 
 A live version of this repo can be found here <br />
 https://www.highscore-cannabis.com

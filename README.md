@@ -2,7 +2,7 @@
 
 ![alt text](https://files.readme.io/3677bcb-blueprint-headless-commerce.png)
 
-- [Api docs -](https://api-docs.dispenseapp.com/docs/blueprint) https://api-docs.dispenseapp.com/docs/blueprint
+- [API docs -](https://api-docs.dispenseapp.com/docs/blueprint) https://api-docs.dispenseapp.com/docs/blueprint
 
 ## Description
 

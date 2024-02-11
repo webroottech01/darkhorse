@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import Button from '@/components/Button'
 import Typography from '@/components/Typography'
-import { imageUrl } from '@/utils/imageUtils'
+import { imageUrl } from '@/utils/image'
 
 const Banner = styled.div`
   position: relative;

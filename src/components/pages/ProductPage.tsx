@@ -4,13 +4,12 @@ import styled, { css } from 'styled-components'
 
 import { Product } from '@/types'
 import { MediaQuery } from '@/utils/mediaQueries'
-import { imageUrl } from '@/utils/imageUtils'
+import { imageUrl } from '@/utils/image'
 import Button from '../Button'
 import Container from '../Container'
 import Image from '../Image'
 import Typography from '../Typography'
-import { useContext } from 'react'
-import { AppContext } from '@/app/AppContextProvider'
+import useVenue from '@/hooks/useVenue'
 
 const Wrapper = styled.div`
   display: flex;
@@ -63,7 +62,7 @@ const ImageWrapper = styled.div`
 `
 
 export default function ProductPage({ product }: { product: Product }) {
-  const appContext = useContext(AppContext)
+  const currentVenue = useVenue()
 
   return (
     <Container>
@@ -126,7 +125,7 @@ export default function ProductPage({ product }: { product: Product }) {
               `}
             >
               <Image
-                alt={`${product.name} image at ${appContext.currentVenue.name}`}
+                alt={`${product.name} image at ${currentVenue.name}`}
                 src={imageUrl(product.image ?? '', {
                   height: '600px',
                 })}

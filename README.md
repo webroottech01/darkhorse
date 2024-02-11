@@ -20,6 +20,7 @@ A live version of this repo can be found here <br />
 https://www.highscore-cannabis.com
 
 ## Features
+
 - Category, brand, cannabis type and effects landing pages.
 - Product pages with product details, reviews, and related products.
 - Cart and order complete pages.
@@ -41,9 +42,11 @@ pnpm install
 You will need to create a `.env.local` file in the root of the project and add the following environment variables:
 
 ```bash
+NEXT_PUBLIC_ENV = dev
 NEXT_PUBLIC_DISPENSE_BASE_URL = https://api.dispenseapp.com/2023-03
 NEXT_PUBLIC_API_KEY = your dispense api key here
 NEXT_PUBLIC_VENUE_ID = your dispense venue/retailer id here
+NEXT_PUBLIC_AUTH_COOKIE = 'highscore-auth //use whatever name you'd like for the auth cookie
 ```
 
 To start the development server, run the following command:

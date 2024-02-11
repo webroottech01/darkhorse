@@ -1,14 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { AppContext } from '@/app/AppContextProvider'
 import { Product } from '@/types'
 import Glider from './Glider'
 import ProductCard from './ProductCard'
 import Container from './Container'
+import useVenue from '@/hooks/useVenue'
 
 type ProductsGliderProps = {
   loading?: boolean
@@ -60,7 +60,7 @@ const GliderTrack = styled.div`
 `
 
 export function ProductsGlider({ loading, products }: ProductsGliderProps) {
-  const { currentVenue } = useContext(AppContext)
+  const currentVenue = useVenue()
 
   return (
     <Container

@@ -3,6 +3,7 @@ import 'server-only'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Montserrat } from 'next/font/google'
+import { QueryClient, dehydrate } from '@tanstack/react-query'
 
 import type { Metadata } from 'next'
 
@@ -10,7 +11,9 @@ import './globals.css'
 import StyledComponentsRegistry from '@/lib/registry'
 import TopNav from '@/components/TopNav'
 import { getVenueById } from '@/api/venueService'
-import AppContextProvider from './AppContextProvider'
+import Providers from './providers'
+import { QueryClientKey } from '@/utils/queryClient'
+import { getAuthToken } from '@/api/ssr/utils'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -29,14 +32,25 @@ export default async function RootLayout({
 }) {
   const venue = await getVenueById(process.env.NEXT_PUBLIC_VENUE_ID!)
 
+  console.log('VENUE', venue)
+
+  const authToken = getAuthToken()
+
+  const queryClient = new QueryClient()
+
+  queryClient.setQueryData(QueryClientKey.VENUE, venue)
+
   return (
     <html lang="en" className={font.className}>
       <body>
         <StyledComponentsRegistry>
-          <AppContextProvider data={JSON.stringify(venue)}>
+          <Providers
+            dehydratedState={dehydrate(queryClient)}
+            authToken={authToken}
+          >
             <TopNav />
             {children}
-          </AppContextProvider>
+          </Providers>
         </StyledComponentsRegistry>
         <Analytics />
         <SpeedInsights />

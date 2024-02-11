@@ -176,10 +176,15 @@ function Button(
         z-index: 2;
         border: none;
         box-sizing: border-box;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        transition-property: background-color, box-shadow, color, transform;
 
         &:active {
-          top: 2px;
+          transform: translateY(2px);
         }
+
+        /* -------- PIXELY -------- */
 
         &:before {
           content: '';
@@ -272,19 +277,16 @@ function Button(
             &:focus-visible,
             &:focus-within {
               background-color: var(--brand-primary);
-              border-color: var(--brand-primary);
             }
 
-            &:focus:not(:active),
-            &:focus-within:not(:active) {
-              border-color: var(--white);
-              box-shadow: 0 0 0 2px var(--brand-primary);
-            }
+            // &:focus:not(:active),
+            // &:focus-within:not(:active) {
+            //   border-color: var(--white);
+            // }
 
             ${active === true &&
             css`
               background-color: var(--brand-primary);
-              border-color: var(--brand-primary);
             `}
           }
         `}
@@ -292,7 +294,6 @@ function Button(
     ${variant === 'secondary' &&
         css`
           color: var(--black);
-          border-color: var(--gray-light);
           background: var(--white);
 
           &:not(:disabled) {
@@ -301,18 +302,15 @@ function Button(
             &:focus-visible,
             &:focus-within {
               background-color: var(--gray-lightest);
-              border-color: var(--gray-light);
             }
 
-            &:focus-visible {
-              border-color: var(--white);
-              box-shadow: 0 0 0 2px var(--brand-primary);
-            }
+            // &:focus-visible {
+            //   border-color: var(--white);
+            // }
 
             ${active === true &&
             css`
               background-color: var(--gray-light);
-              border-color: var(--gray-light);
             `}
           }
         `}
@@ -320,7 +318,6 @@ function Button(
     ${variant === 'tertiary' &&
         css`
           color: var(--white);
-          border-color: var(--white);
           background: var(--brown);
 
           .button-text {
@@ -333,18 +330,16 @@ function Button(
             &:focus-visible,
             &:focus-within {
               background-color: var(--brown);
-              border-color: var(--white);
             }
 
-            &:focus-visible {
-              border-color: var(--brown);
-              box-shadow: 0 0 0 2px var(--brown);
-            }
+            // &:focus-visible {
+            //   border-color: var(--brown);
+            //   box-shadow: 0 0 0 2px var(--brown);
+            // }
 
             ${active === true &&
             css`
               background-color: var(--brown);
-              border-color: var(--white);
             `}
           }
         `}

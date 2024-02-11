@@ -1,16 +1,16 @@
 'use client'
 
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 import Container from './Container'
-import { AppContext } from '@/app/AppContextProvider'
-import { imageUrl } from '@/utils/imageUtils'
+import { imageUrl } from '@/utils/image'
 import SlideOutPanel from './SlideOutPanel'
 import Icon from './Icon'
+import useVenue from '@/hooks/useVenue'
 
 // import Icon from './Icon'
 // import Badge from './Badge'
@@ -89,7 +89,7 @@ const Links = () => {
 
 export default function TopNav() {
   const router = useRouter()
-  const appContext = useContext(AppContext)
+  const currentVenue = useVenue()
   // const q_cart = useCart()
   const [cartSlideOutOpen, setCartSlideOutOpen] = React.useState(false)
 
@@ -104,8 +104,8 @@ export default function TopNav() {
           <LeftCol>
             <Logo href="/">
               <Image
-                alt={`${appContext.currentVenue.name} logo`}
-                src={imageUrl(appContext.currentVenue.logo ?? '', {
+                alt={`${currentVenue.name} logo`}
+                src={imageUrl(currentVenue.logo ?? '', {
                   height: '50px',
                 })}
                 fill

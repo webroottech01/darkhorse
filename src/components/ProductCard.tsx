@@ -9,7 +9,7 @@ import Tag from './Tag'
 import Skeleton from './Skeleton'
 import CardImage from './CardImage'
 import { Product, CannabisType } from '@/types'
-import { imageUrl } from '@/utils/imageUtils'
+import { imageUrl } from '@/utils/image'
 import { MediaQuery } from '@/utils/mediaQueries'
 
 const Card = styled.div`

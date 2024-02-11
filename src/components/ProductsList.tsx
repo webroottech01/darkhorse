@@ -1,13 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import React, { useContext } from 'react'
-import styled, { css } from 'styled-components'
+import React from 'react'
+import { css } from 'styled-components'
 
-import { AppContext } from '@/app/AppContextProvider'
 import { Product } from '@/types'
 import ProductCard from './ProductCard'
 import Container from './Container'
+import useVenue from '@/hooks/useVenue'
 
 export function ProductsList({
   loading,
@@ -16,7 +16,7 @@ export function ProductsList({
   loading?: boolean
   products?: Product[]
 }) {
-  const { currentVenue } = useContext(AppContext)
+  const currentVenue = useVenue()
 
   return (
     <Container

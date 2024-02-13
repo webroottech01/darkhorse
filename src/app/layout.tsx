@@ -8,12 +8,12 @@ import { QueryClient, dehydrate } from '@tanstack/react-query'
 import type { Metadata } from 'next'
 
 import './globals.css'
-import StyledComponentsRegistry from '@/lib/registry'
+import StyledComponentsRegistry from '@/components/registry'
 import TopNav from '@/components/TopNav'
-import { getVenueById } from '@/api/venueService'
 import Providers from './providers'
 import { QueryClientKey } from '@/utils/queryClient'
-import { getAuthToken } from '@/api/ssr/utils'
+import { getAuthToken } from '@/utils/ssrUtils'
+import dispense from '@/utils/dispense'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -30,9 +30,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const venue = await getVenueById(process.env.NEXT_PUBLIC_VENUE_ID!)
-
-  console.log('VENUE', venue)
+  const venue = await dispense.getVenueById(
+    process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
+  )
 
   const authToken = getAuthToken()
 

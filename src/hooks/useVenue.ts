@@ -1,14 +1,17 @@
 'use client'
 
-import { useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import { QueryClientKey } from '@/utils/queryClient'
-import { Venue } from '@/types'
+import dispense from '@/utils/dispense'
 
 const useVenue = () => {
-  const queryClient = useQueryClient()
-
-  return queryClient.getQueryData<Venue>(QueryClientKey.VENUE) as Venue
+  return useQuery({
+    queryKey: QueryClientKey.VENUE,
+    queryFn: () => {
+      return dispense.getVenueById(process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!)
+    },
+  })
 }
 
 export default useVenue

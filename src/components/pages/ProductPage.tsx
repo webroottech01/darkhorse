@@ -2,7 +2,7 @@
 
 import styled, { css } from 'styled-components'
 
-import { Product } from '@/types'
+import { Product } from '@dispense/dispense-js'
 import { MediaQuery } from '@/utils/mediaQueries'
 import { imageUrl } from '@/utils/image'
 import Button from '../Button'
@@ -62,7 +62,7 @@ const ImageWrapper = styled.div`
 `
 
 export default function ProductPage({ product }: { product: Product }) {
-  const currentVenue = useVenue()
+  const q_venue = useVenue()
 
   return (
     <Container>
@@ -125,7 +125,7 @@ export default function ProductPage({ product }: { product: Product }) {
               `}
             >
               <Image
-                alt={`${product.name} image at ${currentVenue.name}`}
+                alt={`${product.name} image at ${q_venue?.data?.name}`}
                 src={imageUrl(product.image ?? '', {
                   height: '600px',
                 })}

@@ -2,7 +2,7 @@
 
 import { ProductsList } from '@/components/ProductsList'
 import Hero from '../Hero'
-import { Product } from '@/types'
+import { Product } from '@dispense/dispense-js'
 import Typography from '../Typography'
 import Image from 'next/image'
 import Container from '../Container'
@@ -31,7 +31,7 @@ const categories = [
   },
 ]
 
-const Section = styled.div`
+const Section = styled(Container)`
   margin-inline: auto;
   position: relative;
   display: flex;
@@ -40,21 +40,24 @@ const Section = styled.div`
   justify-content: center;
   align-items: center;
   padding: 65px 0;
-
-  @media (min-width: 700px) {
-    width: 700px;
-  }
-
-  @media (max-width: 700px) {
-    width: 100%;
-  }
 `
 
 export default function HomePage({ products }: { products: Product[] }) {
   return (
     <main>
       <Hero />
-      <Section as="section">
+      <Section
+        as="section"
+        css={css`
+          @media (min-width: 780px) {
+            width: 780px;
+          }
+
+          @media (max-width: 780px) {
+            width: 100%;
+          }
+        `}
+      >
         <Typography variant="h2">Shop by Category</Typography>
         <div
           css={css`
@@ -87,8 +90,8 @@ export default function HomePage({ products }: { products: Product[] }) {
       </Section>
       <Section>
         <Typography variant="h2">Shop Most Popular</Typography>
+        <ProductsList products={products} />
       </Section>
-      <ProductsList products={products} />
     </main>
   )
 }

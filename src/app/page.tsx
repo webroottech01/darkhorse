@@ -2,9 +2,8 @@ import 'server-only'
 
 import { ResolvingMetadata, Metadata } from 'next'
 
-import { getVenueById } from '@/api/venueService'
-import { listProducts } from '@/api/productService'
 import HomePage from '../components/pages/HomePage'
+import dispense from '@/utils/dispense'
 
 export type Props = {
   params: {}
@@ -15,7 +14,9 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const venue = await getVenueById(process.env.NEXT_PUBLIC_VENUE_ID!)
+  const venue = await dispense.getVenueById(
+    process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
+  )
 
   return {
     title: venue.name,
@@ -31,8 +32,10 @@ export async function generateMetadata(
 }
 
 export default async function HomePageSSR() {
-  const venue = await getVenueById(process.env.NEXT_PUBLIC_VENUE_ID!)
-  const productsResponse = await listProducts({
+  const venue = await dispense.getVenueById(
+    process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
+  )
+  const productsResponse = await dispense.listProducts({
     venueId: venue.id,
     limit: 10,
   })

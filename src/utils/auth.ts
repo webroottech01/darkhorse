@@ -1,7 +1,7 @@
 import cookie from 'js-cookie'
 
 import { queryClientUtils, QueryClientKey } from '@/utils/queryClient'
-import { Venue } from '@/types'
+import { Venue } from '@dispense/dispense-js'
 
 const authCookie = 'highscore-auth'
 

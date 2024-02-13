@@ -1,8 +1,7 @@
 import { ResolvingMetadata, Metadata } from 'next'
 
-import { getProductById } from '@/api/productService'
-import { getVenueById } from '@/api/venueService'
 import ProductPageComponent from '@/components/pages/ProductPage'
+import dispense from '@/utils/dispense'
 
 export type Props = {
   params: {
@@ -15,8 +14,10 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const venue = await getVenueById(process.env.NEXT_PUBLIC_VENUE_ID!)
-  const product = await getProductById(params.productId, {
+  const venue = await dispense.getVenueById(
+    process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
+  )
+  const product = await dispense.getProductById(params.productId, {
     venueId: venue.id,
   })
 
@@ -30,8 +31,10 @@ export default async function ProductPage({
 }: {
   params: { productId: string }
 }) {
-  const venue = await getVenueById(process.env.NEXT_PUBLIC_VENUE_ID!)
-  const product = await getProductById(params.productId, {
+  const venue = await dispense.getVenueById(
+    process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
+  )
+  const product = await dispense.getProductById(params.productId, {
     venueId: venue.id,
   })
 

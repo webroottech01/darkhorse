@@ -89,7 +89,7 @@ const Links = () => {
 
 export default function TopNav() {
   const router = useRouter()
-  const currentVenue = useVenue()
+  const q_venue = useVenue()
   // const q_cart = useCart()
   const [cartSlideOutOpen, setCartSlideOutOpen] = React.useState(false)
 
@@ -104,8 +104,8 @@ export default function TopNav() {
           <LeftCol>
             <Logo href="/">
               <Image
-                alt={`${currentVenue.name} logo`}
-                src={imageUrl(currentVenue.logo ?? '', {
+                alt={`${q_venue?.data?.name} logo`}
+                src={imageUrl(q_venue?.data?.logo ?? '', {
                   height: '50px',
                 })}
                 fill

@@ -11,21 +11,24 @@ import { Product, CannabisType } from '@dispense/dispense-js'
 import { imageUrl } from '@/utils/image'
 import { MediaQuery } from '@/utils/mediaQueries'
 
-console.log('CannabisType', CannabisType)
-
 const Card = styled.div`
-  border: 1px solid var(--gray-light, #e2e6ed);
+  // border: 1px solid var(--gray-light, #e2e6ed);
   background: var(--white, #fff);
-  box-shadow: 0px 4px 0px 0px rgba(168, 175, 187, 0.3);
+  // box-shadow: 0px 4px 0px 0px rgba(168, 175, 187, 0.3);
   cursor: pointer;
   width: 100%;
-  padding: 20px 10px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
   justify-content: center;
   height: 100%;
+
+  /* -------- PIXEL -------- */
+  border: none;
+  box-shadow: -5px 0 0 0 var(--gray-light), 5px 0 0 0 var(--gray-light),
+    0 -5px 0 0 var(--gray-light), 0 5px 0 0 var(--gray-light);
 `
 
 export default function ProductCard({

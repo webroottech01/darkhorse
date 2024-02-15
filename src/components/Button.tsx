@@ -184,7 +184,7 @@ function Button(
           transform: translateY(2px);
         }
 
-        /* -------- PIXELY -------- */
+        /* -------- PIXEL -------- */
 
         &:before {
           content: '';

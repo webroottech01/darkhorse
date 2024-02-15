@@ -39,7 +39,7 @@ export default async function HomePageSSR() {
   const productsResponse = await dispense.listProducts({
     venueId: venue.id,
     limit: 8,
-    sort: ProductSort.TOTAL_SOLD_DESC
+    sort: ProductSort.TOTAL_SOLD_DESC,
   })
 
   return <HomePage products={productsResponse.data} />

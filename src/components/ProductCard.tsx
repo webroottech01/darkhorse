@@ -19,7 +19,7 @@ const Card = styled.div`
   box-shadow: 0px 4px 0px 0px rgba(168, 175, 187, 0.3);
   cursor: pointer;
   width: 100%;
-  padding: 15px 10px;
+  padding: 20px 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -82,18 +82,27 @@ export default function ProductCard({
                 `}
               />
             ) : null}
-            {!!product.cannabisType &&
-              product.cannabisType !== CannabisType.NA && (
-                <Tag cannabisType={product.cannabisType}></Tag>
+            <div
+              css={css`
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+              `}
+            >
+              {!!product.cannabisType &&
+                product.cannabisType !== CannabisType.NA && (
+                  <Tag cannabisType={product.cannabisType}></Tag>
+                )}
+              {!!product.brand?.name && (
+                <Typography variant="body-sm">{product.brand.name}</Typography>
               )}
-            {!!product.brand?.name && (
-              <Typography as="h3" variant="h3">
-                {product.brand.name}
+              <Typography as="span" variant="body">
+                {product.name}
               </Typography>
-            )}
-            <Typography as="span" variant="body">
-              {product.name}
-            </Typography>
+            </div>
           </>
         )}
       </Card>

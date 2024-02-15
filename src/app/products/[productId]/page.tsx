@@ -17,7 +17,8 @@ export async function generateMetadata(
   const venue = await dispense.getVenueById(
     process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
   )
-  const product = await dispense.getProductById(params.productId, {
+  const product = await dispense.getProductById({
+    id: params.productId,
     venueId: venue.id,
   })
 
@@ -34,7 +35,8 @@ export default async function ProductPage({
   const venue = await dispense.getVenueById(
     process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
   )
-  const product = await dispense.getProductById(params.productId, {
+  const product = await dispense.getProductById({
+    id: params.productId,
     venueId: venue.id,
   })
 

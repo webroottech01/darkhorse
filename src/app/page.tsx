@@ -4,6 +4,7 @@ import { ResolvingMetadata, Metadata } from 'next'
 
 import HomePage from '../components/pages/HomePage'
 import dispense from '@/utils/dispense'
+import { ProductSort } from '@dispense/dispense-js'
 
 export type Props = {
   params: {}
@@ -37,7 +38,8 @@ export default async function HomePageSSR() {
   )
   const productsResponse = await dispense.listProducts({
     venueId: venue.id,
-    limit: 10,
+    limit: 8,
+    sort: ProductSort.TOTAL_SOLD_DESC
   })
 
   return <HomePage products={productsResponse.data} />

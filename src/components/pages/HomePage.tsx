@@ -58,7 +58,9 @@ export default function HomePage({ products }: { products: Product[] }) {
           }
         `}
       >
-        <Typography variant="h2">Shop by Category</Typography>
+        <Typography variant="h2" as="h2">
+          Shop by Category
+        </Typography>
         <div
           css={css`
             display: flex;
@@ -83,15 +85,41 @@ export default function HomePage({ products }: { products: Product[] }) {
                 width={80}
                 alt={category.name}
               />
-              <Typography variant="h3">{category.name}</Typography>
+              <Typography variant="h3" as="h3">
+                {category.name}
+              </Typography>
             </div>
           ))}
         </div>
       </Section>
       <Section>
-        <Typography variant="h2">Shop Most Popular</Typography>
+        <Typography variant="h2" as="h2">
+          Shop Most Popular
+        </Typography>
         <ProductsList products={products} />
       </Section>
+      <div
+        css={css`
+          background: var(--green);
+          padding: 160px 0;
+          text-align: center;
+          color: var(--white);
+        `}
+      >
+        <Typography variant="h1" as="h3" style={{ color: 'var(--white)' }}>
+          Legends grow here.
+          <br />
+          Leaf by leaf.
+        </Typography>
+      </div>
+      <div
+        css={css`
+          background: var(--blue);
+          padding: 40px 0;
+          text-align: center;
+          color: var(--white);
+        `}
+      ></div>
     </main>
   )
 }

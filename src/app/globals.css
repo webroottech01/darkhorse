@@ -4,19 +4,14 @@
 
 :root {
   --brand-primary: #007a4b;
-  --brand-secondary: hsl(
-    var(--brand-secondary-h),
-    var(--brand-secondary-s),
-    var(--brand-secondary-l)
-  );
   /* Colors */
   --brand-danger: #ef4d61;
   --brand-danger-lightest: #fbe9ec;
   --brand-warning: #ffc12e;
   --brand-warning-lightest: #fbf5e8;
-  --brand-info: #3ac4ff;
+  --brand-info: #1fc0fb;
   --brand-info-lightest: #e9f5fc;
-  --brand-success: #13b510;
+  --brand-success: #00a35e;
   --brand-success-lightest: #e9f6f2;
   --blue: var(--brand-info);
   --green: var(--brand-success);

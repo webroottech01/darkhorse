@@ -2,7 +2,6 @@
 
 import React from 'react'
 import styled, { css } from 'styled-components'
-import Link from 'next/link'
 
 import Typography from './Typography'
 import Tag from './Tag'

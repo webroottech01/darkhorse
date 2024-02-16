@@ -12,7 +12,7 @@ import StyledComponentsRegistry from '@/components/registry'
 import TopNav from '@/components/TopNav'
 import Providers from './providers'
 import { QueryClientKey } from '@/utils/queryClient'
-import { getAuthToken } from '@/utils/ssrUtils'
+import { getAuthToken } from '@/utils/ssr'
 import dispense from '@/utils/dispense'
 
 export const metadata: Metadata = {

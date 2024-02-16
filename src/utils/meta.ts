@@ -1,0 +1,149 @@
+'server-only'
+
+import { Metadata } from 'next'
+
+// import { convertTemplateString } from 'ui-library'
+import {
+  Venue,
+  ProductTypeName,
+  CannabisTypeName,
+  Product,
+  convertTemplateString,
+} from '@dispense/dispense-js'
+import { RouteName } from './route'
+// import { RouteName } from './route'
+// import { getFullVenueUrl } from '@/utils/ssr'
+// import { capitalize } from './string'
+
+export const getMetaData = ({
+  routeName,
+  data,
+}: {
+  routeName: RouteName
+  data: {
+    venue: Venue
+    product?: Product | null
+    productCategoryName?: string
+    productBrandName?: string
+    productCannabisTypeName?: string
+    productTerpeneName?: string
+    productEffectName?: string
+    productOfferName?: string
+  }
+}) => {
+  // const { baseUrl, fullUrl, pathname } = getFullVenueUrl({
+  //   venue: data.venue,
+  // })
+  const baseUrl = 'https://www.highscore-cannabis.com'
+  const pathname = new URL(window.location.href).pathname
+
+  let metaData: Metadata = {}
+
+  switch (routeName) {
+    case RouteName.HOME:
+      metaData = _getMetaData({
+        venue: data.venue,
+        baseUrl,
+        pathname,
+        titleTemplateStr: '',
+        descTemplateStr: '',
+        data: {},
+        // titleTemplateStr: data.venue.seoMenuMetaData?.home?.title ?? '',
+        // descTemplateStr: data.venue.seoMenuMetaData?.home?.description ?? '',
+        // data: {
+        //   ...convertVenueToMergeVariables(data.venue),
+        // },
+      })
+      break
+  }
+
+  return metaData
+}
+
+function _getMetaData({
+  venue,
+  baseUrl,
+  pathname,
+  titleTemplateStr,
+  descTemplateStr,
+  data,
+}: {
+  venue: Venue
+  baseUrl: string
+  pathname: string
+  titleTemplateStr?: string
+  descTemplateStr?: string
+  data: object
+}): Metadata {
+  let pageTitle = ''
+  let pageDescription = ''
+
+  if (data) {
+    pageTitle = convertTemplateString({
+      template: titleTemplateStr ?? '',
+      data,
+    })
+    pageDescription = convertTemplateString({
+      template: descTemplateStr ?? '',
+      data,
+    })
+  }
+
+  const icons: Metadata['icons'] = []
+
+  if (venue.favicon) {
+    icons.push({
+      url: venue.favicon,
+    })
+  }
+
+  return {
+    metadataBase: new URL(baseUrl),
+    title: pageTitle.replace('undefined', ''), //fixes a flashing of 'undefined' in the title bar while api calls finish
+    description: pageDescription,
+    openGraph: {
+      title: pageTitle,
+      description: pageDescription,
+      type: 'website',
+      url: '/',
+      siteName: venue.name,
+      images: [
+        {
+          url: venue.logo ?? '',
+          width: 1200,
+          height: 630,
+          alt: venue.name,
+        },
+      ],
+    },
+    alternates: {
+      canonical: pathname,
+    },
+    icons,
+  }
+}
+
+function convertVenueToMergeVariables(venue: Venue) {
+  return {
+    storeName: venue.name,
+    storeAddress: venue.addressFormatted,
+    storeWebsite: venue.website ?? venue.seoMenuUrl,
+  }
+}
+
+function convertProductToMergeVariables(product: Product) {
+  const name = product.weightFormatted
+    ? `${product.name} - ${product.weightFormatted}`
+    : product.name
+
+  return {
+    productName: name,
+    productDescription: `${name} - ${product.seoDescription}`,
+    productCategory: ProductTypeName[product.type],
+    productSubCategory: product.subType,
+    productBrand: product.brand?.name,
+    productCannabisType: product.cannabisType
+      ? CannabisTypeName[product.cannabisType]
+      : null,
+  }
+}

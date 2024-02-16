@@ -14,7 +14,7 @@
     "@vercel/analytics": "^1.1.3",
     "@vercel/speed-insights": "^1.0.9",
     "date-fns": "^2.30.0",
-    "@dispense/dispense-js": "^0.0.8",
+    "@dispense/dispense-js": "^0.0.9",
     "js-cookie": "^2.2.1",
     "next": "14.1.0",
     "react": "^18.2.0",

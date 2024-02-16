@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@dispense/dispense-js':
-    specifier: ^0.0.8
-    version: 0.0.8
+    specifier: ^0.0.9
+    version: 0.0.9
   '@tanstack/react-query':
     specifier: ^4.36.1
     version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
@@ -305,8 +305,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
-  /@dispense/dispense-js@0.0.8:
-    resolution: {integrity: sha512-kN02GQtRUYAorQ1Mj/fZkEzc4Jvc7JjUUYENKscxO/ICNGcvhrjwT4B3h+s+tF9aNXJBuRr7dHaKp0/xq+XDfg==}
+  /@dispense/dispense-js@0.0.9:
+    resolution: {integrity: sha512-uR/PMIQv0DQFZv4zq7azyXtWjjm9+/ECuH+liyGq2BArmDq/2OAwDedWZXvxvoRB9C4uN5tIpnYtwPiGmyQXUA==}
     dependencies:
       uuid: 9.0.1
     dev: false

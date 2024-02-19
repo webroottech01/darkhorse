@@ -35,7 +35,8 @@ export const getMetaData = ({
   //   venue: data.venue,
   // })
   const baseUrl = 'https://www.highscore-cannabis.com'
-  const pathname = new URL(window.location.href).pathname
+  // const pathname = new URL(window.location.href).pathname
+  const pathname = '/'
 
   let metaData: Metadata = {}
 

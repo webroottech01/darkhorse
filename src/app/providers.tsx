@@ -13,11 +13,9 @@ import AppProvider from './AppProvider'
 export default function Providers({
   children,
   dehydratedState,
-  authToken,
 }: {
   children: React.ReactNode
   dehydratedState: DehydratedState
-  authToken?: string
 }) {
   //This ensures that data is not shared between different users and requests, while still only creating the QueryClient once per component lifecycle.
   const [queryClient] = React.useState(() => {
@@ -39,7 +37,7 @@ export default function Providers({
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={dehydratedState}>
-        <AppProvider authToken={authToken}>{children}</AppProvider>
+        <AppProvider>{children}</AppProvider>
       </Hydrate>
     </QueryClientProvider>
   )

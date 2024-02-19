@@ -17,13 +17,11 @@ export const AppContext = React.createContext<{
 })
 
 export default function AppProvider({
-  authToken,
   children,
 }: {
-  authToken?: string
   children: React.ReactNode
 }) {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(!!authToken)
+  const [isLoggedIn, setIsLoggedIn] = React.useState(!!authUtils.getAuthToken())
   const value = {
     venueId: process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!,
     isLoggedIn,

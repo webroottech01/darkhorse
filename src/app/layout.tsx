@@ -44,8 +44,6 @@ export default async function RootLayout({
     process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
   )
 
-  const authToken = getAuthToken()
-
   const queryClient = new QueryClient()
 
   queryClient.setQueryData(QueryClientKey.VENUE, venue)
@@ -54,10 +52,7 @@ export default async function RootLayout({
     <html lang="en" className={font.className}>
       <body>
         <StyledComponentsRegistry>
-          <Providers
-            dehydratedState={dehydrate(queryClient)}
-            authToken={authToken}
-          >
+          <Providers dehydratedState={dehydrate(queryClient)}>
             <TopNav />
             {children}
           </Providers>

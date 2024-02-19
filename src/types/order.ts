@@ -1,0 +1,36 @@
+export enum OrderType {
+  PRE_ORDER = 'PRE_ORDER',
+  KIOSK_ORDER = 'KIOSK_ORDER',
+  WALK_UP_ORDER = 'WALK_UP_ORDER',
+}
+
+export enum OrderStatus {
+  PENDING = 'PENDING',
+  CONFIRMED = 'CONFIRMED',
+  //----//
+  CHECKED_IN = 'CHECKED_IN',
+  READY_FOR_PICKUP = 'READY_FOR_PICKUP',
+  //delivery
+  OUT_FOR_DELIVERY = 'OUT_FOR_DELIVERY',
+  //----//
+  CLOSED = 'CLOSED',
+  CANCELLED = 'CANCELLED',
+}
+
+export enum OrderPickUpType {
+  IN_STORE = 'IN_STORE',
+  CURB_SIDE = 'CURB_SIDE',
+  DELIVERY = 'DELIVERY',
+  DRIVE_THROUGH = 'DRIVE_THROUGH',
+  SHIPPING = 'SHIPPING',
+}
+
+export enum OrderPaymentType {
+  CASH = 'CASH',
+  DEBIT = 'DEBIT',
+  CAN_PAY = 'CAN_PAY',
+  SWIFTER = 'SWIFTER',
+  KIND_TAP = 'KIND_TAP',
+  AEROPAY = 'AEROPAY',
+  SQUARE = 'SQUARE',
+}

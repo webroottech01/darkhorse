@@ -1,12 +1,11 @@
 'use client'
 
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
-import { Cart } from '@dispense/dispense-js'
 
 import useVenue from './useVenue'
 import { QueryClientKey } from '@/utils/queryClient'
-import { getOrCreateCart } from '@/utils/cart'
-import dispense from '@/utils/dispense'
+import { Cart } from '@/types/cart'
+import cartService from '@/api/cartService'
 
 const useCart = (
   options?: Omit<UseQueryOptions<Cart>, 'queryKey' | 'queryFn'> & {
@@ -20,9 +19,9 @@ const useCart = (
     queryKey: QueryClientKey.CART,
     queryFn: async () => {
       if (options?.cartId) {
-        return dispense.getCartById(options.cartId)
+        return cartService.getById(options.cartId)
       }
-      return getOrCreateCart(q_venue.data?.id!)
+      return cartService.getOrCreate(q_venue.data?.id!)
     },
     keepPreviousData: true,
     enabled: false,

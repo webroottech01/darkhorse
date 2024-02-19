@@ -2,18 +2,16 @@ import 'server-only'
 
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { Montserrat } from 'next/font/google'
+import { Source_Code_Pro } from 'next/font/google'
 import { QueryClient, dehydrate } from '@tanstack/react-query'
-
-import type { Metadata } from 'next'
 
 import './globals.css'
 import StyledComponentsRegistry from '@/components/registry'
 import TopNav from '@/components/TopNav'
 import Providers from './providers'
 import { QueryClientKey } from '@/utils/queryClient'
-import dispense from '@/utils/dispense'
 import AppInit from './AppInit'
+import venueService from '@/api/venueService'
 
 if (!process.env.NEXT_PUBLIC_ENV) throw new Error('NEXT_PUBLIC_ENV')
 if (!process.env.NEXT_PUBLIC_AUTH_COOKIE)
@@ -25,7 +23,7 @@ if (!process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID)
 if (!process.env.NEXT_PUBLIC_DISPENSE_API_KEY)
   throw new Error('NEXT_PUBLIC_DISPENSE_API_KEY')
 
-const font = Montserrat({
+const font = Source_Code_Pro({
   subsets: ['latin'],
   display: 'swap',
 })
@@ -35,7 +33,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const venue = await dispense.getVenueById(
+  const venue = await venueService.getById(
     process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
   )
 

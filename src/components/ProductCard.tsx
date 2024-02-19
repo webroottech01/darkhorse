@@ -7,9 +7,9 @@ import Typography from './Typography'
 import Tag from './Tag'
 import Skeleton from './Skeleton'
 import CardImage from './CardImage'
-import { Product, CannabisType } from '@dispense/dispense-js'
 import { imageUrl } from '@/utils/image'
 import { MediaQuery } from '@/utils/mediaQueries'
+import { Product, CannabisType } from '@/types/product'
 
 const Card = styled.div`
   // border: 1px solid var(--gray-light, #e2e6ed);

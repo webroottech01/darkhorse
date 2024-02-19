@@ -3,8 +3,9 @@ import 'server-only'
 import { ResolvingMetadata, Metadata } from 'next'
 
 import HomePage from '../components/pages/HomePage'
-import dispense from '@/utils/dispense'
-import { ProductSort } from '@dispense/dispense-js'
+import { ProductSort } from '@/types/product'
+import productService from '@/api/productService'
+import venueService from '@/api/venueService'
 
 export type Props = {
   params: {}
@@ -15,7 +16,7 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const venue = await dispense.getVenueById(
+  const venue = await venueService.getById(
     process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
   )
 
@@ -33,10 +34,10 @@ export async function generateMetadata(
 }
 
 export default async function HomePageSSR() {
-  const venue = await dispense.getVenueById(
+  const venue = await venueService.getById(
     process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
   )
-  const productsResponse = await dispense.listProducts({
+  const productsResponse = await productService.list({
     venueId: venue.id,
     limit: 8,
     sort: ProductSort.TOTAL_SOLD_DESC,

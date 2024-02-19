@@ -2,7 +2,6 @@
 
 import styled, { css } from 'styled-components'
 
-import { Product } from '@dispense/dispense-js'
 import { MediaQuery } from '@/utils/mediaQueries'
 import { imageUrl } from '@/utils/image'
 import Button from '../Button'
@@ -10,6 +9,7 @@ import Container from '../Container'
 import Image from '../Image'
 import Typography from '../Typography'
 import useVenue from '@/hooks/useVenue'
+import { Product } from '@/types/product'
 
 const Wrapper = styled.div`
   display: flex;

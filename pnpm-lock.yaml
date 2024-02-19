@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@dispense/dispense-js':
-    specifier: ^0.0.19
-    version: 0.0.19
   '@tanstack/react-query':
     specifier: ^4.36.1
     version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
@@ -32,9 +29,6 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
-  react-glider:
-    specifier: ^4.0.2
-    version: 4.0.2(react-dom@18.2.0)(react@18.2.0)
   styled-components:
     specifier: ^5.3.11
     version: 5.3.11(@babel/core@7.23.9)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
@@ -303,12 +297,6 @@ packages:
       '@babel/helper-string-parser': 7.23.4
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
-    dev: false
-
-  /@dispense/dispense-js@0.0.19:
-    resolution: {integrity: sha512-3cuYj0v1ajNrd2xvTg9la9WMPzcaZMw51t14Y5dpTWwMQE+DoS6yNrBGsA2EiIQiDm8XN8DHdV4kP+uQ+NuN4w==}
-    dependencies:
-      uuid: 9.0.1
     dev: false
 
   /@emotion/is-prop-valid@1.2.1:
@@ -1652,10 +1640,6 @@ packages:
       resolve-pkg-maps: 1.0.0
     dev: true
 
-  /glider-js@1.7.8:
-    resolution: {integrity: sha512-env4+yfoNYaeHJmEBGygjcZDpZ5LRUjGhCB6Ag+XNQfvuLVD5PhCYQShBVCAd5On7XfknM57O+V2Fwfcsii3Dw==}
-    dev: false
-
   /glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -2380,17 +2364,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-    dev: false
-
-  /react-glider@4.0.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-nZnkV4x8mSzfhGgrTkMrlL/g07T6hR0bLHg0q1iRumuORwfX+kqxCYoRy4/WXTRhlmurhcFKTaH007Vz2HjeHA==}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-    dependencies:
-      glider-js: 1.7.8
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-is@16.13.1:

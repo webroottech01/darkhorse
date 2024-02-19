@@ -2,15 +2,9 @@
 
 import { Metadata } from 'next'
 
-// import { convertTemplateString } from 'ui-library'
-import {
-  Venue,
-  ProductTypeName,
-  CannabisTypeName,
-  Product,
-  convertTemplateString,
-} from '@dispense/dispense-js'
 import { RouteName } from './route'
+import { Product, ProductTypeName, CannabisTypeName } from '@/types/product'
+import { Venue } from '@/types/venue'
 // import { RouteName } from './route'
 // import { getFullVenueUrl } from '@/utils/ssr'
 // import { capitalize } from './string'
@@ -147,4 +141,18 @@ function convertProductToMergeVariables(product: Product) {
       ? CannabisTypeName[product.cannabisType]
       : null,
   }
+}
+
+function convertTemplateString({
+  template,
+  data,
+}: {
+  template: string
+  data: object
+}) {
+  return Object.entries(data).reduce(
+    (res, [key, value]) =>
+      res.replace(new RegExp(`{{\\s*${key}\\s*}}`, 'g'), value),
+    template
+  )
 }

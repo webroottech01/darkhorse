@@ -2,11 +2,11 @@
 
 import { ProductsList } from '@/components/ProductsList'
 import Hero from '../Hero'
-import { Product } from '@dispense/dispense-js'
 import Typography from '../Typography'
 import Image from 'next/image'
 import Container from '../Container'
 import styled, { css } from 'styled-components'
+import { Product } from '@/types/product'
 
 const categories = [
   {

@@ -5,8 +5,8 @@ import React from 'react'
 import { css } from 'styled-components'
 
 import ProductCard from './ProductCard'
-import { Product } from '@dispense/dispense-js'
 import { MediaQuery } from '@/utils/mediaQueries'
+import { Product } from '@/types/product'
 
 export function ProductsList({
   loading,

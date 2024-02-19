@@ -39,76 +39,69 @@ export default function ProductCard({
   variant?: 'default' | 'loading'
 }) {
   return (
-    <div
-      css={css`
-        padding: 15px 7.5px 20px;
-        height: 100%;
-      `}
-    >
-      <Card>
-        {variant === 'loading' || !product ? (
-          <>
-            <Skeleton as="span" style={{ height: '186px', width: '80%' }} />
-            <Skeleton as="span" style={{ height: '26px', width: '60px' }} />
-            <Skeleton as="span" style={{ height: '24px', width: '64px' }} />
-            <Skeleton as="span" style={{ height: '25px', width: '85px' }} />
-          </>
-        ) : (
-          <>
-            {product.image ? (
-              <CardImage
-                src={imageUrl(product.image, {
-                  height: '186px',
-                })}
-                height={186}
-                width={186}
-                alt={product.name}
-                css={css`
-                  margin-bottom: 'auto';
-                  justify-content: 'center';
+    <Card>
+      {variant === 'loading' || !product ? (
+        <>
+          <Skeleton as="span" style={{ height: '186px', width: '80%' }} />
+          <Skeleton as="span" style={{ height: '26px', width: '60px' }} />
+          <Skeleton as="span" style={{ height: '24px', width: '64px' }} />
+          <Skeleton as="span" style={{ height: '25px', width: '85px' }} />
+        </>
+      ) : (
+        <>
+          {product.image ? (
+            <CardImage
+              src={imageUrl(product.image, {
+                height: '186px',
+              })}
+              height={186}
+              width={186}
+              alt={product.name}
+              css={css`
+                margin-bottom: 'auto';
+                justify-content: 'center';
+                height: 160px;
+                width: 100%;
+
+                @media (max-width: ${MediaQuery.screenMd}) {
+                  height: auto;
+                }
+
+                img {
                   height: 160px;
-                  width: 100%;
+                  max-width: 100%;
+                  margin: 0 auto;
 
                   @media (max-width: ${MediaQuery.screenMd}) {
                     height: auto;
                   }
-
-                  img {
-                    height: 160px;
-                    max-width: 100%;
-                    margin: 0 auto;
-
-                    @media (max-width: ${MediaQuery.screenMd}) {
-                      height: auto;
-                    }
-                  }
-                `}
-              />
-            ) : null}
-            <div
-              css={css`
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
+                }
               `}
-            >
-              {!!product.cannabisType &&
-                product.cannabisType !== CannabisType.NA && (
-                  <Tag cannabisType={product.cannabisType}></Tag>
-                )}
-              {!!product.brand?.name && (
-                <Typography variant="body-sm">{product.brand.name}</Typography>
+            />
+          ) : null}
+          <div
+            css={css`
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+            `}
+          >
+            {!!product.cannabisType &&
+              product.cannabisType !== CannabisType.NA && (
+                <Tag cannabisType={product.cannabisType}></Tag>
               )}
-              <Typography as="span" variant="body">
-                {product.name}
-              </Typography>
-            </div>
-          </>
-        )}
-      </Card>
-    </div>
+            {!!product.brand?.name && (
+              <Typography variant="body-sm">{product.brand.name}</Typography>
+            )}
+            <Typography as="span" variant="body">
+              {product.name}
+            </Typography>
+          </div>
+        </>
+      )}
+    </Card>
   )
 }

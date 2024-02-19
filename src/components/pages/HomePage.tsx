@@ -39,7 +39,7 @@ const Section = styled(Container)`
   gap: 40px;
   justify-content: center;
   align-items: center;
-  padding: 65px 0;
+  padding-block: 65px;
 `
 
 export default function HomePage({ products }: { products: Product[] }) {
@@ -61,7 +61,7 @@ export default function HomePage({ products }: { products: Product[] }) {
         <Typography variant="h2" as="h2">
           Shop by Category
         </Typography>
-        <div
+        <Container
           css={css`
             display: flex;
             flex-direction: row;
@@ -90,7 +90,7 @@ export default function HomePage({ products }: { products: Product[] }) {
               </Typography>
             </div>
           ))}
-        </div>
+        </Container>
       </Section>
       <Section>
         <Typography variant="h2" as="h2">

@@ -6,6 +6,7 @@ import { css } from 'styled-components'
 
 import ProductCard from './ProductCard'
 import { Product } from '@dispense/dispense-js'
+import { MediaQuery } from '@/utils/mediaQueries'
 
 export function ProductsList({
   loading,
@@ -19,7 +20,14 @@ export function ProductsList({
       css={css`
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        gap: 40px;
+
+        @media (max-width: ${MediaQuery.screenMd}) {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+        @media (max-width: ${MediaQuery.screenSm}) {
+          grid-template-columns: 1fr 1fr;
+        }
       `}
     >
       {loading ? (

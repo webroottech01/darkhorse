@@ -3,7 +3,7 @@
 import React, { useContext } from 'react'
 import styled, { css } from 'styled-components'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { Controller, useForm } from 'react-hook-form'
 
 import useVenue from '@/hooks/useVenue'

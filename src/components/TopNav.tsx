@@ -14,6 +14,7 @@ import useVenue from '@/hooks/useVenue'
 import useCart from '@/hooks/useCart'
 import Badge from './Badge'
 import cartService from '@/api/cartService'
+import Cart from './Cart'
 
 // import Icon from './Icon'
 // import Badge from './Badge'
@@ -152,7 +153,7 @@ export default function TopNav() {
         open={cartSlideOutOpen}
         onClose={() => setCartSlideOutOpen(false)}
       >
-        {/* <Cart onClose={() => setCartSlideOutOpen(false)} /> */}
+        <Cart />
       </SlideOutPanel>
     </>
   )

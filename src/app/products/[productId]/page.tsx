@@ -1,8 +1,10 @@
 import { ResolvingMetadata, Metadata } from 'next'
 
-import ProductPageComponent from '@/components/pages/ProductPage'
+import ProductPage from '@/components/pages/ProductPage'
 import productService from '@/api/productService'
 import venueService from '@/api/venueService'
+import { getMetaData } from '@/utils/meta'
+import { RouteName } from '@/utils/route'
 
 export type Props = {
   params: {
@@ -23,12 +25,16 @@ export async function generateMetadata(
     venueId: venue.id,
   })
 
-  return {
-    title: `Buy ${product.name} at ${venue.name}`,
-  }
+  return getMetaData({
+    routeName: RouteName.PRODUCT,
+    data: {
+      venue,
+      product,
+    },
+  })
 }
 
-export default async function ProductPage({
+export default async function ProductPageSSR({
   params,
 }: {
   params: { productId: string }
@@ -41,5 +47,5 @@ export default async function ProductPage({
     venueId: venue.id,
   })
 
-  return <ProductPageComponent product={product}></ProductPageComponent>
+  return <ProductPage product={product} />
 }

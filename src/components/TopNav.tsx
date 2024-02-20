@@ -11,6 +11,9 @@ import { imageUrl } from '@/utils/image'
 import SlideOutPanel from './SlideOutPanel'
 import Icon from './Icon'
 import useVenue from '@/hooks/useVenue'
+import useCart from '@/hooks/useCart'
+import Badge from './Badge'
+import cartService from '@/api/cartService'
 
 // import Icon from './Icon'
 // import Badge from './Badge'
@@ -90,7 +93,7 @@ const Links = () => {
 export default function TopNav() {
   const router = useRouter()
   const q_venue = useVenue()
-  // const q_cart = useCart()
+  const q_cart = useCart()
   const [cartSlideOutOpen, setCartSlideOutOpen] = React.useState(false)
 
   useEffect(() => {
@@ -132,14 +135,14 @@ export default function TopNav() {
               }}
             >
               <Icon type="CART" />
-              {/* {q_cart?.data?.items && q_cart?.data?.items.length ? (
+              {q_cart?.data?.items && q_cart?.data?.items.length ? (
                 <Badge
                   style={{ position: 'absolute', top: '14px', right: '10px' }}
                   variant="primary"
                 >
-                  {getTotalItemCount()}
+                  {cartService.getTotalItemCount()}
                 </Badge>
-              ) : null} */}
+              ) : null}
             </a>
           </RightCol>
         </TopNavContainer>

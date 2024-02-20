@@ -1,6 +1,7 @@
 export enum RouteName {
   HOME = 'HOME',
   PRODUCTS = 'PRODUCTS',
+  PRODUCT = 'PRODUCT',
 }
 
 export const getCurrentMenuRouteName = (path: string) => {
@@ -10,6 +11,8 @@ export const getCurrentMenuRouteName = (path: string) => {
     return RouteName.HOME
   } else if (path === '/products') {
     return RouteName.PRODUCTS
+  } else if (path.match('/products/*')) {
+    return RouteName.PRODUCT
   }
 
   return null

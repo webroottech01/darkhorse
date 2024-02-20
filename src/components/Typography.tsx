@@ -155,6 +155,11 @@ export type TypographyProps = {
   variant?: Variant
 }
 
+export const getFont = (variant?: Variant) =>
+  variant?.startsWith('number')
+    ? 'var(--font-family-secondary)'
+    : 'var(--font-family-primary)'
+
 export const getTypographyStyles = (variant?: Variant) =>
   `
   font-weight: 400;

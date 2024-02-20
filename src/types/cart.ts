@@ -1,5 +1,6 @@
 import { OrderPickUpType, OrderType } from './order'
-import { ProductType, ProductPriceType } from './product'
+import { Discount } from './pricing'
+import { ProductType, ProductPriceType, Product } from './product'
 
 export type Cart = {
   id: string
@@ -19,22 +20,63 @@ export type Cart = {
   administrativeArea?: string
   type?: OrderType
   rewardId?: string | null
+  discounts?: Discount[]
+  subtotalWithoutDiscounts?: number
+  subtotal?: number
 }
 
-export type CartCreateData = Omit<Cart, 'id' | 'organization' | 'venue' | 'user' | 'prospect'> & {
+export type CartWithItemProducts = Omit<Cart, 'items'> & {
+  items: (Omit<CartItem, 'product'> & {
+    product: Product
+  })[]
+}
+
+export type CartCreateData = Omit<
+  Cart,
+  'id' | 'organization' | 'venue' | 'user' | 'prospect' | 'items'
+> & {
   venueId: string
   userId?: string
   prospectId?: string
   cartId?: string
+  date?: Date
+  pickUpType?: OrderPickUpType
+  items?: CartItemCreateData[]
+  promoCode?: string | null
+  firstName?: string
+  lastName?: string
+  email?: string
+  phone?: string
+  administrativeArea?: string
+  type?: OrderType
+  rewardId?: string | null
 }
 
 export type CartItem = {
-  productId: string
+  id: string
+  product: string
   quantity: number
+  status?: CartItemStatus
   /**
    * @description Only use with WEIGHT_TIER products. This is the weight of the product in grams.
    */
   purchaseWeight?: number
+  name?: string
+  price: number
+  priceWithDiscounts?: number
+  size?: string
+  weightFormatted?: string
+  discountTotal?: number
+}
+
+export type CartItemCreateData = {
+  productId: string
+  quantity: number
+  purchaseWeight?: number
+}
+
+export type CartItemWithProduct = Omit<CartItem, 'product'> & {
+  product: Product
 }
 
 export enum CartItemStatus {

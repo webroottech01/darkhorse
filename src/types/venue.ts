@@ -6,6 +6,8 @@ export type Venue = {
   addressFormatted?: string
   website?: string
   seoMenuUrl?: string
+  currencyCode?: string
+  languageCode?: string
   seoMenuMetaData?: {
     home?: {
       title?: string

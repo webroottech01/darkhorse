@@ -3,6 +3,7 @@ import { ListParams } from './constants'
 export type Product = {
   id: string
   name: string
+  enable?: boolean
   slug: string
   price: number
   image?: string
@@ -17,6 +18,64 @@ export type Product = {
   variants?: Product[]
   effects?: CannabisEffect[]
   weightFormatted?: string
+  priceType: ProductPriceType
+  quantity: number
+  quantityTotal?: number
+  purchaseMax?: number
+  labs?: {
+    terpenes?: string[]
+    potency?: ProductPotencyLevels
+    //
+    alphaPinene?: number | null
+    alphaPineneContentUnit?: CannabisContentUnit | null
+    betaCaryophyllene?: number | null
+    betaCaryophylleneContentUnit?: CannabisContentUnit | null
+    betaEudesmol?: number | null
+    betaEudesmoContentUnitl?: number | null
+    betaMyrcene?: number | null
+    betaMyrceneContentUnit?: CannabisContentUnit | null
+    betaPinene?: number | null
+    betaPineneContentUnit?: CannabisContentUnit | null
+    bisabolol?: number | null
+    bisabololContentUnit?: CannabisContentUnit | null
+    caryophylleneOxide?: number | null
+    caryophylleneOxideContentUnit?: CannabisContentUnit | null
+    guaiol?: number | null
+    guaiolContentUnit?: CannabisContentUnit | null
+    humulene?: number | null
+    humuleneContentUnit?: CannabisContentUnit | null
+    limonene?: number | null
+    limoneneContentUnit?: CannabisContentUnit | null
+    linalool?: number | null
+    linaloolContentUnit?: CannabisContentUnit | null
+    ocimene?: number | null
+    ocimeneContentUnit?: CannabisContentUnit | null
+    terpinene?: number | null
+    terpineneContentUnit?: CannabisContentUnit | null
+    terpinolene?: number | null
+    terpinoleneContentUnit?: CannabisContentUnit | null
+    threeCarene?: number | null
+    threeCareneContentUnit?: CannabisContentUnit | null
+    transNerolidol?: number | null
+    transNerolidolContentUnit?: CannabisContentUnit | null
+    //
+    thcMax?: number | null
+    thc?: number | null
+    thcContentUnit?: CannabisContentUnit | null
+    thcA?: number | null
+    thcAContentUnit?: CannabisContentUnit | null
+    cbdMax?: number | null
+    cbd?: number | null
+    cbdContentUnit?: CannabisContentUnit | null
+    cbdA?: number | null
+    cbdAContentUnit?: CannabisContentUnit | null
+    cbaA?: number | null
+    cbaAContentUnit?: CannabisContentUnit | null
+    cbn?: number | null
+    cbnContentUnit?: CannabisContentUnit | null
+    cbg?: number | null
+    cbgContentUnit?: CannabisContentUnit | null
+  }
 }
 
 export type ProductsResponse = {
@@ -41,6 +100,12 @@ export enum ProductPriceType {
   REGULAR = 'REGULAR',
   WEIGHT_TIER = 'WEIGHT_TIER', //deli style
   PRICE_TIER = 'PRICE_TIER', //price breaks
+}
+
+export enum ProductPotencyLevels {
+  MILD = 'MILD',
+  MEDIUM = 'MEDIUM',
+  STRONG = 'STRONG',
 }
 
 export enum CannabisType {
@@ -127,6 +192,15 @@ export enum CannabisEffectName {
   NOT_HIGH = 'Not High',
   HUNGRY = 'Hungry',
   ANXIOUS = 'Anxious',
+}
+
+export type TerpeneStrength = {
+  name: string
+  relativeValue: number
+  value: number
+  context: string
+  // iconName: TerpeneIcon
+  contentUnit: 'px' | 'em' | 'rem' | '%' | 'vw' | 'vh'
 }
 
 export enum TerpeneType {

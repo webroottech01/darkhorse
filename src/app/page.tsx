@@ -6,6 +6,8 @@ import HomePage from '../components/pages/HomePage'
 import { ProductSort } from '@/types/product'
 import productService from '@/api/productService'
 import venueService from '@/api/venueService'
+import { getMetaData } from '@/utils/meta'
+import { RouteName } from '@/utils/route'
 
 export type Props = {
   params: {}
@@ -20,17 +22,12 @@ export async function generateMetadata(
     process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID!
   )
 
-  return {
-    title: venue.name,
-    //@ts-ignore
-    icons: [
-      venue.favicon
-        ? {
-            url: venue.favicon,
-          }
-        : undefined,
-    ].filter(Boolean),
-  }
+  return getMetaData({
+    routeName: RouteName.HOME,
+    data: {
+      venue,
+    },
+  })
 }
 
 export default async function HomePageSSR() {

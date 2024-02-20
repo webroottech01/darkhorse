@@ -10,6 +10,7 @@ import Image from '../Image'
 import Typography from '../Typography'
 import useVenue from '@/hooks/useVenue'
 import { Product } from '@/types/product'
+import cartService from '@/api/cartService'
 
 const Wrapper = styled.div`
   display: flex;
@@ -154,18 +155,11 @@ export default function ProductPage({ product }: { product: Product }) {
               onClick={async (e) => {
                 e.preventDefault()
 
-                alert(
-                  JSON.stringify({
-                    title: 'Added to cart',
-                    description: `${product.name} has been added to your cart`,
-                  })
-                )
-
-                // await addProduct({
-                //   venueId,
-                //   productId: q_product.data.id,
-                //   quantity: 1,
-                // })
+                await cartService.addProduct({
+                  venueId: q_venue?.data?.id!,
+                  productId: product.id,
+                  quantity: 1,
+                })
               }}
             >
               Add to Cart

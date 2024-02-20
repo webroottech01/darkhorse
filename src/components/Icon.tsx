@@ -20,6 +20,10 @@ export type IconType =
   | 'CHEVRON_UP'
   | 'CHEVRON_LEFT'
   | 'CHEVRON_RIGHT'
+  | 'PLUS'
+  | 'SUBTRACT'
+  | 'DELETE'
+  | 'TRASH'
 
 type IconArgs = {
   type: IconType
@@ -39,6 +43,27 @@ const getIconByType = (type: IconType, color?: string) => {
   const fill = color ?? 'currentColor'
 
   switch (type) {
+    case 'PLUS':
+      return (
+        <>
+          <path
+            d="M20.25 10.75C20.25 8.12665 22.3766 6 25 6C27.6234 6 29.75 8.12665 29.75 10.75V39.25C29.75 41.8734 27.6234 44 25 44C22.3766 44 20.25 41.8734 20.25 39.25V10.75Z"
+            fill={fill}
+          />
+          <path
+            d="M39.25 20.25C41.8734 20.25 44 22.3766 44 25C44 27.6233 41.8734 29.75 39.25 29.75H10.75C8.12665 29.75 6 27.6233 6 25C6 22.3766 8.12665 20.25 10.75 20.25H39.25Z"
+            fill={fill}
+          />
+        </>
+      )
+    case 'SUBTRACT':
+      return (
+        <path
+          xmlns="http://www.w3.org/2000/svg"
+          d="M39.25 20.25C41.8734 20.25 44 22.3766 44 25C44 27.6233 41.8734 29.75 39.25 29.75H10.75C8.12665 29.75 6 27.6233 6 25C6 22.3766 8.12665 20.25 10.75 20.25H39.25Z"
+          fill={fill}
+        />
+      )
     case 'SEARCH':
       return (
         <path
@@ -1323,6 +1348,16 @@ const getIconByType = (type: IconType, color?: string) => {
           fillRule="evenodd"
           clipRule="evenodd"
           d="M30.0839 9.5L32.5 11.831L18.3322 25.5L32.5 39.169L30.0839 41.5L13.5 25.5L30.0839 9.5Z"
+          fill={fill}
+        />
+      )
+    case 'DELETE':
+    case 'TRASH':
+      return (
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M22.9879 8C20.2472 8 17.9786 10.0213 17.5916 12.6545H10.9394C9.8683 12.6545 9 13.5228 9 14.5939C9 15.665 9.8683 16.5333 10.9394 16.5333L17.5334 16.5333H32.4667L39.0606 16.5333C40.1317 16.5333 41 15.665 41 14.5939C41 13.5228 40.1317 12.6545 39.0606 12.6545H32.4084C32.0214 10.0213 29.7529 8 27.0122 8H22.9879ZM13.2666 18.6667H36.7333L35.0289 36.6447C34.7339 39.7564 32.1209 42.1333 28.9953 42.1333H21.0046C17.879 42.1333 15.266 39.7564 14.971 36.6447L13.2666 18.6667Z"
           fill={fill}
         />
       )

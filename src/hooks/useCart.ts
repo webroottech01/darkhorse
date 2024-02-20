@@ -4,17 +4,17 @@ import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 
 import useVenue from './useVenue'
 import { QueryClientKey } from '@/utils/queryClient'
-import { Cart } from '@/types/cart'
+import { Cart, CartWithItemProducts } from '@/types/cart'
 import cartService from '@/api/cartService'
 
 const useCart = (
-  options?: Omit<UseQueryOptions<Cart>, 'queryKey' | 'queryFn'> & {
+  options?: Omit<UseQueryOptions<CartWithItemProducts>, 'queryKey' | 'queryFn'> & {
     cartId?: string
   }
 ) => {
   const q_venue = useVenue()
 
-  return useQuery<Cart | null>({
+  return useQuery<CartWithItemProducts | null>({
     ...((options ?? {}) as any),
     queryKey: QueryClientKey.CART,
     queryFn: async () => {

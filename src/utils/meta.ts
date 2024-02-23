@@ -50,6 +50,21 @@ export const getMetaData = ({
         // },
       })
       break
+    default:
+      metaData = _getMetaData({
+        venue: data.venue,
+        baseUrl,
+        pathname,
+        titleTemplateStr: '',
+        descTemplateStr: '',
+        data: {},
+        // titleTemplateStr: data.venue.seoMenuMetaData?.home?.title ?? '',
+        // descTemplateStr: data.venue.seoMenuMetaData?.home?.description ?? '',
+        // data: {
+        //   ...convertVenueToMergeVariables(data.venue),
+        // },
+      })
+      break
   }
 
   return metaData

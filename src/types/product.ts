@@ -1,5 +1,8 @@
 import { ListParams } from './constants'
 
+export const ProductDefaultImage =
+  'https://imgix.dispenseapp.com/default-image.png'
+
 export type Product = {
   id: string
   name: string
@@ -11,6 +14,7 @@ export type Product = {
   seoDescription?: string
   brand?: {
     name?: string
+    logo?: string
   }
   type: ProductType
   subType?: string

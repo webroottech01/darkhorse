@@ -54,7 +54,7 @@ export type CartCreateData = Omit<
 
 export type CartItem = {
   id: string
-  product: string
+  product: Product
   quantity: number
   status?: CartItemStatus
   /**

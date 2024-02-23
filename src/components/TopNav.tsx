@@ -153,7 +153,12 @@ export default function TopNav() {
         open={cartSlideOutOpen}
         onClose={() => setCartSlideOutOpen(false)}
       >
-        <Cart />
+        <Cart
+          onClose={() => {
+            console.log('CLOSE')
+            setCartSlideOutOpen(false)
+          }}
+        />
       </SlideOutPanel>
     </>
   )

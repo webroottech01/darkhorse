@@ -8,21 +8,6 @@ import { Controller, useForm } from 'react-hook-form'
 
 import useVenue from '@/hooks/useVenue'
 import useCart from '@/hooks/useCart'
-import TopNav from '@/components/TopNav'
-// import useCartMutation from '@/hooks/useCartMutation'
-// import ProductImage from '@/components/ProductImage'
-// import { OrderCartItemWithProductPopulated } from 'shared'
-// import { hasSoldOutItems as hasSoldOutItemsFn, clearCart } from '@/utils/cart'
-// import MenuBottomBar from '@/components/MenuBottomBar'
-// import { ApiError } from 'api-library'
-// import {
-//   getProductRemainingQuantity,
-//   getProductPurchaseMax,
-//   getProductHref,
-// } from '@/utils/product'
-// import StoreClosedAlert from '@/components/StoreClosedAlert'
-// import useMenuRouter from '@/hooks/useMenuRouter'
-// import MenuBackLink from '../MenuBackLink'
 import Button from './Button'
 import Icon from './Icon'
 import Loading from './Loading'
@@ -45,6 +30,7 @@ import Stepper from './Stepper'
 import useCartMutation from '@/hooks/useCartMutation'
 import DispenseError from '@/api/dispenseError'
 import cartService from '@/api/cartService'
+import ProductImage from './ProductImage'
 
 // const cartFormSchema = z.object({
 //   items: z.array(
@@ -59,7 +45,7 @@ type CartFormData = {
 }
 
 const Wrapper = styled.div`
-  padding-bottom: 100px;
+  padding: 20px 40px 100px;
 `
 
 const CartBody = styled.div`
@@ -79,7 +65,8 @@ const PriceRow = styled.div`
 
 const CartList = styled.ul`
   list-style-type: none;
-  padding: 20px 20px 40px;
+  padding: 20px 0 40px;
+  margin: 0;
 `
 
 const ProductRow = styled.div`
@@ -119,7 +106,7 @@ function getDefaultValues(items: CartItemWithProduct[]) {
   }
 }
 
-export default function Cart({}: {}) {
+export default function Cart({ onClose }: { onClose: () => void }) {
   const [cartLoading, setCartLoading] = React.useState(true)
   const router = useRouter()
   const q_venue = useVenue()
@@ -132,15 +119,15 @@ export default function Cart({}: {}) {
   const q_cart = useCart()
   const cartItems = watch('items')
 
-  //   React.useEffect(() => {
-  //     if (q_cart?.data) {
-  //       setCartLoading(false)
-  //     }
+  React.useEffect(() => {
+    if (q_cart?.data) {
+      setCartLoading(false)
+    }
 
-  //     if (!q_cart?.data?.items) return
+    if (!q_cart?.data?.items) return
 
-  //     reset(getDefaultValues(q_cart?.data?.items ?? []))
-  //   }, [q_cart.data])
+    reset(getDefaultValues(q_cart?.data?.items ?? []))
+  }, [q_cart.data])
 
   const m_cart = useCartMutation({
     onSuccess: (data) => {
@@ -177,6 +164,27 @@ export default function Cart({}: {}) {
   return (
     <>
       <Wrapper>
+        <div
+          css={css`
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+          `}
+        >
+          <Typography variant="h2">Your Cart</Typography>
+          <div css={css``} onClick={() => onClose()}>
+            <Icon
+              type="CLOSE_X"
+              height={30}
+              width={30}
+              css={css`
+                cursor: pointer;
+              `}
+            />
+          </div>
+        </div>
         {/* <StoreClosedAlert /> */}
         {q_cart.fetchStatus === 'fetching' || cartLoading ? (
           <div
@@ -223,7 +231,7 @@ export default function Cart({}: {}) {
                             cursor: 'pointer',
                           }}
                         >
-                          {/* <ProductImage product={item.product} /> */}
+                          <ProductImage product={item.product} />
                         </div>
                         <div>
                           <Typography variant="body-xs">
@@ -391,67 +399,72 @@ export default function Cart({}: {}) {
                     css={css`
                       display: flex;
                       flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      padding: 40px 0;
                     `}
                   >
-                    <Link href="/">
-                      <Button icon="PLUS" size="medium">
+                    <Link href="/shop">
+                      <Button
+                        icon="PLUS"
+                        size="medium"
+                        onClick={() => onClose()}
+                      >
                         Add more items
                       </Button>
                     </Link>
                   </div>
                 </CartList>
-                <div css={{ padding: '0 20px' }}>
-                  <PriceBreakdown>
-                    <Typography variant="h3">Subtotal</Typography>
+                <PriceBreakdown>
+                  <Typography variant="h3">Subtotal</Typography>
+                  <Typography
+                    variant="number-secondary"
+                    css={{
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {formatCurrency(
+                      q_cart?.data?.subtotalWithoutDiscounts ?? 0,
+                      q_venue?.data?.currencyCode,
+                      q_venue?.data?.languageCode
+                    )}
+                  </Typography>
+                </PriceBreakdown>
+                {q_cart?.data?.discounts?.map((discount) => (
+                  <PriceBreakdown
+                    key={`${discount.name}-${discount.productOffer}`}
+                    css={{
+                      marginTop: '5px',
+                    }}
+                  >
+                    <div>
+                      <Typography variant="body">{discount.name}</Typography>
+                    </div>
                     <Typography
                       variant="number-secondary"
                       css={{
-                        fontWeight: 'bold',
+                        color: 'var(--green)',
                       }}
                     >
                       {formatCurrency(
-                        q_cart?.data?.subtotalWithoutDiscounts ?? 0,
+                        (discount.amount ?? 0) * -1,
                         q_venue?.data?.currencyCode,
                         q_venue?.data?.languageCode
                       )}
                     </Typography>
                   </PriceBreakdown>
-                  {q_cart?.data?.discounts?.map((discount) => (
-                    <PriceBreakdown
-                      key={`${discount.name}-${discount.productOffer}`}
-                      css={{
-                        marginTop: '5px',
-                      }}
-                    >
-                      <div>
-                        <Typography variant="body">{discount.name}</Typography>
-                      </div>
-                      <Typography
-                        variant="number-secondary"
-                        css={{
-                          color: 'var(--green)',
-                        }}
-                      >
-                        {formatCurrency(
-                          (discount.amount ?? 0) * -1,
-                          q_venue?.data?.currencyCode,
-                          q_venue?.data?.languageCode
-                        )}
-                      </Typography>
-                    </PriceBreakdown>
-                  ))}
-                  <div
-                    css={css`
-                      margin-top: 20px;
-                      display: flex;
-                      flex-direction: row;
-                      justify-content: flex-end;
-                    `}
-                  >
-                    {/* {q_cart?.data ? (
+                ))}
+                <div
+                  css={css`
+                    margin-top: 20px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                  `}
+                >
+                  {/* {q_cart?.data ? (
                       <PromoCodeForm cart={q_cart?.data}></PromoCodeForm>
                     ) : null} */}
-                  </div>
                 </div>
               </>
             ) : (
@@ -461,13 +474,34 @@ export default function Cart({}: {}) {
                   <Typography variant="body-sm">Your cart is empty</Typography>
                 </div>
                 <EmptyAddItems>
-                  <Link href="/">
-                    <Button>Add Items</Button>
-                  </Link>
+                  <Button onClick={() => onClose()}>Add Items</Button>
                 </EmptyAddItems>
               </div>
             )}
           </CartBody>
+        )}
+        {q_cart.fetchStatus === 'fetching' || cartLoading ? null : (
+          <div
+            css={css`
+              position: absolute;
+              top: auto;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              padding: 20px;
+              background: var(--white);
+              border-top: 1px solid var(--gray-light);
+            `}
+          >
+            <Link href={`/${q_cart?.data?.id}/checkout`}>
+              <Button
+                variant="primary"
+                style={{ display: 'block', width: '100%' }}
+              >
+                Checkout
+              </Button>
+            </Link>
+          </div>
         )}
       </Wrapper>
     </>

@@ -23,6 +23,7 @@ export type Cart = {
   discounts?: Discount[]
   subtotalWithoutDiscounts?: number
   subtotal?: number
+  checkoutUrl: string
 }
 
 export type CartWithItemProducts = Omit<Cart, 'items'> & {
@@ -33,7 +34,13 @@ export type CartWithItemProducts = Omit<Cart, 'items'> & {
 
 export type CartCreateData = Omit<
   Cart,
-  'id' | 'organization' | 'venue' | 'user' | 'prospect' | 'items'
+  | 'id'
+  | 'organization'
+  | 'venue'
+  | 'user'
+  | 'prospect'
+  | 'items'
+  | 'checkoutUrl'
 > & {
   venueId: string
   userId?: string

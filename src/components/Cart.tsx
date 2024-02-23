@@ -493,14 +493,18 @@ export default function Cart({ onClose }: { onClose: () => void }) {
               border-top: 1px solid var(--gray-light);
             `}
           >
-            <Link href={`/${q_cart?.data?.id}/checkout`}>
-              <Button
-                variant="primary"
-                style={{ display: 'block', width: '100%' }}
-              >
-                Checkout
-              </Button>
-            </Link>
+            <Button
+              variant="primary"
+              style={{ display: 'block', width: '100%' }}
+              onClick={(e) => {
+                e.preventDefault()
+
+                // window.location.href = q_cart?.data?.checkoutUrl!
+                window.location.href = `https://menus-dev.dispenseapp.com/${q_venue?.data?.id}/menu/${q_cart?.data?.id}/checkout`
+              }}
+            >
+              Checkout
+            </Button>
           </div>
         )}
       </Wrapper>

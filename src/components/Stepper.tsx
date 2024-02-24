@@ -85,4 +85,6 @@ const Stepper = forwardRef<HTMLInputElement, StepperProps>(
   }
 )
 
+Stepper.displayName = 'Stepper'
+
 export default Stepper

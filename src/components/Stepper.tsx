@@ -38,7 +38,7 @@ const Container = styled.div`
   align-items: center;
 `
 
-export default forwardRef<HTMLInputElement, StepperProps>(
+const Stepper = forwardRef<HTMLInputElement, StepperProps>(
   ({ value, onChange, disabled, minValue, maxValue }: StepperProps, ref) => {
     minValue = minValue ?? 0
     maxValue = maxValue ?? Infinity
@@ -84,3 +84,5 @@ export default forwardRef<HTMLInputElement, StepperProps>(
     )
   }
 )
+
+export default Stepper

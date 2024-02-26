@@ -2,6 +2,7 @@ export type Venue = {
   id: string
   name: string
   logo?: string
+  logoSquare?: string
   favicon?: string
   addressFormatted?: string
   website?: string

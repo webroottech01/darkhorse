@@ -6,15 +6,14 @@ import styled, { css } from 'styled-components'
 import Typography from './Typography'
 import Tag from './Tag'
 import Skeleton from './Skeleton'
-import CardImage from './CardImage'
 import { imageUrl } from '@/utils/image'
 import { MediaQuery } from '@/utils/mediaQueries'
 import { Product, CannabisType } from '@/types/product'
 
 const Card = styled.div`
-  // border: 1px solid var(--gray-light, #e2e6ed);
+  border: 1px solid var(--gray-light, #e2e6ed);
   background: var(--white, #fff);
-  // box-shadow: 0px 4px 0px 0px rgba(168, 175, 187, 0.3);
+  box-shadow: 0px 4px 0px 0px rgba(168, 175, 187, 0.3);
   cursor: pointer;
   width: 100%;
   padding: 20px;
@@ -24,11 +23,6 @@ const Card = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-
-  /* -------- PIXEL -------- */
-  border: none;
-  box-shadow: -5px 0 0 0 var(--gray-light), 5px 0 0 0 var(--gray-light),
-    0 -5px 0 0 var(--gray-light), 0 5px 0 0 var(--gray-light);
 `
 
 export default function ProductCard({
@@ -50,7 +44,7 @@ export default function ProductCard({
       ) : (
         <>
           {product.image ? (
-            <CardImage
+            <img
               src={imageUrl(product.image, {
                 height: '186px',
               })}
@@ -58,23 +52,15 @@ export default function ProductCard({
               width={186}
               alt={product.name}
               css={css`
-                margin-bottom: 'auto';
-                justify-content: 'center';
                 height: 160px;
-                width: 100%;
+                max-width: 100%;
+                display: flex;
+                justify-content: center;
+                padding: 20px 0 0;
+                margin: 0 auto;
 
-                @media (max-width: ${MediaQuery.screenMd}) {
+                @media (max-width: ${MediaQuery.screenSm}) {
                   height: auto;
-                }
-
-                img {
-                  height: 160px;
-                  max-width: 100%;
-                  margin: 0 auto;
-
-                  @media (max-width: ${MediaQuery.screenMd}) {
-                    height: auto;
-                  }
                 }
               `}
             />

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -15,15 +15,7 @@ import useCart from '@/hooks/useCart'
 import Badge from './Badge'
 import cartService from '@/api/cartService'
 import Cart from './Cart'
-
-// import Icon from './Icon'
-// import Badge from './Badge'
-// import useCart from 'src/hooks/useCart'
-// import { getTotalItemCount } from 'src/utils/cartUtils'
-// import Cart from 'src/components/Cart'
-// import SlideOutPanel from './SlideOutPanel'
-// import Image from './Image'
-// import router from 'src/router'
+import { MediaQuery } from '@/utils/mediaQueries'
 
 const topNavLinks = [
   {
@@ -108,12 +100,34 @@ export default function TopNav() {
           <LeftCol>
             <Logo href="/">
               <Image
+                css={css`
+                  display: block;
+
+                  @media (max-width: ${MediaQuery.screenSm}) {
+                    display: none;
+                  }
+                `}
                 alt={`${q_venue?.data?.name} logo`}
                 src={imageUrl(q_venue?.data?.logo ?? '', {
                   height: '50px',
                 })}
                 fill
-                loading="lazy"
+                loading="eager"
+              />
+              <Image
+                css={css`
+                  display: none;
+
+                  @media (max-width: ${MediaQuery.screenSm}) {
+                    display: block;
+                  }
+                `}
+                alt={`${q_venue?.data?.name} logo`}
+                src={imageUrl(q_venue?.data?.logoSquare ?? '', {
+                  height: '50px',
+                })}
+                fill
+                loading="eager"
               />
             </Logo>
             <Links />
@@ -122,13 +136,6 @@ export default function TopNav() {
             <Icon type="SEARCH" />
             <a
               href="#"
-              // css={css`
-              //   display: flex;
-              //   flex-direction: row;
-              //   gap: 4px;
-              //   align-items: center;
-              //   justify-content: center;
-              // `}
               onClick={(e) => {
                 e.preventDefault()
 

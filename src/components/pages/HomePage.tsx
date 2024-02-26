@@ -32,14 +32,8 @@ const categories = [
 ]
 
 const Section = styled(Container)`
-  margin-inline: auto;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  justify-content: center;
-  align-items: center;
-  padding-block: 65px;
+  text-align: center;
+  padding-block: 60px;
 `
 
 export default function HomePage({ products }: { products: Product[] }) {
@@ -49,6 +43,9 @@ export default function HomePage({ products }: { products: Product[] }) {
       <Section
         as="section"
         css={css`
+          padding-top: 60px;
+          padding-bottom: 0;
+
           @media (min-width: 780px) {
             width: 780px;
           }
@@ -58,15 +55,29 @@ export default function HomePage({ products }: { products: Product[] }) {
           }
         `}
       >
-        <Typography variant="h2" as="h2">
+        <Typography variant="h2" as="h2" style={{ marginTop: 0 }}>
           Shop by Category
         </Typography>
-        <Container
+      </Section>
+      <Container
+        css={css`
+          overflow: hidden;
+          height: 180px;
+          padding: 0;
+        `}
+      >
+        <div
           css={css`
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             width: 100%;
+
+            padding: 20px 0 20px;
+            overflow-y: hidden;
+            overflow-x: auto;
+            width: 100%;
+            box-sizing: content-box;
           `}
         >
           {categories.map((category) => (
@@ -77,6 +88,7 @@ export default function HomePage({ products }: { products: Product[] }) {
                 flex-direction: column;
                 gap: 20px;
                 align-items: center;
+                min-width: 120px;
               `}
             >
               <Image
@@ -90,10 +102,10 @@ export default function HomePage({ products }: { products: Product[] }) {
               </Typography>
             </div>
           ))}
-        </Container>
-      </Section>
+        </div>
+      </Container>
       <Section>
-        <Typography variant="h2" as="h2">
+        <Typography variant="h2" as="h2" style={{ marginTop: 0 }}>
           Shop Most Popular
         </Typography>
         <ProductsList products={products} />

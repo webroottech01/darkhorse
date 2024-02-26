@@ -7,16 +7,21 @@ import styled from 'styled-components'
 import Button from '@/components/Button'
 import Typography from '@/components/Typography'
 import { imageUrl } from '@/utils/image'
+import { MediaQuery } from '@/utils/mediaQueries'
 
 const Banner = styled.div`
   position: relative;
-  height: 700px;
   width: 100vw;
   display: flex;
   flex-direction: column;
   padding: 100px 0;
   align-items: center;
   justify-content: space-between;
+  height: 700px;
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    height: 500px;
+  }
 `
 
 const HeroInner = styled.div`
@@ -42,11 +47,14 @@ const HeroH1 = styled(Typography).withConfig({
   max-width: 600px;
   color: #fff;
   text-align: center;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-size: 60px;
   font-style: normal;
   font-weight: 700;
   line-height: 65px;
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    font-size: 50px;
+  }
 `
 
 export default function Hero() {
@@ -67,7 +75,10 @@ export default function Hero() {
         priority
       />
       <HeroInner>
-        <HeroH1 variant="body" as="h1">
+        <HeroH1
+          variant="body"
+          as="h1"
+        >
           Level Up! <br /> Get Higher
         </HeroH1>
         <Link href="/shop">

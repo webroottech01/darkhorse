@@ -1,5 +1,5 @@
-import ShopPage from '@/components/pages/ShopPage'
+import ProductsPage from '@/components/pages/Products/ProductsPage'
 
 export default function ShopPageSSR() {
-  return <ShopPage />
+  return <ProductsPage />
 }

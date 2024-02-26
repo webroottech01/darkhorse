@@ -4,7 +4,7 @@ export enum RouteName {
   PRODUCT = 'PRODUCT',
 }
 
-export const getCurrentMenuRouteName = (path: string) => {
+export const getCurrentRouteName = (path: string) => {
   path = path ?? '/'
 
   if (path === '/') {

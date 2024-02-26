@@ -2,15 +2,20 @@
 
 import React from 'react'
 import { css } from 'styled-components'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { usePathname, useSearchParams } from 'next/navigation'
 
-import TopNav from '../../TopNav'
-import SlideOutPanel from '@/components/SlideOutPanel'
-// import useMenuRouter from '@/hooks/useMenuRouter'
-// import MenuBackLink from '../../MenuBackLink'
-// import useMenuPath from '@/hooks/useMenuPath'
-// import useSearchParams from '@/hooks/useSearchParams'
+import SlideOutPanel, { SlideOutPanelProps } from '@/components/SlideOutPanel'
+import Button from '@/components/Button'
+import AccordionFilter from '@/components/Filters/AccordionFilter'
+import Filters from '@/components/Filters/Filters'
+import {
+  FilterDef,
+  FilterOnAppliedChangeFn,
+  FiltersRef,
+} from '@/components/Filters/types'
+import { MediaQuery } from '@/utils/mediaQueries'
+import { addQueryStringParams } from '@/utils/url'
 
 type ProductsFiltersSlideOutProps = {
   filterDefs: FilterDef[]
@@ -37,11 +42,6 @@ export default function ProductsFiltersSlideOut({
           overflow-x: auto;
         `}
       >
-        <TopNav
-          title="Filter"
-          variant="slim"
-          leftContent={<MenuBackLink onClick={onClose}>Close</MenuBackLink>}
-        />
         <div
           css={css`
             padding: 40px;

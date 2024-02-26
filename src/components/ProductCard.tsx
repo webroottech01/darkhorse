@@ -28,12 +28,14 @@ const Card = styled.div`
 export default function ProductCard({
   product,
   variant,
+  style,
 }: {
   product?: Product
   variant?: 'default' | 'loading'
+  style?: React.CSSProperties
 }) {
   return (
-    <Card>
+    <Card style={style}>
       {variant === 'loading' || !product ? (
         <>
           <Skeleton as="span" style={{ height: '186px', width: '80%' }} />

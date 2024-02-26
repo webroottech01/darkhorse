@@ -85,6 +85,7 @@ export type Product = {
 export type ProductsResponse = {
   data: Product[]
   count: number
+  pageCount: number
 }
 
 export enum ProductType {

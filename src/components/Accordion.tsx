@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import styled from 'styled-components'
+import styled, { CSSProp } from 'styled-components'
 
 import Button from './Button'
 import { fadeIn } from '@/constants/animations'
@@ -10,6 +10,7 @@ export type AccordionProps = {
   trigger: React.ReactNode
   children: React.ReactNode
   style?: React.CSSProperties
+  css?: CSSProp
 }
 
 const AccordionTrigger = styled.div`
@@ -32,11 +33,14 @@ export default function Accordion({
   trigger,
   children,
   style,
+  css,
 }: AccordionProps) {
   const [isOpen, setOpen] = React.useState(false)
 
+  console.log('css', css)
+
   return (
-    <div style={style}>
+    <div style={style} css={css}>
       <AccordionTrigger
         onClick={(e) => {
           e.preventDefault()
@@ -51,7 +55,7 @@ export default function Accordion({
           round
           icon={isOpen ? 'SUBTRACT' : 'PLUS'}
           iconSide="right"
-        ></Button>
+        />
       </AccordionTrigger>
       {isOpen && <AccordionBody>{children}</AccordionBody>}
     </div>

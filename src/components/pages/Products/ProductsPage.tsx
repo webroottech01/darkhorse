@@ -4,7 +4,6 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { useQueryClient } from '@tanstack/react-query'
 import { InView } from 'react-intersection-observer'
-import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
@@ -179,7 +178,7 @@ const FilterRightCol = ({
   </div>
 )
 
-export default function ProductsPage({}: {}) {
+export default function ProductsPage({ category }: { category?: ProductType }) {
   const router = useRouter()
   const pathname = usePathname()
   const routeName = useRouteName()
@@ -194,6 +193,10 @@ export default function ProductsPage({}: {}) {
   const formattedSearchParams = React.useMemo(() => {
     const queryParams: any = {
       ...searchParams,
+    }
+
+    if (category) {
+      queryParams.type = category
     }
 
     if (queryParams.weight) {
@@ -235,6 +238,10 @@ export default function ProductsPage({}: {}) {
   const resetList = () => {
     queryClient.setQueryData(QueryClientKey.PRODUCTS, () => [])
   }
+
+  const pageTitle = React.useMemo(() => {
+    return category ? ProductTypeName[category] : 'Shop our products'
+  }, [category])
 
   return (
     <>
@@ -308,8 +315,8 @@ export default function ProductsPage({}: {}) {
                     }
                   `}
                 >
-                  <Typography variant="h1" as="h1">
-                    FLOWER
+                  <Typography variant="h1" as="h1" style={{ margin: 0 }}>
+                    {pageTitle}
                   </Typography>
                 </div>
               </div>
@@ -341,8 +348,8 @@ export default function ProductsPage({}: {}) {
                 }
               `}
             >
-              <Typography variant="h1" as="h1">
-                FLOWER
+              <Typography variant="h1" as="h1" style={{ margin: 0 }}>
+                {pageTitle}
               </Typography>
             </div>
             <ProductsGrid>

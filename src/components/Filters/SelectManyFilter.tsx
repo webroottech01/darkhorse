@@ -11,6 +11,7 @@ import FormInput from '../FormInput'
 import Icon from '../Icon'
 import Loading from '../Loading'
 import Checkbox from '../Checkbox'
+import Typography from '../Typography'
 
 function SelectManyFilter({
   filterDef,
@@ -100,7 +101,7 @@ function SelectManyFilter({
                       if (onChange) onChange()
                     }}
                   >
-                    {option.label}
+                    <Typography variant="body" style={{ fontStyle: 'italic' }}>{option.label}</Typography>
                   </Checkbox>
                 </DropdownItem>
               )

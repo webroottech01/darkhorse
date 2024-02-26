@@ -162,7 +162,7 @@ export const getFont = (variant?: Variant) =>
 
 export const getTypographyStyles = (variant?: Variant) =>
   `
-  font-weight: 400;
+  font-weight: 200;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.5;

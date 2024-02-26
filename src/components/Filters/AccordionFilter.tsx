@@ -64,6 +64,7 @@ export default function AccordionFilter({
     <Accordion
       style={{
         width: '100%',
+        borderBottom: '1px solid var(--gray-light)',
       }}
       trigger={
         <Typography variant="label">

@@ -7,6 +7,7 @@ import { css } from 'styled-components'
 import ProductCard from './ProductCard'
 import { MediaQuery } from '@/utils/mediaQueries'
 import { Product } from '@/types/product'
+import { getProductHref } from '@/utils/product'
 
 export function ProductsList({
   loading,
@@ -46,7 +47,7 @@ export function ProductsList({
           <Link
             key={product.id}
             style={{ height: '100%' }}
-            href={`products/${product.slug}`}
+            href={getProductHref(product)}
           >
             <ProductCard product={product} />
           </Link>

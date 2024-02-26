@@ -1,33 +1,40 @@
 'use client'
 
+import Link from 'next/link'
+import styled, { css } from 'styled-components'
+
 import { ProductsList } from '@/components/ProductsList'
 import Hero from '../Hero'
 import Typography from '../Typography'
 import Image from 'next/image'
 import Container from '../Container'
-import styled, { css } from 'styled-components'
-import { Product } from '@/types/product'
+import { Product, ProductType } from '@/types/product'
 
 const categories = [
   {
     name: 'Flower',
     image: 'https://assets.dispenseapp.com/highscore-cannabis/hs-flower.svg',
+    type: ProductType.FLOWER,
   },
   {
     name: 'Vapes',
     image: 'https://assets.dispenseapp.com/highscore-cannabis/hs-vapes.svg',
+    type: ProductType.VAPORIZERS,
   },
   {
     name: 'Edibles',
     image: 'https://assets.dispenseapp.com/highscore-cannabis/hs-edibles.svg',
+    type: ProductType.EDIBLES,
   },
   {
     name: 'Pre Rolls',
     image: 'https://assets.dispenseapp.com/highscore-cannabis/hs-pre-rolls.svg',
+    type: ProductType.PRE_ROLLS,
   },
   {
     name: 'Topicals',
     image: 'https://assets.dispenseapp.com/highscore-cannabis/hs-topicals.svg',
+    type: ProductType.TOPICALS,
   },
 ]
 
@@ -81,7 +88,8 @@ export default function HomePage({ products }: { products: Product[] }) {
           `}
         >
           {categories.map((category) => (
-            <div
+            <Link
+              href={`/shop/${category.type.toLowerCase()}`}
               key={category.name}
               css={css`
                 display: flex;
@@ -100,7 +108,7 @@ export default function HomePage({ products }: { products: Product[] }) {
               <Typography variant="h3" as="h3">
                 {category.name}
               </Typography>
-            </div>
+            </Link>
           ))}
         </div>
       </Container>

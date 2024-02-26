@@ -9,6 +9,7 @@ export type IconType =
   | 'SEARCH'
   | 'CLOSE_X_CIRCLED'
   | 'INFO_CIRCLED'
+  | 'CHECK_MARK'
   | 'CHECK_MARK_CIRCLED'
   | 'CLOSE_X'
   | 'FLOWER'
@@ -90,6 +91,15 @@ const getIconByType = (type: IconType, color?: string) => {
             fill={fill}
           />
         </>
+      )
+    case 'CHECK_MARK':
+      return (
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M40.8315 11.7809C42.2228 12.9581 42.3964 15.0403 41.2191 16.4316L23.0692 37.8815C22.4249 38.643 21.4706 39.0722 20.4733 39.049C19.476 39.0258 18.5427 38.5526 17.9344 37.7619L9.6845 27.037C8.57329 25.5924 8.84353 23.5205 10.2881 22.4093C11.7327 21.2981 13.8046 21.5684 14.9158 23.0129L20.6724 30.4966L36.1808 12.1685C37.358 10.7772 39.4403 10.6036 40.8315 11.7809Z"
+          fill={fill}
+        />
       )
     case 'CHECK_MARK_CIRCLED':
       return (

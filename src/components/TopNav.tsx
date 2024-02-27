@@ -26,7 +26,13 @@ const topNavLinks = [
 
 const TopNavEl = styled.div`
   height: 70px;
-  box-shadow: 0px -1px 0px 0px var(--card-border-color) inset;
+`
+
+const TopNavImage = styled(Image)`
+  object-fit: cover;
+  height: 70px;
+  position: absolute;
+  top: 0;
 `
 
 const TopNavContainer = styled(Container)`
@@ -96,6 +102,16 @@ export default function TopNav() {
   return (
     <>
       <TopNavEl>
+        {/* <TopNavImage
+          alt="Highscore Hero"
+          src={imageUrl('https://dispense-images.imgix.net/hs-nav-bg.png', {
+            height: 70,
+          })}
+          fill
+          quality={75}
+          loading="eager"
+          priority
+        /> */}
         <TopNavContainer>
           <LeftCol>
             <Logo href="/">

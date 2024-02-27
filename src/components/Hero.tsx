@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import Button from '@/components/Button'
 import Typography from '@/components/Typography'
@@ -14,7 +14,7 @@ const Banner = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: column;
-  padding: 100px 0;
+  padding: 12% 0;
   align-items: center;
   justify-content: space-between;
   height: 700px;
@@ -31,6 +31,7 @@ const HeroInner = styled.div`
   gap: 20px;
   align-items: center;
   justify-content: space-between;
+  color: var(--white);
 `
 
 const HeroImage = styled(Image)`
@@ -44,17 +45,27 @@ const HeroImage = styled(Image)`
 const HeroH1 = styled(Typography).withConfig({
   shouldForwardProp: (prop) => !['variant'].includes(prop),
 })`
-  max-width: 600px;
-  color: #fff;
+  color: var(--white);
   text-align: center;
-  font-size: 60px;
   font-style: normal;
   font-weight: 700;
-  line-height: 65px;
+  text-align: center;
+  text-shadow: -6px 4px 4px rgba(107, 107, 107, 0.25);
+  font-size: 66px;
+  margin: 0 0 -20px;
 
   @media (max-width: ${MediaQuery.screenMd}) {
     font-size: 50px;
   }
+`
+
+const HeroH2 = styled(Typography).withConfig({
+  shouldForwardProp: (prop) => !['variant'].includes(prop),
+})`
+  color: var(--white);
+  font-family: var(--font-family-primary);
+  font-weight: 700;
+  margin: 0;
 `
 
 export default function Hero() {
@@ -75,21 +86,27 @@ export default function Hero() {
         priority
       />
       <HeroInner>
-        <HeroH1
-          variant="body"
-          as="h1"
-        >
-          Level Up! <br /> Get Higher
+        <HeroH1 variant="h1" as="h1">
+          Level up!
         </HeroH1>
-        <Link href="/shop">
-          <Button
-            size="default"
-            variant="primary"
-            style={{ paddingInline: '80px' }}
-          >
-            Shop
-          </Button>
-        </Link>
+        <HeroH2 variant="h2" as="h2">
+          with our top notch cannabis products
+        </HeroH2>
+        <div
+          css={css`
+            padding: 40px 0;
+          `}
+        >
+          <Link href="/shop">
+            <Button
+              size="default"
+              variant="primary"
+              style={{ paddingInline: '80px' }}
+            >
+              Shop
+            </Button>
+          </Link>
+        </div>
       </HeroInner>
     </Banner>
   )

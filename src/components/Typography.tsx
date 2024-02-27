@@ -120,13 +120,22 @@ export const getVariantStyles = (variant?: Variant) => {
       return `
         font-size: 3.75rem;
         color: var(--black);
-        font-weight: 800;
+        font-family: var(--font-family-tertiary);
+
+        font-weight: 400;
+        line-height: 70px;
+        letter-spacing: 1.4px;
       `
     case 'h2':
       return `
         font-size: 2.00rem;
         color: var(--black);
         font-weight: 800;
+        font-family: var(--font-family-tertiary);
+
+        font-weight: 400;
+        line-height: 54px; /* 81.818% */
+        letter-spacing: 0.4px;
       `
     case 'h3':
       return `

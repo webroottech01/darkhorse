@@ -35,7 +35,9 @@ const topNavLinks = [
   },
   {
     name: 'Specials',
-    path: '/shop',
+    path: addQueryStringParams('/shop', {
+      discounted: 'true',
+    }),
   },
 ]
 
@@ -110,7 +112,11 @@ const Links = () => {
             position="left"
             key={l.path}
             Trigger={(props) => (
-              <DropdownTrigger {...props} size="small">
+              <DropdownTrigger
+                {...props}
+                size="small"
+                style={{ background: 'none', border: 'none' }}
+              >
                 <TopNavLink>{l.name}</TopNavLink>
               </DropdownTrigger>
             )}
@@ -123,9 +129,29 @@ const Links = () => {
                     onClick={() => props.close()}
                     css={css`
                       display: block;
+                      position: relative;
+                      padding: 0 0 5px;
 
-                      > div {
-                        font-weight: bold;
+                      &:hover {
+                        &:after {
+                          transform: scaleX(1);
+                        }
+                      }
+
+                      &:after {
+                        content: '';
+                        display: inline-block;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        height: 2px;
+                        background-color: var(--blue-dark);
+                        -webkit-transition: 0.25s;
+                        transition: 0.25s;
+                        -webkit-transform: scaleX(0);
+                        -ms-transform: scaleX(0);
+                        transform: scaleX(0);
                       }
                     `}
                   >
@@ -183,10 +209,9 @@ export default function TopNav() {
                 }
               `}
               alt={`${q_venue?.data?.name} logo`}
-              src={imageUrl(q_venue?.data?.logoSquare ?? '', {
-                height: '50px',
-              })}
-              fill
+              src={q_venue?.data?.logoSquare ?? ''}
+              height={50}
+              width={50}
               loading="eager"
             />
           </Logo>

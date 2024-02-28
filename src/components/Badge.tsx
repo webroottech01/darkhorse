@@ -24,11 +24,6 @@ const BadgeEl = styled(Typography)<{
   color: var(--white);
   font-size: 12px;
 
-  > span {
-    position: relative;
-    top: 4px;
-  }
-
   ${({ badgeVariant }) =>
     badgeVariant === 'primary' &&
     `

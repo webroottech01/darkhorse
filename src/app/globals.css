@@ -4,6 +4,8 @@
 
   /* Colors */
   --bg-color: #f7f3e0;
+  --text-color: var(--blue-dark);
+  --border-color: #c2bc9c;
   --brand-danger: #ef4d61;
   --brand-danger-lightest: #fbe9ec;
   --brand-warning: #ffc12e;
@@ -13,7 +15,7 @@
   --brand-success: var(--brand-primary);
   --brand-success-lightest: #e9f6f2;
   --blue: var(--brand-primary);
-  --blue-dark: #27a3ab;
+  --blue-dark: #076b72;
   --green: var(--brand-success);
   --green-dark: #007a4b;
   --orange: #ee870f;
@@ -46,6 +48,7 @@ body {
   min-height: 100vh;
   -webkit-text-size-adjust: 100%;
   line-height: normal;
+  color: var(--text-color);
 }
 
 a {

@@ -57,7 +57,7 @@ const DropdownList = styled.ul<
   position: absolute;
   top: calc(100% + ${(props) => props.blockOffset}px);
   background-color: var(--bg-color);
-  border: 3px solid var(--blue-dark);
+  border: 3px solid var(--blue);
   width: ${(props) => (props.fillParent ? '100%' : 'auto')};
   border-radius: 4px;
   padding: 20px 30px;
@@ -92,8 +92,8 @@ const DropdownList = styled.ul<
     height: 9px;
     width: 9px;
     transform: rotate(45deg);
-    border-left: solid 3px var(--blue-dark);
-    border-top: solid 3px var(--blue-dark);
+    border-left: solid 3px var(--blue);
+    border-top: solid 3px var(--blue);
     ${(props) =>
       props.position === 'left'
         ? css`
@@ -138,7 +138,7 @@ const Dropdown = ({
   onClose,
   itemClickToClose,
   inlineOffset = 20,
-  blockOffset = 10,
+  blockOffset = 0,
   css: _css,
   ...rest
 }: DropdownProps) => {

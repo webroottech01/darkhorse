@@ -53,13 +53,13 @@ export const getVariantStyles = (variant?: Variant) => {
       `
     case 'number-sm':
       return `
-        color: var(--black);
+        color: var(--text-color);
         font-size: 0.8125rem;
       `
     case 'number-lg':
       return `
         font-size: 1.5rem;
-        color: var(--black);
+        color: var(--text-color);
       `
     case 'number-lg-secondary':
       return `
@@ -69,7 +69,7 @@ export const getVariantStyles = (variant?: Variant) => {
     case 'number':
       return `
         font-size: 1rem;
-        color: var(--black);
+        color: var(--text-color);
       `
     case 'number-secondary':
       return `
@@ -119,8 +119,8 @@ export const getVariantStyles = (variant?: Variant) => {
     case 'h1':
       return `
         font-size: 3.75rem;
-        color: var(--black);
-        font-family: var(--font-family-primary);
+        color: var(--text-color);
+        font-family: var(--font-family-secondary);
 
         font-weight: 400;
         line-height: 85px;
@@ -129,7 +129,7 @@ export const getVariantStyles = (variant?: Variant) => {
     case 'h2':
       return `
         font-size: 2.00rem;
-        color: var(--black);
+        color: var(--text-color);
         font-weight: 800;
         font-family: var(--font-family-primary);
 
@@ -140,7 +140,7 @@ export const getVariantStyles = (variant?: Variant) => {
     case 'h3':
       return `
         font-size: 1rem;
-        color: var(--black);
+        color: var(--text-color);
         font-weight: 800;
       `
     case 'h4':
@@ -154,7 +154,7 @@ export const getVariantStyles = (variant?: Variant) => {
     case 'body':
     default:
       return `
-        color: var(--black);
+        color: var(--text-color);
         font-size: 1rem;
       `
   }

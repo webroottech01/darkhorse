@@ -37,8 +37,6 @@ export default function Accordion({
 }: AccordionProps) {
   const [isOpen, setOpen] = React.useState(false)
 
-  console.log('css', css)
-
   return (
     <div style={style} css={css}>
       <AccordionTrigger
@@ -55,6 +53,7 @@ export default function Accordion({
           round
           icon={isOpen ? 'SUBTRACT' : 'PLUS'}
           iconSide="right"
+          variant="secondary"
         />
       </AccordionTrigger>
       {isOpen && <AccordionBody>{children}</AccordionBody>}

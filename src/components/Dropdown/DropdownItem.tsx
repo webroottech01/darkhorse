@@ -22,7 +22,6 @@ const DropdownItemContainer = styled.li`
   * {
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: var(--brand-primary);
     display: block;
     text-transform: capitalize;
   }

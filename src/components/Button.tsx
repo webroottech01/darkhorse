@@ -80,7 +80,7 @@ const ButtonIcon = styled(Icon)`
     props.buttonVariant === 'primary' &&
     css`
       path {
-        fill: white;
+        fill: var(--white);
       }
     `}
 `
@@ -252,6 +252,11 @@ function Button(
             &:focus-within {
               background-color: transparent;
               border-color: var(--green);
+              color: var(--brand-primary);
+
+              path {
+                fill: var(--brand-primary);
+              }
             }
 
             &:focus:not(:active),
@@ -282,6 +287,10 @@ function Button(
             &:focus-within {
               background-color: transparent;
               border-color: var(--green);
+
+              path {
+                fill: var(--brand-primary);
+              }
             }
 
             &:focus-visible {

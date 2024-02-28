@@ -13,6 +13,7 @@ export default function DropdownTrigger({
 }: DropdownTriggerProps &
   ButtonOptions & {
     children: React.ReactNode
+    style?: React.CSSProperties
   }) {
   return (
     <Button

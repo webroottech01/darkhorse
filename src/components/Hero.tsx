@@ -8,6 +8,7 @@ import Button from '@/components/Button'
 import Typography from '@/components/Typography'
 import { imageUrl } from '@/utils/image'
 import { MediaQuery } from '@/utils/mediaQueries'
+import { addQueryStringParams } from '@/utils/url'
 
 const Banner = styled.div`
   position: relative;
@@ -56,7 +57,11 @@ export default function Hero() {
         <Typography
           variant="body"
           as="h2"
-          style={{ fontSize: '1.4rem', margin: '0 0 20px 0', color: 'var(--white)' }}
+          style={{
+            fontSize: '1.4rem',
+            margin: '0 0 20px 0',
+            color: 'var(--white)',
+          }}
         >
           High Score Cannabis
         </Typography>
@@ -80,7 +85,11 @@ export default function Hero() {
               Order Online
             </Button>
           </Link>
-          <Link href="/shop">
+          <Link
+            href={addQueryStringParams('/shop', {
+              discounted: true,
+            })}
+          >
             <Button
               size="default"
               variant="secondary"

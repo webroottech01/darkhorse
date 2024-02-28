@@ -7,7 +7,6 @@ import { InView } from 'react-intersection-observer'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-import Container from '@/components/Container'
 import useVenue from '@/hooks/useVenue'
 import {
   ProductsSort,
@@ -44,8 +43,8 @@ import EmptyState from '@/components/EmptyState'
 import ProductCard from '@/components/ProductCard'
 import Typography from '@/components/Typography'
 
-const Wrapper = styled(Container)`
-  padding: 100px 0;
+const Wrapper = styled.div`
+  padding: 0;
 `
 
 const Filters = styled(_Filters)`
@@ -59,11 +58,16 @@ const Filters = styled(_Filters)`
 
 const ProductsGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   gap: 20px 20px;
 
   @media (max-width: ${MediaQuery.screenLg}) {
+    grid-template-columns: minmax(0, 1fr) 1fr;
+    gap: 10px 10px;
+  }
+
+  @media (max-width: ${MediaQuery.screenMd}) {
     grid-template-columns: minmax(0, 1fr) 1fr;
     gap: 10px 10px;
   }
@@ -78,8 +82,12 @@ const LeftNavAnimation = css`
 
 const LeftNav = styled.div`
   flex: 0 0 auto;
-  width: 240px;
-  padding-right: 40px;
+  width: 300px;
+  padding: 20px;
+  height: 100vh;
+  border-right: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
   ${LeftNavAnimation}
 
   @media (max-width: ${MediaQuery.screenMd}) {
@@ -92,6 +100,7 @@ const RightContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  padding: 60px 40px;
 
   @media (max-width: ${MediaQuery.screenMd}) {
     gap: 15px;
@@ -222,14 +231,14 @@ export default function ProductsPage({ category }: { category?: ProductType }) {
     queryKey: [formattedSearchParams],
     params: {
       ...formattedSearchParams,
-      limit: 20,
+      limit: 16,
       active: true,
       quantityMin: 1,
       group: true,
       enable: true,
     },
     options: {
-      keepPreviousData: true,
+      keepPreviousData: false,
       enabled: true,
     },
   })

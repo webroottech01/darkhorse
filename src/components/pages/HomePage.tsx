@@ -62,7 +62,7 @@ export default function HomePage({ products }: { products: Product[] }) {
           }
         `}
       >
-        <Typography variant="h2" as="h2" style={{ marginTop: 0 }}>
+        <Typography variant="h1" as="h2" style={{ marginTop: 0 }}>
           Shop by Category
         </Typography>
       </Section>
@@ -113,7 +113,7 @@ export default function HomePage({ products }: { products: Product[] }) {
         </div>
       </Container>
       <Section>
-        <Typography variant="h2" as="h2" style={{ marginTop: 0 }}>
+        <Typography variant="h1" as="h2" style={{ marginTop: 0 }}>
           Shop Most Popular
         </Typography>
         <ProductsList products={products} />

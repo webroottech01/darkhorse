@@ -17,6 +17,7 @@ const Banner = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   overflow: hidden;
+  background: var(--brand-primary);
 `
 
 const HeroInner = styled.div`
@@ -26,7 +27,7 @@ const HeroInner = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   color: var(--white);
-  padding: 340px 48px 30px;
+  padding: 240px 60px 30px;
 `
 
 const HeroImage = styled(Image)`
@@ -55,7 +56,7 @@ export default function Hero() {
         <Typography
           variant="body"
           as="h2"
-          style={{ fontSize: '1.4rem', margin: 0, color: 'var(--white)' }}
+          style={{ fontSize: '1.4rem', margin: '0 0 20px 0', color: 'var(--white)' }}
         >
           High Score Cannabis
         </Typography>
@@ -102,7 +103,7 @@ export default function Hero() {
           height: 'auto',
         }}
         src={imageUrl(
-          'https://dispense-images.imgix.net/highscore/v2/hs-hero-v2.png',
+          'https://dispense-images.imgix.net/highscore/v2/hs-hero-3.png',
           {
             height: 700,
             width: 1200,

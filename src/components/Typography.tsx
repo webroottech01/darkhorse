@@ -123,7 +123,7 @@ export const getVariantStyles = (variant?: Variant) => {
         font-family: var(--font-family-primary);
 
         font-weight: 400;
-        line-height: 70px;
+        line-height: 85px;
         letter-spacing: 1.4px;
       `
     case 'h2':

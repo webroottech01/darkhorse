@@ -270,17 +270,18 @@ function Button(
     
     ${variant === 'secondary' &&
         css`
-          background-color: transparent;
+          background-color: var(--blue);
           border-color: var(--green);
           color: var(--white);
+          border-width: 3px;
 
           &:not(:disabled) {
             &:hover,
             &:active,
             &:focus-visible,
             &:focus-within {
-              background-color: var(--gray-lightest);
-              border-color: var(--gray-light);
+              background-color: transparent;
+              border-color: var(--green);
             }
 
             &:focus-visible {

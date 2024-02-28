@@ -21,6 +21,10 @@ const topNavLinks = [
     name: 'Shop',
     path: '/shop',
   },
+  {
+    name: 'Specials',
+    path: '/shop',
+  },
 ]
 
 const TopNavEl = styled.div`
@@ -31,6 +35,8 @@ const TopNavEl = styled.div`
   gap: 20px;
   padding: 0 24px;
   position: relative;
+  background: var(--brand-primary);
+  z-index: 0;
 `
 
 const TopNavImage = styled(Image)`
@@ -55,6 +61,7 @@ const LeftCol = styled.div`
   align-items: center;
   height: 100%;
   gap: 20px;
+  z-index: 1;
 `
 
 const RightCol = styled.div`
@@ -64,6 +71,7 @@ const RightCol = styled.div`
   align-items: center;
   height: 100%;
   gap: 20px;
+  z-index: 1;
 `
 
 const Links = () => {
@@ -73,6 +81,7 @@ const Links = () => {
         display: flex;
         flex-direction: row;
         align-items: center;
+        gap: 20px;
       `}
     >
       {topNavLinks.map((l) => {

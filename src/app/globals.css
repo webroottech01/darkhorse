@@ -8,11 +8,11 @@
   --brand-danger-lightest: #fbe9ec;
   --brand-warning: #ffc12e;
   --brand-warning-lightest: #fbf5e8;
-  --brand-info: #1fc0fb;
+  --brand-info: var(--brand-primary);
   --brand-info-lightest: #e9f5fc;
   --brand-success: var(--brand-primary);
   --brand-success-lightest: #e9f6f2;
-  --blue: var(--brand-info);
+  --blue: var(--brand-primary);
   --green: var(--brand-success);
   --green-dark: #007a4b;
   --orange: #ee870f;
@@ -42,7 +42,6 @@ body {
   font-weight: 200;
   font-family: var(--font-family-primary);
   background: var(--bg-color);
-
   min-height: 100vh;
 }
 

@@ -27,14 +27,12 @@ if (!process.env.NEXT_PUBLIC_DISPENSE_API_KEY)
 const font1 = localFont({
   src: [
     {
-      path: '../fonts/GothamBook.woff2',
+      path: '../fonts/Gotham-Book.woff2',
       weight: 'normal',
       style: 'normal',
     },
     {
-      path: '../fonts/GothamBold.woff2',
-      weight: 'bold',
-      style: 'bold',
+      path: '../fonts/Gotham-Bold.woff2',
     },
   ],
   display: 'swap',

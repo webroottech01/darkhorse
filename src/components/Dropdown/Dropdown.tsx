@@ -15,10 +15,13 @@ const DropdownContainer = styled.div<Partial<NonHTMLProps>>`
   width: ${(props) => (props.fillParent ? '100%' : 'auto')};
   position: relative;
   display: flex;
-  justify-content: ${(props) => (props.position === 'right' ? 'flex-end' : 'flex-start')};
+  justify-content: ${(props) =>
+    props.position === 'right' ? 'flex-end' : 'flex-start'};
 `
 
-const DropdownBackdrop = styled.div<Partial<NonHTMLProps & DropdownTriggerProps>>`
+const DropdownBackdrop = styled.div<
+  Partial<NonHTMLProps & DropdownTriggerProps>
+>`
   display: flex;
   align-items: flex-start;
   transition: background-color 100ms;
@@ -43,33 +46,54 @@ const DropdownBackdrop = styled.div<Partial<NonHTMLProps & DropdownTriggerProps>
     `}
 `
 
-const DropdownList = styled.div<
-  Pick<NonHTMLProps, 'fillParent' | 'position' | 'inlineOffset' | 'blockOffset'>
+const DropdownList = styled.ul<
+  Pick<
+    NonHTMLProps,
+    'fillParent' | 'position' | 'inlineOffset' | 'blockOffset'
+  > & {
+    isOpen?: boolean
+  }
 >`
   position: absolute;
   top: calc(100% + ${(props) => props.blockOffset}px);
-  background-color: var(--white);
+  background-color: var(--bg-color);
+  border: 3px solid var(--blue-dark);
   width: ${(props) => (props.fillParent ? '100%' : 'auto')};
   border-radius: 4px;
-  padding: 5px;
-  border: 2px solid var(--gray-light);
+  padding: 20px 30px;
   z-index: 8;
-  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
-  animation-duration: 400ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 15px rgba(71, 101, 80, 0.15);
+  transition: transform 0.25s, opacity 0.25s, -webkit-transform 0.25s;
   will-change: transform, opacity;
   animation-name: slideUpAndFade;
+  transform: translateY(50px);
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  color: var(--brand-primary);
+
+  ${(props) =>
+    props.isOpen &&
+    `
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  `}
+
+  /* ARROW */
   ::after {
     content: '';
     position: absolute;
-    top: -6px;
+    top: -8px;
     display: block;
-    background-color: var(--white);
+    background-color: var(--bg-color);
     height: 9px;
     width: 9px;
     transform: rotate(45deg);
-    border-left: solid 2px var(--gray-light);
-    border-top: solid 2px var(--gray-light);
+    border-left: solid 3px var(--blue-dark);
+    border-top: solid 3px var(--blue-dark);
     ${(props) =>
       props.position === 'left'
         ? css`
@@ -87,7 +111,9 @@ const TriggerContainer = styled.div<Partial<DropdownProps>>`
 `
 
 export type NonHTMLProps = {
-  children?: React.ReactNode | (({ close }: { close(): void }) => React.ReactNode)
+  children?:
+    | React.ReactNode
+    | (({ close }: { close(): void }) => React.ReactNode)
   Trigger: React.FunctionComponent<DropdownTriggerProps>
   position?: 'left' | 'right'
   fillParent?: boolean
@@ -97,9 +123,12 @@ export type NonHTMLProps = {
   blockOffset?: number
 }
 
-export type DropdownProps = React.ComponentProps<typeof DropdownList> & NonHTMLProps
+export type DropdownProps = React.ComponentProps<typeof DropdownList> &
+  NonHTMLProps
 
-export type CloseDropdownProps = { closedBy?: 'click outside' | 'trigger' | 'esc' | 'blur' }
+export type CloseDropdownProps = {
+  closedBy?: 'click outside' | 'trigger' | 'esc' | 'blur'
+}
 
 const Dropdown = ({
   children,
@@ -136,7 +165,8 @@ const Dropdown = ({
     function handleBodyClick(e: MouseEvent) {
       if (
         !triggerContainerRef.current?.contains(e.target as Node) &&
-        (!dropdownListRef.current?.contains(e.target as Node) || itemClickToClose === true)
+        (!dropdownListRef.current?.contains(e.target as Node) ||
+          itemClickToClose === true)
       ) {
         closeDropdown({ closedBy: 'click outside' })
       }
@@ -182,19 +212,25 @@ const Dropdown = ({
           position={position}
           ref={triggerContainerRef}
         >
-          <Trigger toggleDropdown={toggleDropdown} isOpen={isOpen} position={position} />
+          <Trigger
+            toggleDropdown={toggleDropdown}
+            isOpen={isOpen}
+            position={position}
+          />
         </TriggerContainer>
         <DropdownList
-          className="dispense-dropdown-menu"
           {...rest}
-          style={{ ...rest.style, display: isOpen ? 'block' : 'none' }}
+          className="dispense-dropdown-menu"
+          isOpen={isOpen}
           inlineOffset={inlineOffset}
           blockOffset={blockOffset}
           position={position}
           fillParent={fillParent}
           ref={dropdownListRef}
         >
-          {typeof children === 'function' ? children({ close: closeDropdown }) : children}
+          {typeof children === 'function'
+            ? children({ close: closeDropdown })
+            : children}
         </DropdownList>
       </DropdownContainer>
     </DropdownBackdrop>

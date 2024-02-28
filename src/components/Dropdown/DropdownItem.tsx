@@ -9,31 +9,35 @@ export type DropdownItemProps = {
   onMouseEnter?: () => void
 }
 
-const DropdownItemContainer = styled.button`
-  all: unset;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px 15px;
+const DropdownItemContainer = styled.li`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   cursor: pointer;
-  border-bottom: var(--gray-lightest);
-  border-radius: 4px;
-  border: 1px solid transparent;
+  padding: 10px 0;
+  margin: 0;
+
+  &:first-child {
+    padding-top: 0;
+  }
 
   * {
     text-overflow: ellipsis;
-    overflow: hidden;
     white-space: nowrap;
+    color: var(--brand-primary);
+    display: block;
+    text-transform: capitalize;
   }
 
   &:focus-within {
-    background-color: var(--gray-lightest);
   }
 `
 
-const DropdownItem = ({ className, as, children, onClick, onMouseEnter }: DropdownItemProps) => {
+const DropdownItem = ({
+  className,
+  as,
+  children,
+  onClick,
+  onMouseEnter,
+}: DropdownItemProps) => {
   const ref = React.useRef<HTMLButtonElement>(null)
   return (
     <DropdownItemContainer
@@ -47,7 +51,9 @@ const DropdownItem = ({ className, as, children, onClick, onMouseEnter }: Dropdo
       as={as}
       ref={ref}
       onMouseEnter={
-        onMouseEnter ? () => onMouseEnter() : () => ref.current?.focus({ preventScroll: true })
+        onMouseEnter
+          ? () => onMouseEnter()
+          : () => ref.current?.focus({ preventScroll: true })
       }
     >
       {children}

@@ -174,8 +174,8 @@ export const getTypographyStyles = (variant?: Variant) =>
   font-weight: 200;
   font-style: normal;
   font-stretch: normal;
-  line-height: 1.5;
-  letter-spacing: 0.4px;
+  line-height: normal;
+  letter-spacing: 1.25px;
   ${getVariantStyles(variant)}
 `
 const Typography = styled.div<TypographyProps>`

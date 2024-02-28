@@ -15,11 +15,23 @@ import Badge from './Badge'
 import cartService from '@/api/cartService'
 import Cart from './Cart'
 import { MediaQuery } from '@/utils/mediaQueries'
+import { ProductType, ProductTypeName } from '@/types/product'
+import { addQueryStringParams } from '@/utils/url'
+import Dropdown, { DropdownTriggerProps } from './Dropdown/Dropdown'
+import DropdownTrigger from './Dropdown/DropdownTrigger'
+import Typography from './Typography'
+import DropdownItem from './Dropdown/DropdownItem'
 
 const topNavLinks = [
   {
     name: 'Shop',
     path: '/shop',
+    links: Object.values(ProductType).map((type) => {
+      return {
+        name: ProductTypeName[type],
+        path: `/shop/${type.toLowerCase()}`,
+      }
+    }),
   },
   {
     name: 'Specials',
@@ -32,36 +44,40 @@ const TopNavEl = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
   padding: 0 24px;
   position: relative;
   background: var(--brand-primary);
-  z-index: 0;
+  z-index: 100;
 `
 
 const TopNavImage = styled(Image)`
   object-fit: cover;
-  width: 1200px;
-  height: 700px;
   position: absolute;
   top: 0;
   z-index: -1;
+`
+
+const TopNavLink = styled(Typography)`
+  font-family: var(--font-family-secondary);
+  font-size: 1.6rem;
+  color: var(--white);
 `
 
 const Logo = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 100%;
 `
 
 const LeftCol = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 100%;
   gap: 20px;
   z-index: 1;
+  flex: 0;
 `
 
 const RightCol = styled.div`
@@ -69,9 +85,9 @@ const RightCol = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 100%;
   gap: 20px;
   z-index: 1;
+  flex: 0;
 `
 
 const Links = () => {
@@ -82,20 +98,46 @@ const Links = () => {
         flex-direction: row;
         align-items: center;
         gap: 20px;
+
+        .dispense-dropdown-menu {
+          width: 220px;
+        }
       `}
     >
       {topNavLinks.map((l) => {
-        return (
-          <Link
+        return l.links && l.links.length ? (
+          <Dropdown
+            position="left"
             key={l.path}
-            href={l.path}
-            css={css`
-              font-family: var(--font-family-secondary);
-              font-size: 1.6rem;
-              color: var(--white);
-            `}
+            Trigger={(props) => (
+              <DropdownTrigger {...props} size="small">
+                <TopNavLink>{l.name}</TopNavLink>
+              </DropdownTrigger>
+            )}
           >
-            {l.name}
+            {(props) => {
+              return l.links.map((link) => (
+                <DropdownItem key={link.path}>
+                  <Link
+                    href={link.path}
+                    onClick={() => props.close()}
+                    css={css`
+                      display: block;
+
+                      > div {
+                        font-weight: bold;
+                      }
+                    `}
+                  >
+                    <Typography>{link.name}</Typography>
+                  </Link>
+                </DropdownItem>
+              ))
+            }}
+          </Dropdown>
+        ) : (
+          <Link key={l.path} href={l.path}>
+            <TopNavLink>{l.name}</TopNavLink>
           </Link>
         )
       })}
@@ -159,12 +201,15 @@ export default function TopNav() {
 
               setCartSlideOutOpen(true)
             }}
+            css={css`
+              position: relative;
+            `}
           >
             <Icon type="CART" />
             {q_cart?.data?.items && q_cart?.data?.items.length ? (
               <Badge
-                style={{ position: 'absolute', top: '14px', right: '10px' }}
-                variant="primary"
+                style={{ position: 'absolute', top: '-5px', right: '10px' }}
+                variant="danger"
               >
                 {cartService.getTotalItemCount()}
               </Badge>

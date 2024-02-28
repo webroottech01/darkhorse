@@ -5,28 +5,41 @@ import Typography from './Typography'
 
 export type BadgeProps = {
   children?: React.ReactNode
-  variant?: 'default' | 'primary' | 'danger'
+  variant?: 'default' | 'primary' | 'secondary' | 'danger'
   style?: React.CSSProperties
 }
 
 const BadgeEl = styled(Typography)<{
-  badgeVariant?: 'default' | 'primary' | 'danger'
+  badgeVariant?: 'default' | 'primary' | 'secondary' | 'danger'
 }>`
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 19px;
-  width: auto;
-  padding: 5px 6px;
-  border-radius: 20px;
+  height: 20px;
+  width: 20px;
+  padding: 0;
+  margin: 0;
+  border-radius: 100%;
   background-color: var(--gray);
   color: var(--white);
   font-size: 12px;
+
+  > span {
+    position: relative;
+    top: 4px;
+  }
 
   ${({ badgeVariant }) =>
     badgeVariant === 'primary' &&
     `
     background-color: var(--brand-primary);
+    color: var(--white);
+  `};
+
+  ${({ badgeVariant }) =>
+    badgeVariant === 'secondary' &&
+    `
+    background-color: var(--brand-secondary);
     color: var(--white);
   `};
 
@@ -41,7 +54,7 @@ const BadgeEl = styled(Typography)<{
 export default function Badge({ children, variant, style }: BadgeProps) {
   return (
     <BadgeEl className="badge" badgeVariant={variant} style={style}>
-      {children}
+      <span>{children}</span>
     </BadgeEl>
   )
 }

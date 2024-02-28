@@ -3,7 +3,7 @@
   --brand-secondary: #58cb6e;
 
   /* Colors */
-  --bg-color: #ffffff;
+  --bg-color: #f7f3e0;
   --brand-danger: #ef4d61;
   --brand-danger-lightest: #fbe9ec;
   --brand-warning: #ffc12e;
@@ -13,6 +13,7 @@
   --brand-success: var(--brand-primary);
   --brand-success-lightest: #e9f6f2;
   --blue: var(--brand-primary);
+  --blue-dark: #27a3ab;
   --green: var(--brand-success);
   --green-dark: #007a4b;
   --orange: #ee870f;
@@ -39,10 +40,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
-  font-weight: 200;
+  font-weight: normal;
   font-family: var(--font-family-primary);
   background: var(--bg-color);
   min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
+  line-height: normal;
 }
 
 a {

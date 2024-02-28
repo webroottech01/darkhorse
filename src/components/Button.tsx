@@ -18,6 +18,12 @@ const ButtonText = styled(Typography)<
     `}
 
   ${(props) =>
+    props.buttonVariant === 'secondary' &&
+    css`
+      color: var(--white);
+    `}
+
+  ${(props) =>
     props.size === 'medium' &&
     css`
       font-size: 0.875rem;
@@ -85,8 +91,6 @@ const LoadingWrapper = styled.div<{
 }>`
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   transition: opacity 0.2s;
-  background-color: ${({ variant }) =>
-    variant === 'primary' ? 'var(--brand-primary)' : 'var(--white)'};
   z-index: 3;
   position: absolute;
   top: 0;
@@ -236,8 +240,9 @@ function Button(
         
     ${variant === 'primary' &&
         css`
-          background-color: var(--brand-primary);
-          border-color: var(--brand-primary);
+          background-color: var(--brand-secondary);
+          border-color: var(--green-dark);
+          border-width: 3px;
           color: var(--white);
 
           &:not(:disabled) {
@@ -245,29 +250,29 @@ function Button(
             &:active,
             &:focus-visible,
             &:focus-within {
-              background-color: var(--brand-primary);
-              border-color: var(--brand-primary);
+              background-color: transparent;
+              border-color: var(--green);
             }
 
             &:focus:not(:active),
             &:focus-within:not(:active) {
               border-color: var(--white);
-              box-shadow: 0 0 0 2px var(--brand-primary);
+              box-shadow: 0 0 0 2px var(--brand-secondary);
             }
 
             ${active === true &&
             css`
-              background-color: var(--brand-primary);
-              border-color: var(--brand-primary);
+              background-color: var(--brand-secondary);
+              border-color: var(--green-dark);
             `}
           }
         `}
     
     ${variant === 'secondary' &&
         css`
-          color: var(--black);
-          border-color: var(--gray-light);
-          background: var(--white);
+          background-color: transparent;
+          border-color: var(--green);
+          color: var(--white);
 
           &:not(:disabled) {
             &:hover,

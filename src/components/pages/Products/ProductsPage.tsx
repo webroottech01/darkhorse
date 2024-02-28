@@ -45,7 +45,7 @@ import ProductCard from '@/components/ProductCard'
 import Typography from '@/components/Typography'
 
 const Wrapper = styled(Container)`
-  padding-bottom: 100px;
+  padding: 100px 0;
 `
 
 const Filters = styled(_Filters)`

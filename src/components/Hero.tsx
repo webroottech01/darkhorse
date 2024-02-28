@@ -14,30 +14,23 @@ const Banner = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: column;
-  padding: 12% 0;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  height: 700px;
-
-  @media (max-width: ${MediaQuery.screenMd}) {
-    height: 500px;
-  }
+  overflow: hidden;
 `
 
 const HeroInner = styled.div`
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   color: var(--white);
+  padding: 340px 48px 30px;
 `
 
 const HeroImage = styled(Image)`
   object-fit: cover;
-  width: 1200px;
-  height: 700px;
   position: absolute;
   top: 0;
 `
@@ -46,12 +39,8 @@ const HeroH1 = styled(Typography).withConfig({
   shouldForwardProp: (prop) => !['variant'].includes(prop),
 })`
   color: var(--white);
-  text-align: center;
-  font-style: normal;
-  font-weight: 700;
-  text-align: center;
-  text-shadow: -6px 4px 4px rgba(107, 107, 107, 0.25);
-  font-size: 66px;
+  font-size: 80px;
+  font-family: var(--font-family-secondary);
   margin: 0 0 -20px;
 
   @media (max-width: ${MediaQuery.screenMd}) {
@@ -59,42 +48,26 @@ const HeroH1 = styled(Typography).withConfig({
   }
 `
 
-const HeroH2 = styled(Typography).withConfig({
-  shouldForwardProp: (prop) => !['variant'].includes(prop),
-})`
-  color: var(--white);
-  font-family: var(--font-family-primary);
-  font-weight: 700;
-  margin: 0;
-`
-
 export default function Hero() {
   return (
     <Banner>
-      <HeroImage
-        alt="Highscore Hero"
-        src={imageUrl(
-          'https://dispense-images.imgix.net/highscore-hero-1.png',
-          {
-            height: 700,
-            width: 1200,
-          }
-        )}
-        fill
-        quality={75}
-        loading="eager"
-        priority
-      />
       <HeroInner>
-        <HeroH1 variant="h1" as="h1">
-          Level up!
+        <Typography
+          variant="body"
+          as="h2"
+          style={{ fontSize: '1.4rem', margin: 0, color: 'var(--white)' }}
+        >
+          High Score Cannabis
+        </Typography>
+        <HeroH1 variant="h1" as="h1" style={{ margin: 0, maxWidth: '700px' }}>
+          Where Every Strain is a High Score
         </HeroH1>
-        <HeroH2 variant="h2" as="h2">
-          with our top notch cannabis products
-        </HeroH2>
         <div
           css={css`
             padding: 40px 0;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
           `}
         >
           <Link href="/shop">
@@ -103,11 +76,39 @@ export default function Hero() {
               variant="primary"
               style={{ paddingInline: '80px' }}
             >
-              Shop
+              Order Online
+            </Button>
+          </Link>
+          <Link href="/shop">
+            <Button
+              size="default"
+              variant="secondary"
+              style={{ paddingInline: '80px' }}
+            >
+              Shop Specials
             </Button>
           </Link>
         </div>
       </HeroInner>
+      <HeroImage
+        alt="Highscore Hero"
+        priority={true}
+        height={165}
+        width={500}
+        quality={70}
+        sizes="100vw"
+        style={{
+          width: '100%',
+          height: 'auto',
+        }}
+        src={imageUrl(
+          'https://dispense-images.imgix.net/highscore/v2/hs-hero-v2.png',
+          {
+            height: 700,
+            width: 1200,
+          }
+        )}
+      />
     </Banner>
   )
 }

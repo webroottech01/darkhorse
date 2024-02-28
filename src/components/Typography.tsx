@@ -120,7 +120,7 @@ export const getVariantStyles = (variant?: Variant) => {
       return `
         font-size: 3.75rem;
         color: var(--black);
-        font-family: var(--font-family-tertiary);
+        font-family: var(--font-family-primary);
 
         font-weight: 400;
         line-height: 70px;
@@ -131,7 +131,7 @@ export const getVariantStyles = (variant?: Variant) => {
         font-size: 2.00rem;
         color: var(--black);
         font-weight: 800;
-        font-family: var(--font-family-tertiary);
+        font-family: var(--font-family-primary);
 
         font-weight: 400;
         line-height: 54px; /* 81.818% */
@@ -164,10 +164,10 @@ export type TypographyProps = {
   variant?: Variant
 }
 
-export const getFont = (variant?: Variant) =>
-  variant?.startsWith('number')
-    ? 'var(--font-family-secondary)'
-    : 'var(--font-family-primary)'
+export const getFont = (variant?: Variant) => 'var(--font-family-primary)'
+// variant?.startsWith('number')
+//   ? 'var(--font-family-secondary)'
+//   : 'var(--font-family-primary)'
 
 export const getTypographyStyles = (variant?: Variant) =>
   `

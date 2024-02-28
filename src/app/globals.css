@@ -1,20 +1,20 @@
 :root {
-  --font-family-primary: '__circularFont_beabfe', 'Helvetica Neue', Arial,
-    sans-serif;
-  --font-family-secondary: '__circularFont_beabfe', Helvetica, Arial, sans-serif;
-  --font-family-tertiary: '__bdcFont_00c036', Helvetica, Arial, sans-serif;
-  --brand-primary: #007a4b;
+  --brand-primary: #52c0c7;
+  --brand-secondary: #58cb6e;
+
   /* Colors */
+  --bg-color: #ffffff;
   --brand-danger: #ef4d61;
   --brand-danger-lightest: #fbe9ec;
   --brand-warning: #ffc12e;
   --brand-warning-lightest: #fbf5e8;
   --brand-info: #1fc0fb;
   --brand-info-lightest: #e9f5fc;
-  --brand-success: #00a35e;
+  --brand-success: var(--brand-primary);
   --brand-success-lightest: #e9f6f2;
   --blue: var(--brand-info);
   --green: var(--brand-success);
+  --green-dark: #007a4b;
   --orange: #ee870f;
   --yellow: var(--brand-warning);
   --yellow-darker: #c4921c;
@@ -41,20 +41,16 @@ body {
   font-size: 16px;
   font-weight: 200;
   font-family: var(--font-family-primary);
+  background: var(--bg-color);
 
-  background: rgb(81, 192, 197);
-  background: linear-gradient(
-    0deg,
-    rgba(160, 223, 212, 1) 0%,
-    rgba(81, 192, 197, 1) 50%
-  );
+  min-height: 100vh;
 }
 
 a {
   text-decoration: none;
 
   &:visited {
-    color: #00311e;
+    color: var(--white);
   }
 }
 

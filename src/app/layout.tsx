@@ -24,24 +24,26 @@ if (!process.env.NEXT_PUBLIC_DISPENSE_VENUE_ID)
 if (!process.env.NEXT_PUBLIC_DISPENSE_API_KEY)
   throw new Error('NEXT_PUBLIC_DISPENSE_API_KEY')
 
-const circularFont = localFont({
+const font1 = localFont({
   src: [
     {
-      path: '../fonts/CircularStd-Book.woff2',
+      path: '../fonts/GothamBook.woff2',
       weight: 'normal',
       style: 'normal',
     },
     {
-      path: '../fonts/CircularStd-Black.woff2',
+      path: '../fonts/GothamBold.woff2',
       weight: 'bold',
       style: 'bold',
     },
   ],
   display: 'swap',
+  variable: '--font-family-primary',
 })
-const bdcFont = localFont({
-  src: '../fonts/BDC-Dubba-Hubba.woff2',
+const font2 = localFont({
+  src: '../fonts/GentyDemo-Regular.woff2',
   display: 'swap',
+  variable: '--font-family-secondary',
 })
 
 export default async function RootLayout({
@@ -58,10 +60,7 @@ export default async function RootLayout({
   queryClient.setQueryData(QueryClientKey.VENUE, venue)
 
   return (
-    <html
-      lang="en"
-      className={`${circularFont.className} ${bdcFont.className}`}
-    >
+    <html lang="en" className={`${font1.variable} ${font2.variable}`}>
       <body>
         <StyledComponentsRegistry>
           <Providers dehydratedState={dehydrate(queryClient)}>

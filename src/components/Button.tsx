@@ -174,7 +174,8 @@ function Button(
         margin-bottom: 0;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
-        transition-property: background-color, border-color, box-shadow, color;
+        transition-property: background-color, border-color, box-shadow, color,
+          transform;
         border-radius: 40px;
         border-width: 2px;
         border-style: solid;
@@ -191,6 +192,12 @@ function Button(
         &:disabled {
           opacity: 0.6;
           cursor: not-allowed;
+        }
+
+        &:not(:disabled) {
+          &:hover {
+            transform: scale(1.02);
+          }
         }
 
         ${((icon && !iconSide) || iconSide === 'left') &&
@@ -238,25 +245,30 @@ function Button(
           padding: 0;
         `}
         
-    ${variant === 'primary' &&
+    ${variant === 'primary' && //GREEN
         css`
           background-color: var(--brand-secondary);
           border-color: var(--green-dark);
           border-width: 3px;
           color: var(--white);
 
+          ${round &&
+          css`
+            border-width: 1px;
+          `}
+
           &:not(:disabled) {
             &:hover,
             &:active,
             &:focus-visible,
             &:focus-within {
-              background-color: transparent;
-              border-color: var(--green);
-              color: var(--brand-primary);
+              // * {
+              //   color: var(--brand-primary);
+              // }
 
-              path {
-                fill: var(--brand-primary);
-              }
+              // path {
+              //   fill: var(--brand-primary);
+              // }
             }
 
             &:focus:not(:active),
@@ -273,7 +285,7 @@ function Button(
           }
         `}
     
-    ${variant === 'secondary' &&
+    ${variant === 'secondary' && //BLUE
         css`
           background-color: var(--blue);
           border-color: var(--green);
@@ -285,8 +297,12 @@ function Button(
             &:active,
             &:focus-visible,
             &:focus-within {
-              background-color: transparent;
-              border-color: var(--green);
+              // background-color: transparent;
+              // border-color: var(--green);
+
+              // * {
+              //   color: var(--white);
+              // }
 
               path {
                 fill: var(--brand-primary);

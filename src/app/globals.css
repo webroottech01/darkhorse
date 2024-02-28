@@ -49,6 +49,10 @@ body {
   -webkit-text-size-adjust: 100%;
   line-height: normal;
   color: var(--text-color);
+
+  &.no-scroll {
+    overflow: hidden;
+  }
 }
 
 a {

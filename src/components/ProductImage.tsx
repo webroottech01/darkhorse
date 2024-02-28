@@ -2,12 +2,12 @@
 
 import React from 'react'
 import styled, { css } from 'styled-components'
+import Image from 'next/image'
 
 import { Product, ProductDefaultImage } from '@/types/product'
 import BrandImage from './BrandImage'
-import { imageUrl } from '@/utils/image'
 
-const Wrapper = styled.img`
+const Wrapper = styled(Image)`
   border-radius: 4px;
   border: 1px solid var(--gray-light);
   margin-right: 15px;
@@ -50,12 +50,10 @@ export default function ProductImage({ product }: { product: Product }) {
     </div>
   ) : (
     <Wrapper
-      height="78px"
-      width="78px"
-      src={imageUrl(imageSrc ?? '', {
-        height: 78,
-        width: 78,
-      })}
+      height={78}
+      width={78}
+      src={imageSrc ?? ''}
+      alt={product.name}
       onError={() => {
         setStatus('error')
 

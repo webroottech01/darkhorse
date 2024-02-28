@@ -45,7 +45,21 @@ type CartFormData = {
 }
 
 const Wrapper = styled.div`
-  padding: 20px 40px 100px;
+  background: var(--bg-color);
+  height: auto;
+  width: 100%;
+  position: absolute;
+  inset: 0 0 0 0;
+`
+
+const CartHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 0;
 `
 
 const CartBody = styled.div`
@@ -88,8 +102,8 @@ const EmptyIcon = styled(Icon)`
   width: 3.8rem;
   margin-bottom: 20px;
 
-  > path {
-    fill: var(--gray-light);
+  > rect {
+    fill: var(--gray);
   }
 `
 
@@ -98,6 +112,15 @@ const EmptyAddItems = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+`
+
+const CartFooter = styled.div`
+  padding: 20px;
+  background: var(--bg-color);
+  border-top: 1px solid var(--gray-light);
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
 `
 
 function getDefaultValues(items: CartItemWithProduct[]) {
@@ -157,6 +180,10 @@ export default function Cart({ onClose }: { onClose: () => void }) {
     )
   }, [cartItems])
 
+  const totalItemCount = React.useMemo(() => {
+    return cartService.getTotalItemCount()
+  }, [cartItems])
+
   React.useEffect(() => {
     q_cart.refetch()
   }, [])
@@ -164,17 +191,21 @@ export default function Cart({ onClose }: { onClose: () => void }) {
   return (
     <>
       <Wrapper>
-        <div
-          css={css`
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-          `}
-        >
-          <Typography variant="h2">Your Cart</Typography>
-          <div css={css``} onClick={() => onClose()}>
+        <CartHeader>
+          <div
+            css={css`
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 100%;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              padding: 20px;
+            `}
+            onClick={() => onClose()}
+          >
             <Icon
               type="CLOSE_X"
               height={30}
@@ -184,315 +215,323 @@ export default function Cart({ onClose }: { onClose: () => void }) {
               `}
             />
           </div>
-        </div>
+          <Typography variant="h2" style={{ fontSize: '1.4rem' }}>
+            Your Cart ({totalItemCount})
+          </Typography>
+        </CartHeader>
         {/* <StoreClosedAlert /> */}
-        {q_cart.fetchStatus === 'fetching' || cartLoading ? (
-          <div
-            css={css`
-              display: flex;
-              flex-direction: row;
-              justify-content: center;
-              align-items: center;
-              padding-top: 100px;
-            `}
-          >
-            <Loading />
-          </div>
-        ) : (
-          <CartBody>
-            {hasSoldOutItems && (
-              <PaddedInfoBox>
-                <InfoBox type="danger" closeable={false}>
-                  An item in your cart is sold out. Please remove it to
-                  continue.
-                </InfoBox>
-              </PaddedInfoBox>
-            )}
-            {hasQuantityNotAvailableOutItems && (
-              <PaddedInfoBox>
-                <InfoBox type="danger" closeable={false}>
-                  An item in your cart has low stock. The quantity was adjusted.
-                </InfoBox>
-              </PaddedInfoBox>
-            )}
-            {cartItems.length ? (
-              <>
-                <CartList>
-                  {cartItems.map((item, index) => {
-                    return (
-                      <ProductRow key={item.product.id}>
-                        <div
-                          onClick={(e) => {
-                            e.preventDefault()
+        <div
+          css={css`
+            padding: 20px 40px 100px;
+          `}
+        >
+          {q_cart.fetchStatus === 'fetching' || cartLoading ? (
+            <div
+              css={css`
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding-top: 100px;
+              `}
+            >
+              <Loading />
+            </div>
+          ) : (
+            <CartBody>
+              {hasSoldOutItems && (
+                <PaddedInfoBox>
+                  <InfoBox type="danger" closeable={false}>
+                    An item in your cart is sold out. Please remove it to
+                    continue.
+                  </InfoBox>
+                </PaddedInfoBox>
+              )}
+              {hasQuantityNotAvailableOutItems && (
+                <PaddedInfoBox>
+                  <InfoBox type="danger" closeable={false}>
+                    An item in your cart has low stock. The quantity was
+                    adjusted.
+                  </InfoBox>
+                </PaddedInfoBox>
+              )}
+              {cartItems.length ? (
+                <>
+                  <CartList>
+                    {cartItems.map((item, index) => {
+                      return (
+                        <ProductRow key={item.product.id}>
+                          <div
+                            onClick={(e) => {
+                              e.preventDefault()
 
-                            // router.push(getProductHref(item.product))
-                          }}
-                          style={{
-                            cursor: 'pointer',
-                          }}
-                        >
-                          <ProductImage product={item.product} />
-                        </div>
-                        <div>
-                          <Typography variant="body-xs">
-                            {item.product?.brand?.name}
-                          </Typography>
-                          <Typography
+                              // router.push(getProductHref(item.product))
+                            }}
                             style={{
                               cursor: 'pointer',
                             }}
-                            variant="body"
-                            onClick={(e) => {
-                              e.preventDefault()
-
-                              router.push(getProductHref(item.product))
-                            }}
                           >
-                            {item.name}
-                            {item.weightFormatted
-                              ? ` - ${item.weightFormatted}`
-                              : item.size
-                              ? ` - ${item.size}`
-                              : ''}
-                          </Typography>
-                          <PriceRow>
+                            <ProductImage product={item.product} />
+                          </div>
+                          <div>
+                            <Typography variant="body-xs">
+                              {item.product?.brand?.name}
+                            </Typography>
                             <Typography
-                              variant="number"
                               style={{
-                                textDecoration:
-                                  item.discountTotal && item.discountTotal > 0
-                                    ? 'line-through'
-                                    : 'none',
-                                color:
-                                  item.discountTotal && item.discountTotal > 0
-                                    ? 'var(--gray)'
-                                    : 'var(--black)',
+                                cursor: 'pointer',
+                              }}
+                              variant="body"
+                              onClick={(e) => {
+                                e.preventDefault()
+
+                                router.push(getProductHref(item.product))
                               }}
                             >
-                              {formatCurrency(item.price * item.quantity)}
+                              {item.name}
+                              {item.weightFormatted
+                                ? ` - ${item.weightFormatted}`
+                                : item.size
+                                ? ` - ${item.size}`
+                                : ''}
                             </Typography>
-                            {item.discountTotal && item.discountTotal > 0 ? (
-                              <Typography variant="number">
-                                {formatCurrency(item.priceWithDiscounts ?? 0)}
+                            <PriceRow>
+                              <Typography
+                                variant="number"
+                                style={{
+                                  textDecoration:
+                                    item.discountTotal && item.discountTotal > 0
+                                      ? 'line-through'
+                                      : 'none',
+                                  color:
+                                    item.discountTotal && item.discountTotal > 0
+                                      ? 'var(--gray)'
+                                      : 'var(--black)',
+                                }}
+                              >
+                                {formatCurrency(item.price * item.quantity)}
+                              </Typography>
+                              {item.discountTotal && item.discountTotal > 0 ? (
+                                <Typography variant="number">
+                                  {formatCurrency(item.priceWithDiscounts ?? 0)}
+                                </Typography>
+                              ) : null}
+                            </PriceRow>
+                            {item.quantity > 0 ? (
+                              <Controller
+                                name={`items.${index}.quantity`}
+                                control={control}
+                                render={({ field: { value } }) => {
+                                  return (
+                                    <Stepper
+                                      disabled={m_cart.status === 'loading'}
+                                      minValue={1}
+                                      maxValue={item.product.quantityTotal ?? 1}
+                                      value={value}
+                                      onChange={(value) => {
+                                        if (!cartItems.length) return
+
+                                        const newCartItems = cartItems.map(
+                                          (x) => {
+                                            return x.id === item.id
+                                              ? { ...x, quantity: value }
+                                              : { ...x }
+                                          }
+                                        )
+
+                                        setValue('items', newCartItems, {
+                                          shouldDirty: true,
+                                        })
+
+                                        return m_cart.mutate({
+                                          venueId: q_venue?.data?.id!,
+                                          items: getValues('items').map((x) => {
+                                            return {
+                                              productId: x.product.id,
+                                              quantity: x.quantity,
+                                              purchaseWeight:
+                                                x.purchaseWeight ?? undefined,
+                                            }
+                                          }),
+                                        })
+                                      }}
+                                    />
+                                  )
+                                }}
+                              />
+                            ) : (
+                              <Typography
+                                variant="body-sm"
+                                css="color: var(--brand-danger); margin-top: 10px"
+                              >
+                                Sold Out
+                              </Typography>
+                            )}
+                            {item.status ===
+                            CartItemStatus.QUANTITY_NOT_AVAILABLE ? (
+                              <Typography
+                                variant="body-sm"
+                                css="color: var(--brand-danger); margin-top: 10px"
+                              >
+                                Only {getProductRemainingQuantity(item.product)}{' '}
+                                left
                               </Typography>
                             ) : null}
-                          </PriceRow>
-                          {item.quantity > 0 ? (
-                            <Controller
-                              name={`items.${index}.quantity`}
-                              control={control}
-                              render={({ field: { value } }) => {
-                                return (
-                                  <Stepper
-                                    disabled={m_cart.status === 'loading'}
-                                    minValue={1}
-                                    maxValue={item.product.quantityTotal ?? 1}
-                                    value={value}
-                                    onChange={(value) => {
-                                      if (!cartItems.length) return
+                            {item.status ===
+                            CartItemStatus.QUANTITY_OVER_PURCHASE_MAX ? (
+                              <Typography
+                                variant="body-sm"
+                                css="margin-top: 10px"
+                              >
+                                You can only purchase{' '}
+                                {getProductPurchaseMax(item.product)}{' '}
+                              </Typography>
+                            ) : null}
+                          </div>
+                          <div
+                            css={css`
+                              display: flex;
+                              flex-direction: row;
+                              justify-content: center;
+                            `}
+                          >
+                            <Button
+                              round
+                              icon="DELETE"
+                              size="small"
+                              variant="primary"
+                              disabled={m_cart.status === 'loading'}
+                              onClick={(e) => {
+                                e.preventDefault()
+                                e.stopPropagation()
 
-                                      const newCartItems = cartItems.map(
-                                        (x) => {
-                                          return x.id === item.id
-                                            ? { ...x, quantity: value }
-                                            : { ...x }
-                                        }
-                                      )
+                                if (!cartItems || !cartItems?.length) {
+                                  cartService.clearCart()
 
-                                      setValue('items', newCartItems, {
-                                        shouldDirty: true,
-                                      })
+                                  return
+                                }
 
-                                      return m_cart.mutate({
-                                        venueId: q_venue?.data?.id!,
-                                        items: getValues('items').map((x) => {
-                                          return {
-                                            productId: x.product.id,
-                                            quantity: x.quantity,
-                                            purchaseWeight:
-                                              x.purchaseWeight ?? undefined,
-                                          }
-                                        }),
-                                      })
-                                    }}
-                                  />
-                                )
+                                const newCartItems = cartItems.filter((i) => {
+                                  return i.id !== item.id
+                                })
+
+                                setValue('items', newCartItems, {
+                                  shouldDirty: true,
+                                })
+
+                                return m_cart.mutate({
+                                  venueId: q_venue?.data?.id!,
+                                  items: getValues('items').map((x) => {
+                                    return {
+                                      productId: x.product.id,
+                                      quantity: x.quantity,
+                                      purchaseWeight:
+                                        x.purchaseWeight ?? undefined,
+                                    }
+                                  }),
+                                })
                               }}
                             />
-                          ) : (
-                            <Typography
-                              variant="body-sm"
-                              css="color: var(--brand-danger); margin-top: 10px"
-                            >
-                              Sold Out
-                            </Typography>
-                          )}
-                          {item.status ===
-                          CartItemStatus.QUANTITY_NOT_AVAILABLE ? (
-                            <Typography
-                              variant="body-sm"
-                              css="color: var(--brand-danger); margin-top: 10px"
-                            >
-                              Only {getProductRemainingQuantity(item.product)}{' '}
-                              left
-                            </Typography>
-                          ) : null}
-                          {item.status ===
-                          CartItemStatus.QUANTITY_OVER_PURCHASE_MAX ? (
-                            <Typography
-                              variant="body-sm"
-                              css="margin-top: 10px"
-                            >
-                              You can only purchase{' '}
-                              {getProductPurchaseMax(item.product)}{' '}
-                            </Typography>
-                          ) : null}
-                        </div>
-                        <div
-                          css={css`
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: center;
-                          `}
+                          </div>
+                        </ProductRow>
+                      )
+                    })}
+                    <div
+                      css={css`
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 40px 0;
+                      `}
+                    >
+                      <Link href="/shop">
+                        <Button
+                          variant="link"
+                          icon="PLUS"
+                          size="medium"
+                          onClick={() => onClose()}
                         >
-                          <Button
-                            round
-                            icon="DELETE"
-                            size="small"
-                            disabled={m_cart.status === 'loading'}
-                            onClick={(e) => {
-                              e.preventDefault()
-                              e.stopPropagation()
-
-                              if (!cartItems || !cartItems?.length) {
-                                cartService.clearCart()
-
-                                return
-                              }
-
-                              const newCartItems = cartItems.filter((i) => {
-                                return i.id !== item.id
-                              })
-
-                              setValue('items', newCartItems, {
-                                shouldDirty: true,
-                              })
-
-                              return m_cart.mutate({
-                                venueId: q_venue?.data?.id!,
-                                items: getValues('items').map((x) => {
-                                  return {
-                                    productId: x.product.id,
-                                    quantity: x.quantity,
-                                    purchaseWeight:
-                                      x.purchaseWeight ?? undefined,
-                                  }
-                                }),
-                              })
-                            }}
-                          />
-                        </div>
-                      </ProductRow>
-                    )
-                  })}
-                  <div
-                    css={css`
-                      display: flex;
-                      flex-direction: row;
-                      justify-content: center;
-                      align-items: center;
-                      padding: 40px 0;
-                    `}
-                  >
-                    <Link href="/shop">
-                      <Button
-                        icon="PLUS"
-                        size="medium"
-                        onClick={() => onClose()}
-                      >
-                        Add more items
-                      </Button>
-                    </Link>
-                  </div>
-                </CartList>
-                <PriceBreakdown>
-                  <Typography variant="h3">Subtotal</Typography>
-                  <Typography
-                    variant="number-secondary"
-                    css={{
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    {formatCurrency(
-                      q_cart?.data?.subtotalWithoutDiscounts ?? 0,
-                      q_venue?.data?.currencyCode,
-                      q_venue?.data?.languageCode
-                    )}
-                  </Typography>
-                </PriceBreakdown>
-                {q_cart?.data?.discounts?.map((discount) => (
-                  <PriceBreakdown
-                    key={`${discount.name}-${discount.productOffer}`}
-                    css={{
-                      marginTop: '5px',
-                    }}
-                  >
-                    <div>
-                      <Typography variant="body">{discount.name}</Typography>
+                          Add more items
+                        </Button>
+                      </Link>
                     </div>
+                  </CartList>
+                  <PriceBreakdown>
+                    <Typography variant="h3">Subtotal</Typography>
                     <Typography
                       variant="number-secondary"
                       css={{
-                        color: 'var(--green)',
+                        fontWeight: 'bold',
                       }}
                     >
                       {formatCurrency(
-                        (discount.amount ?? 0) * -1,
+                        q_cart?.data?.subtotalWithoutDiscounts ?? 0,
                         q_venue?.data?.currencyCode,
                         q_venue?.data?.languageCode
                       )}
                     </Typography>
                   </PriceBreakdown>
-                ))}
-                <div
-                  css={css`
-                    margin-top: 20px;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: flex-end;
-                  `}
-                >
-                  {/* {q_cart?.data ? (
+                  {q_cart?.data?.discounts?.map((discount) => (
+                    <PriceBreakdown
+                      key={`${discount.name}-${discount.productOffer}`}
+                      css={{
+                        marginTop: '5px',
+                      }}
+                    >
+                      <div>
+                        <Typography variant="body">{discount.name}</Typography>
+                      </div>
+                      <Typography
+                        variant="number-secondary"
+                        css={{
+                          color: 'var(--green)',
+                        }}
+                      >
+                        {formatCurrency(
+                          (discount.amount ?? 0) * -1,
+                          q_venue?.data?.currencyCode,
+                          q_venue?.data?.languageCode
+                        )}
+                      </Typography>
+                    </PriceBreakdown>
+                  ))}
+                  <div
+                    css={css`
+                      margin-top: 20px;
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: flex-end;
+                    `}
+                  >
+                    {/* {q_cart?.data ? (
                       <PromoCodeForm cart={q_cart?.data}></PromoCodeForm>
                     ) : null} */}
+                  </div>
+                </>
+              ) : (
+                <div css={{ padding: '0 20px' }}>
+                  <div css={{ textAlign: 'center', padding: '50px 0' }}>
+                    <EmptyIcon
+                      type="CART"
+                      style={{ color: 'var(--text-color)' }}
+                    ></EmptyIcon>
+                    <Typography variant="body-sm">
+                      Your cart is empty
+                    </Typography>
+                  </div>
+                  <EmptyAddItems>
+                    <Button onClick={() => onClose()}>Start Shopping</Button>
+                  </EmptyAddItems>
                 </div>
-              </>
-            ) : (
-              <div css={{ padding: '0 20px' }}>
-                <div css={{ textAlign: 'center', padding: '50px 0' }}>
-                  <EmptyIcon type="CART"></EmptyIcon>
-                  <Typography variant="body-sm">Your cart is empty</Typography>
-                </div>
-                <EmptyAddItems>
-                  <Button onClick={() => onClose()}>Add Items</Button>
-                </EmptyAddItems>
-              </div>
-            )}
-          </CartBody>
-        )}
-        {q_cart.fetchStatus === 'fetching' || cartLoading ? null : (
-          <div
-            css={css`
-              position: absolute;
-              top: auto;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              padding: 20px;
-              background: var(--white);
-              border-top: 1px solid var(--gray-light);
-            `}
-          >
+              )}
+            </CartBody>
+          )}
+        </div>
+        {q_cart.fetchStatus === 'fetching' ||
+        cartLoading ||
+        totalItemCount < 1 ? null : (
+          <CartFooter>
             <Button
               variant="primary"
               style={{ display: 'block', width: '100%' }}
@@ -505,7 +544,7 @@ export default function Cart({ onClose }: { onClose: () => void }) {
             >
               Checkout
             </Button>
-          </div>
+          </CartFooter>
         )}
       </Wrapper>
     </>

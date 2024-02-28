@@ -7,7 +7,6 @@ import Image from 'next/image'
 import Typography from './Typography'
 import Tag from './Tag'
 import Skeleton from './Skeleton'
-import { imageUrl } from '@/utils/image'
 import { MediaQuery } from '@/utils/mediaQueries'
 import { Product, CannabisType } from '@/types/product'
 

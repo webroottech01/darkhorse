@@ -51,7 +51,7 @@ const TopNavEl = styled.div`
   padding: 0 24px;
   position: relative;
   background: var(--brand-primary);
-  z-index: 100;
+  z-index: 10;
 `
 
 const TopNavImage = styled(Image)`
@@ -198,7 +198,7 @@ export default function TopNav() {
               src={q_venue?.data?.logo ?? ''}
               height={62}
               width={200}
-              loading="eager"
+              priority={false}
             />
             <Image
               css={css`
@@ -212,7 +212,7 @@ export default function TopNav() {
               src={q_venue?.data?.logoSquare ?? ''}
               height={50}
               width={50}
-              loading="eager"
+              priority={false}
             />
           </Logo>
           <Links />
@@ -243,15 +243,9 @@ export default function TopNav() {
         </RightCol>
         <TopNavImage
           alt="Highscore Nav Background"
-          src={imageUrl(
-            'https://dispense-images.imgix.net/highscore/v2/hs-nav-bg-2.png',
-            {
-              height: 80,
-            }
-          )}
+          src='https://dispense-images.imgix.net/highscore/v2/hs-nav-bg-2.png'
           fill
           quality={75}
-          loading="eager"
           priority={false}
         />
       </TopNavEl>

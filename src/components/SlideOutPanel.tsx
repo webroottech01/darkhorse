@@ -83,8 +83,12 @@ const SlideOutPanel = ({
   React.useEffect(() => {
     if (open) {
       setTimeout(() => setVisible(true))
+
+      document.body.className = 'no-scroll'
     } else {
       setVisible(false)
+
+      document.body.className = ''
     }
   }, [open])
 

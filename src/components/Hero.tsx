@@ -6,7 +6,6 @@ import styled, { css } from 'styled-components'
 
 import Button from '@/components/Button'
 import Typography from '@/components/Typography'
-import { imageUrl } from '@/utils/image'
 import { MediaQuery } from '@/utils/mediaQueries'
 import { addQueryStringParams } from '@/utils/url'
 
@@ -103,6 +102,7 @@ export default function Hero() {
       <HeroImage
         alt="Highscore Hero"
         priority={true}
+        loading={'eager'}
         height={165}
         width={500}
         quality={70}
@@ -111,13 +111,7 @@ export default function Hero() {
           width: '100%',
           height: 'auto',
         }}
-        src={imageUrl(
-          'https://dispense-images.imgix.net/highscore/v2/hs-hero-3.png',
-          {
-            height: 700,
-            width: 1200,
-          }
-        )}
+        src={'https://dispense-images.imgix.net/highscore/v2/hs-hero-3.png'}
       />
     </Banner>
   )

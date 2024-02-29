@@ -3,7 +3,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { CannabisType, CannabisTypeName } from '@dispense/dispense-js'
+import { CannabisType, CannabisTypeName } from '@/types/product'
 
 const SpanEl = styled.span.withConfig({
   shouldForwardProp: (prop) => !['cannabisType', 'variant'].includes(prop),

@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 import styled, { css } from 'styled-components'
 
@@ -7,17 +5,20 @@ import Icon, { IconType } from './Icon'
 import Loading from './Loading'
 import Typography from './Typography'
 
-const ButtonText = styled(Typography).withConfig({
-  shouldForwardProp: (prop) =>
-    !['buttonVariant', 'iconSide', 'round', 'variant'].includes(prop),
-})<
-  Omit<ButtonOptions, 'variant'> & { buttonVariant: ButtonOptions['variant'] }
+const ButtonText = styled(Typography)<
+  ButtonOptions & { buttonVariant: ButtonOptions['variant'] }
 >`
   color: var(--black);
   font-weight: bold;
 
   ${(props) =>
     props.buttonVariant === 'primary' &&
+    css`
+      color: var(--white);
+    `}
+
+  ${(props) =>
+    props.buttonVariant === 'secondary' &&
     css`
       color: var(--white);
     `}
@@ -71,11 +72,7 @@ const ButtonText = styled(Typography).withConfig({
       : null}
 `
 
-const ButtonIcon = styled(Icon)<{
-  buttonVariant?: ButtonOptions['variant']
-  iconSide?: ButtonOptions['iconSide']
-  size?: ButtonOptions['size']
-}>`
+const ButtonIcon = styled(Icon)`
   position: relative;
   z-index: 2;
 
@@ -83,7 +80,7 @@ const ButtonIcon = styled(Icon)<{
     props.buttonVariant === 'primary' &&
     css`
       path {
-        fill: white;
+        fill: var(--white);
       }
     `}
 `
@@ -94,8 +91,6 @@ const LoadingWrapper = styled.div<{
 }>`
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   transition: opacity 0.2s;
-  background-color: ${({ variant }) =>
-    variant === 'primary' ? 'var(--brand-primary)' : 'var(--white)'};
   z-index: 3;
   position: absolute;
   top: 0;
@@ -152,6 +147,7 @@ function Button(
     loading,
     disabled,
     active,
+    className,
     ...rest
   }: ButtonProps,
   ref: React.Ref<HTMLButtonElement>
@@ -164,55 +160,44 @@ function Button(
       ref={ref}
       disabled={disabled || loading}
       {...rest}
+      className={active ? `${className} active` : className}
       css={css`
         color: var(--brand-primary);
         position: relative;
-        cursor: pointer;
-        user-select: none;
-        padding: 10px 10px;
-        position: relative;
-        height: 50px;
-        width: auto;
-        z-index: 2;
-        border: none;
+        overflow: hidden;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        margin-bottom: 0;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
-        transition-property: background-color, box-shadow, color, transform;
-
-        &:active {
-          transform: translateY(2px);
-        }
-
-        /* -------- PIXELY -------- */
-
-        &:before {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 10px;
-          bottom: 10px;
-          left: -10px;
-          right: -10px;
-          z-index: -1;
-        }
-
-        &:after {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 4px;
-          bottom: 4px;
-          left: -6px;
-          right: -6px;
-          z-index: -1;
-        }
-
-        /* ---------------- */
+        transition-property: background-color, border-color, box-shadow, color,
+          transform;
+        border-radius: 40px;
+        border-width: 2px;
+        border-style: solid;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        user-select: none;
+        background-image: none;
+        padding: 0 30px;
+        outline: none;
 
         &:disabled {
           opacity: 0.6;
           cursor: not-allowed;
+        }
+
+        &:not(:disabled) {
+          &:hover {
+            transform: scale(1.02);
+          }
         }
 
         ${((icon && !iconSide) || iconSide === 'left') &&
@@ -260,86 +245,79 @@ function Button(
           padding: 0;
         `}
         
-    ${variant === 'primary' &&
+    ${variant === 'primary' && //GREEN
         css`
-          background-color: var(--brand-primary);
-
-          &:before,
-          &:after {
-            background-color: var(--brand-primary);
-          }
-
+          background-color: var(--brand-secondary);
+          border-color: var(--green-dark);
+          border-width: 3px;
           color: var(--white);
+
+          ${round &&
+          css`
+            border-width: 1px;
+          `}
 
           &:not(:disabled) {
             &:hover,
             &:active,
             &:focus-visible,
             &:focus-within {
-              background-color: var(--brand-primary);
+              // * {
+              //   color: var(--brand-primary);
+              // }
+
+              // path {
+              //   fill: var(--brand-primary);
+              // }
             }
 
-            // &:focus:not(:active),
-            // &:focus-within:not(:active) {
-            //   border-color: var(--white);
-            // }
+            &:focus:not(:active),
+            &:focus-within:not(:active) {
+              border-color: var(--white);
+              box-shadow: 0 0 0 2px var(--brand-secondary);
+            }
 
             ${active === true &&
             css`
-              background-color: var(--brand-primary);
+              background-color: var(--brand-secondary);
+              border-color: var(--green-dark);
             `}
           }
         `}
     
-    ${variant === 'secondary' &&
+    ${variant === 'secondary' && //BLUE
         css`
-          color: var(--black);
-          background: var(--white);
+          background-color: var(--blue);
+          border-color: var(--green);
+          color: var(--white);
+          border-width: 3px;
 
           &:not(:disabled) {
             &:hover,
             &:active,
             &:focus-visible,
             &:focus-within {
-              background-color: var(--gray-lightest);
+              // background-color: transparent;
+              // border-color: var(--green);
+
+              // * {
+              //   color: var(--white);
+              // }
+
+              path {
+                fill: var(--brand-primary);
+              }
             }
 
-            // &:focus-visible {
-            //   border-color: var(--white);
-            // }
+            &:focus-visible {
+              border-color: var(--white);
+              box-shadow: 0 0 0 2px var(--brand-primary);
+            }
 
             ${active === true &&
             css`
               background-color: var(--gray-light);
-            `}
-          }
-        `}
-
-    ${variant === 'tertiary' &&
-        css`
-          color: var(--white);
-          background: var(--brown);
-
-          .button-text {
-            color: var(--white);
-          }
-
-          &:not(:disabled) {
-            &:hover,
-            &:active,
-            &:focus-visible,
-            &:focus-within {
-              background-color: var(--brown);
-            }
-
-            // &:focus-visible {
-            //   border-color: var(--brown);
-            //   box-shadow: 0 0 0 2px var(--brown);
-            // }
-
-            ${active === true &&
-            css`
-              background-color: var(--brown);
+              border-color: var(--gray-light);
             `}
           }
         `}
@@ -358,6 +336,7 @@ function Button(
             &:focus-visible,
             &:focus-within {
               color: var(--brand-primary);
+              transform: none;
             }
 
             ${active === true &&
@@ -371,9 +350,8 @@ function Button(
       <LoadingWrapper visible={loading} variant={variant}>
         <ButtonLoading size={size === 'small' ? 'xsmall' : 'small'} />
       </LoadingWrapper>
-      {justifyIcon === 'left' && icon && (
+      {justifyIcon === 'left' && (
         <ButtonIcon
-          className="button-icon"
           buttonVariant={variant}
           size={size}
           {...iconDimensions}
@@ -381,7 +359,6 @@ function Button(
         />
       )}
       <ButtonText
-        className="button-text"
         buttonVariant={variant}
         size={size ?? 'default'}
         iconSide={icon ? iconSide ?? 'left' : undefined}
@@ -389,13 +366,8 @@ function Button(
       >
         {children}
       </ButtonText>
-      {justifyIcon === 'right' && icon && (
-        <ButtonIcon
-          className="button-icon"
-          size={size}
-          {...iconDimensions}
-          type={icon}
-        />
+      {justifyIcon === 'right' && (
+        <ButtonIcon size={size} {...iconDimensions} type={icon} />
       )}
     </button>
   )

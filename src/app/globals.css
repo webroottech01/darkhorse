@@ -1,20 +1,23 @@
-@import '~glider-js/glider.min.css';
-
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap');
-
 :root {
-  --brand-primary: #007a4b;
+  --brand-primary: #52c0c7;
+  --brand-secondary: #58cb6e;
+
   /* Colors */
+  --bg-color: #f7f3e0;
+  --text-color: var(--blue-dark);
+  --border-color: #c2bc9c;
   --brand-danger: #ef4d61;
   --brand-danger-lightest: #fbe9ec;
   --brand-warning: #ffc12e;
   --brand-warning-lightest: #fbf5e8;
-  --brand-info: #1fc0fb;
+  --brand-info: var(--brand-primary);
   --brand-info-lightest: #e9f5fc;
-  --brand-success: #00a35e;
+  --brand-success: var(--brand-primary);
   --brand-success-lightest: #e9f6f2;
-  --blue: var(--brand-info);
+  --blue: var(--brand-primary);
+  --blue-dark: #076b72;
   --green: var(--brand-success);
+  --green-dark: #007a4b;
   --orange: #ee870f;
   --yellow: var(--brand-warning);
   --yellow-darker: #c4921c;
@@ -38,14 +41,24 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f8fd;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: var(--font-family-primary);
+  background: var(--bg-color);
+  min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
+  line-height: normal;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
 }
 
 a {
   text-decoration: none;
 
   &:visited {
-    color: #00311e;
+    color: var(--text-color);
   }
 }
 

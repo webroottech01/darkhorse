@@ -3,6 +3,8 @@ import { QueryClient } from '@tanstack/react-query'
 export const QueryClientKey = {
   VENUE: ['VENUE'],
   CURRENT_USER: ['CURRENT_USER'],
+  CART: ['CART'],
+  PRODUCTS: ['PRODUCTS'],
 }
 
 class QueryClientUtils {

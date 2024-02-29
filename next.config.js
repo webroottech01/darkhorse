@@ -4,12 +4,17 @@ const path = require('path')
 const nextConfig = {
   images: {
     domains: ['assets.dispenseapp.com', 'dispense-images.imgix.net'],
+    loader: 'custom',
+    loaderFile: './src/imageLoader.js',
+    formats: ['image/avif', 'image/webp'],
   },
   compiler: {
     styledComponents: true,
   },
   webpack: (config) => {
-    config.resolve.alias['styled-components'] = path.resolve('./node_modules/styled-components')
+    config.resolve.alias['styled-components'] = path.resolve(
+      './node_modules/styled-components'
+    )
 
     return config
   },

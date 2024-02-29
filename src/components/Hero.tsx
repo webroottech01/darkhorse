@@ -48,7 +48,7 @@ const HeroImage = styled(Image)`
   }
 
   @media (max-width: ${MediaQuery.screenSm}) {
-    height: 100%;
+    height: 100% !important;
     width: 220% !important;
   }
 `

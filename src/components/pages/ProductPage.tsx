@@ -15,8 +15,11 @@ import cartService from '@/api/cartService'
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 60px;
   justify-content: space-between;
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    flex-direction: column;
+  }
 `
 
 const LeftCol = styled.div`
@@ -26,6 +29,12 @@ const LeftCol = styled.div`
   align-items: center;
   justify-content: center;
   border-right: 1px solid var(--border-color);
+  padding: 60px;
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    border: none;
+    width: 100%;
+  }
 `
 
 const RightCol = styled.div`
@@ -34,6 +43,11 @@ const RightCol = styled.div`
   flex-direction: column;
   gap: 10px;
   flex: 0 0 auto;
+  padding: 60px;
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    width: 100%;
+  }
 `
 
 export default function ProductPage({ product }: { product: Product }) {

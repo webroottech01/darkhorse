@@ -49,11 +49,11 @@ const Wrapper = styled.div`
 
 const Filters = styled(_Filters)`
   padding: 0;
-  display: 'flex';
-  flex-direction: 'column';
-  gap: '20px';
-  justify-content: 'flex-start';
-  align-items: 'flex-start';
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
 `
 
 const ProductsGrid = styled.div`
@@ -104,6 +104,7 @@ const RightContent = styled.div`
 
   @media (max-width: ${MediaQuery.screenMd}) {
     gap: 15px;
+    padding: 20px 15px;
   }
 `
 

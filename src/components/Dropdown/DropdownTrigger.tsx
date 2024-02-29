@@ -27,11 +27,11 @@ export default function DropdownTrigger({
       css={css`
         border-radius: 4px;
         border-width: 1px;
-        padding: 0 36px 0 16px;
+        padding: 0 46px 0 16px;
 
         svg {
-          height: 14px;
-          width: 14px;
+          height: 20px;
+          width: 20px;
         }
       `}
     >

@@ -93,6 +93,7 @@ export default function ProductCard({
 
                   @media (max-width: ${MediaQuery.screenSm}) {
                     height: auto;
+                    max-height: 200px;
                   }
                 `}
               />

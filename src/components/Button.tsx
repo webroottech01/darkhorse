@@ -336,6 +336,7 @@ function Button(
             &:focus-visible,
             &:focus-within {
               color: var(--brand-primary);
+              transform: none;
             }
 
             ${active === true &&

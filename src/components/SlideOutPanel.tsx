@@ -48,10 +48,10 @@ const SlideOutPanelContainer = styled.div.withConfig({
   ${(props) =>
     props.side === 'left'
       ? `
-  left: ${props.open ? 0 : -900}px;
+  left: ${props.open ? 0 : props.width ? `-${props.width}` : '-900px'};
   `
       : `
-  right: ${props.open ? 0 : -900}px;
+  right: ${props.open ? 0 : props.width ? `-${props.width}` : '-900px'};
   `}
 
   box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2),
@@ -64,10 +64,7 @@ const Backdrop = styled.div<{ visible: boolean }>`
   background-color: var(--dropdown-backdrop);
   opacity: ${({ visible }) => (visible ? '1' : '0')};
   pointer-events: ${({ visible }) => (visible ? 'all' : 'none')};
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   transition: opacity ${slideOutTransitionDuration}ms ease;
 `
 const SlideOutPanel = ({

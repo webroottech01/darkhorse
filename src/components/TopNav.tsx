@@ -76,6 +76,21 @@ const TopNavLink = styled(Link)`
   font-family: var(--font-family-secondary);
   font-size: 1.6rem;
   color: var(--white);
+
+  &:hover,
+  &:active,
+  &:focus-visible,
+  &:focus-within {
+    color: var(--brand-primary);
+  }
+
+  &:visited {
+    color: var(--white);
+  }
+
+  path {
+    fill: var(--white) !important;
+  }
 `
 
 const MobileCenterText = styled(Typography)`
@@ -146,11 +161,6 @@ const RightCol = styled.div`
 
   @media (max-width: ${MediaQuery.screenMd}) {
     gap: 10px;
-
-    svg {
-      height: 42px;
-      width: 42px;
-    }
   }
 
   @media (max-width: ${MediaQuery.screenSm}) {
@@ -159,11 +169,6 @@ const RightCol = styled.div`
 
     .cart-icon {
       margin-top: 6px;
-    }
-
-    svg {
-      height: 32px;
-      width: 32px;
     }
   }
 `
@@ -196,6 +201,19 @@ const Links = () => {
                 {...props}
                 size="small"
                 style={{ background: 'none', border: 'none' }}
+                css={css`
+                  &:hover,
+                  &:active,
+                  &:focus-visible,
+                  &:focus-within {
+                    color: var(--brand-primary);
+                    transform: none !important;
+
+                    path {
+                      fill: var(--white) !important;
+                    }
+                  }
+                `}
               >
                 <TopNavLink key={l.path} href={l.path}>
                   {l.name}
@@ -309,7 +327,6 @@ export default function TopNav() {
           <Links />
         </LeftCol>
         <RightCol>
-          <Icon type="SEARCH" />
           <a
             href="#"
             onClick={(e) => {
@@ -322,7 +339,7 @@ export default function TopNav() {
               position: relative;
             `}
           >
-            <Icon type="CART" />
+            <Icon height={52} width={52} type="CART" />
             {q_cart?.data?.items && q_cart?.data?.items.length ? (
               <Badge
                 style={{ position: 'absolute', top: '-5px', right: '10px' }}

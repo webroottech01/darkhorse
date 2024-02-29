@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 import Icon from './Icon'
 import Typography from './Typography'
 
-const CartHeader = styled.div`
+const Header = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -13,6 +13,7 @@ const CartHeader = styled.div`
   position: relative;
   border-bottom: 1px solid var(--border-color);
   padding: 10px 0;
+  height: 75px;
 `
 
 export default function SlideoutHeader({
@@ -23,7 +24,7 @@ export default function SlideoutHeader({
   CenterText: React.ReactNode
 }) {
   return (
-    <CartHeader>
+    <Header>
       <div
         css={css`
           position: absolute;
@@ -48,6 +49,6 @@ export default function SlideoutHeader({
         />
       </div>
       {CenterText}
-    </CartHeader>
+    </Header>
   )
 }

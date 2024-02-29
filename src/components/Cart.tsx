@@ -47,15 +47,15 @@ type CartFormData = {
 
 const Wrapper = styled.div`
   background: var(--bg-color);
-  height: auto;
-  width: 100%;
-  position: absolute;
-  inset: 0 0 0 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `
 
 const CartBody = styled.div`
-  max-width: 900px;
-  margin: auto;
+  height: calc(100% - 75px - 90px);
+  padding: 20px 40px 100px;
+  overflow-y: auto;
 `
 
 const PaddedInfoBox = styled.div`
@@ -109,9 +109,9 @@ const CartFooter = styled.div`
   padding: 20px;
   background: var(--bg-color);
   border-top: 1px solid var(--gray-light);
-  position: absolute;
-  inset: auto 0 0 0;
   z-index: 1;
+  margin-top: auto;
+  height: 90px;
 `
 
 function getDefaultValues(items: CartItemWithProduct[]) {
@@ -191,11 +191,7 @@ export default function Cart({ onClose }: { onClose: () => void }) {
           }
         />
         {/* <StoreClosedAlert /> */}
-        <div
-          css={css`
-            padding: 20px 40px 100px;
-          `}
-        >
+        <CartBody>
           {q_cart.fetchStatus === 'fetching' || cartLoading ? (
             <div
               css={css`
@@ -209,7 +205,7 @@ export default function Cart({ onClose }: { onClose: () => void }) {
               <Loading />
             </div>
           ) : (
-            <CartBody>
+            <>
               {hasSoldOutItems && (
                 <PaddedInfoBox>
                   <InfoBox type="danger" closeable={false}>
@@ -236,7 +232,7 @@ export default function Cart({ onClose }: { onClose: () => void }) {
                             onClick={(e) => {
                               e.preventDefault()
 
-                              // router.push(getProductHref(item.product))
+                              router.push(getProductHref(item.product))
                             }}
                             style={{
                               cursor: 'pointer',
@@ -486,7 +482,7 @@ export default function Cart({ onClose }: { onClose: () => void }) {
                     <EmptyIcon
                       type="CART"
                       style={{ color: 'var(--text-color)' }}
-                    ></EmptyIcon>
+                    />
                     <Typography variant="body-sm">
                       Your cart is empty
                     </Typography>
@@ -496,9 +492,9 @@ export default function Cart({ onClose }: { onClose: () => void }) {
                   </EmptyAddItems>
                 </div>
               )}
-            </CartBody>
+            </>
           )}
-        </div>
+        </CartBody>
         {q_cart.fetchStatus === 'fetching' ||
         cartLoading ||
         totalItemCount < 1 ? null : (

@@ -4,9 +4,8 @@ import React, { useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
-import { imageUrl } from '@/utils/image'
 import SlideOutPanel from './SlideOutPanel'
 import Icon from './Icon'
 import useVenue from '@/hooks/useVenue'
@@ -21,17 +20,25 @@ import Dropdown, { DropdownTriggerProps } from './Dropdown/Dropdown'
 import DropdownTrigger from './Dropdown/DropdownTrigger'
 import Typography from './Typography'
 import DropdownItem from './Dropdown/DropdownItem'
+import SlideoutHeader from './SlideoutHeader'
+import Accordion from './Accordion'
 
 const topNavLinks = [
   {
     name: 'Shop',
     path: '/shop',
-    links: Object.values(ProductType).map((type) => {
-      return {
-        name: ProductTypeName[type],
-        path: `/shop/${type.toLowerCase()}`,
-      }
-    }),
+    links: [
+      {
+        name: 'All Products',
+        path: '/shop',
+      },
+      ...Object.values(ProductType).map((type) => {
+        return {
+          name: ProductTypeName[type],
+          path: `/shop/${type.toLowerCase()}`,
+        }
+      }),
+    ],
   },
   {
     name: 'Specials',
@@ -52,6 +59,10 @@ const TopNavEl = styled.div`
   position: relative;
   background: var(--brand-primary);
   z-index: 10;
+
+  @media (max-width: ${MediaQuery.screenSm}) {
+    padding: 0 10px 0 15px;
+  }
 `
 
 const TopNavImage = styled(Image)`
@@ -61,16 +72,54 @@ const TopNavImage = styled(Image)`
   z-index: -1;
 `
 
-const TopNavLink = styled(Typography)`
+const TopNavLink = styled(Link)`
   font-family: var(--font-family-secondary);
   font-size: 1.6rem;
   color: var(--white);
+`
+
+const MobileCenterText = styled(Typography)`
+  position: absolute;
+  font-family: var(--font-family-secondary);
+  color: var(--white);
+  text-align: center;
+  width: 100%;
+  inset: 0;
+  z-index: 0;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    display: flex;
+  }
+`
+
+const MobileNavToggle = styled.a`
+  display: none;
+
+  svg {
+    path {
+      fill: var(--white);
+    }
+  }
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    display: block;
+  }
 `
 
 const Logo = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    display: none;
+  }
 `
 
 const LeftCol = styled.div`
@@ -90,6 +139,33 @@ const RightCol = styled.div`
   gap: 20px;
   z-index: 1;
   flex: 0;
+
+  .cart-icon {
+    margin-top: 6px;
+  }
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    gap: 10px;
+
+    svg {
+      height: 42px;
+      width: 42px;
+    }
+  }
+
+  @media (max-width: ${MediaQuery.screenSm}) {
+    gap: 5px;
+    margin-top: 6px;
+
+    .cart-icon {
+      margin-top: 6px;
+    }
+
+    svg {
+      height: 32px;
+      width: 32px;
+    }
+  }
 `
 
 const Links = () => {
@@ -104,6 +180,10 @@ const Links = () => {
         .dispense-dropdown-menu {
           width: 220px;
         }
+
+        @media (max-width: ${MediaQuery.screenMd}) {
+          display: none;
+        }
       `}
     >
       {topNavLinks.map((l) => {
@@ -117,7 +197,9 @@ const Links = () => {
                 size="small"
                 style={{ background: 'none', border: 'none' }}
               >
-                <TopNavLink>{l.name}</TopNavLink>
+                <TopNavLink key={l.path} href={l.path}>
+                  {l.name}
+                </TopNavLink>
               </DropdownTrigger>
             )}
           >
@@ -162,9 +244,9 @@ const Links = () => {
             }}
           </Dropdown>
         ) : (
-          <Link key={l.path} href={l.path}>
-            <TopNavLink>{l.name}</TopNavLink>
-          </Link>
+          <TopNavLink key={l.path} href={l.path}>
+            {l.name}
+          </TopNavLink>
         )
       })}
     </div>
@@ -173,45 +255,54 @@ const Links = () => {
 
 export default function TopNav() {
   const router = useRouter()
+  const pathname = usePathname()
   const q_venue = useVenue()
   const q_cart = useCart()
   const [cartSlideOutOpen, setCartSlideOutOpen] = React.useState(false)
+  const [mobileSlideoutOpen, setMobileSlideoutOpen] = React.useState(false)
 
   useEffect(() => {
     setCartSlideOutOpen(false)
-  }, [router])
+    setMobileSlideoutOpen(false)
+  }, [pathname])
 
   return (
     <>
       <TopNavEl>
+        <MobileCenterText>
+          <Link href="/">
+            <Image
+              css={css`
+                display: block;
+              `}
+              alt={`${q_venue?.data?.name} logo`}
+              src="https://dispense-images.imgix.net/highscore/v2/hs-logo-white-icon.png"
+              height={47}
+              width={150}
+              priority={false}
+            />
+          </Link>
+        </MobileCenterText>
         <LeftCol>
+          <MobileNavToggle
+            href="#"
+            onClick={(e) => {
+              e.preventDefault()
+
+              setMobileSlideoutOpen(true)
+            }}
+          >
+            <Icon height={40} width={40} type="HAMBURGER" />
+          </MobileNavToggle>
           <Logo href="/">
             <Image
               css={css`
                 display: block;
-
-                @media (max-width: ${MediaQuery.screenSm}) {
-                  display: none;
-                }
               `}
               alt={`${q_venue?.data?.name} logo`}
-              src={q_venue?.data?.logo ?? ''}
+              src="https://dispense-images.imgix.net/highscore/v2/hs-logo-white-icon.png"
               height={62}
               width={200}
-              priority={false}
-            />
-            <Image
-              css={css`
-                display: none;
-
-                @media (max-width: ${MediaQuery.screenSm}) {
-                  display: block;
-                }
-              `}
-              alt={`${q_venue?.data?.name} logo`}
-              src={q_venue?.data?.logoSquare ?? ''}
-              height={50}
-              width={50}
               priority={false}
             />
           </Logo>
@@ -226,6 +317,7 @@ export default function TopNav() {
 
               setCartSlideOutOpen(true)
             }}
+            className="cart-icon"
             css={css`
               position: relative;
             `}
@@ -243,12 +335,75 @@ export default function TopNav() {
         </RightCol>
         <TopNavImage
           alt="Highscore Nav Background"
-          src='https://dispense-images.imgix.net/highscore/v2/hs-nav-bg-2.png'
+          src="https://dispense-images.imgix.net/highscore/v2/hs-nav-bg-2.png"
           fill
           quality={75}
           priority={false}
         />
       </TopNavEl>
+      <SlideOutPanel
+        width="100%"
+        side="left"
+        open={mobileSlideoutOpen}
+        onClose={() => setMobileSlideoutOpen(false)}
+      >
+        <SlideoutHeader
+          onClose={() => setMobileSlideoutOpen(false)}
+          CenterText={
+            <Typography variant="h2" style={{ fontSize: '1.4rem' }}>
+              Menu
+            </Typography>
+          }
+        />
+        <div
+          css={css`
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 15px;
+            font-family: var(--font-family-secondary);
+            font-size: 2rem;
+            color: var(--brand-primary);
+          `}
+        >
+          {topNavLinks.map((l) => (
+            <React.Fragment key={l.path}>
+              {l.links && l.links.length ? (
+                <Accordion
+                  trigger={<>{l.name}</>}
+                  style={{
+                    width: '100%',
+                    borderBottom: '1px solid var(--gray-light)',
+                  }}
+                >
+                  <div
+                    css={css`
+                      display: flex;
+                      flex-direction: column;
+                      align-items: flex-start;
+                      justify-content: center;
+                      margin-left: 40px;
+                      gap: 10px;
+                    `}
+                  >
+                    {l.links.map((link) => (
+                      <Link key={link.path} href={link.path}>
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
+                </Accordion>
+              ) : (
+                <Link key={l.path} href={l.path}>
+                  {l.name}
+                </Link>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </SlideOutPanel>
       <SlideOutPanel
         width="600px"
         open={cartSlideOutOpen}
@@ -256,7 +411,6 @@ export default function TopNav() {
       >
         <Cart
           onClose={() => {
-            console.log('CLOSE')
             setCartSlideOutOpen(false)
           }}
         />

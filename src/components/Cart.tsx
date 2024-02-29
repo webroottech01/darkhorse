@@ -31,6 +31,7 @@ import useCartMutation from '@/hooks/useCartMutation'
 import DispenseError from '@/api/dispenseError'
 import cartService from '@/api/cartService'
 import ProductImage from './ProductImage'
+import SlideoutHeader from './SlideoutHeader'
 
 // const cartFormSchema = z.object({
 //   items: z.array(
@@ -50,16 +51,6 @@ const Wrapper = styled.div`
   width: 100%;
   position: absolute;
   inset: 0 0 0 0;
-`
-
-const CartHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  border-bottom: 1px solid var(--border-color);
-  padding: 10px 0;
 `
 
 const CartBody = styled.div`
@@ -191,34 +182,14 @@ export default function Cart({ onClose }: { onClose: () => void }) {
   return (
     <>
       <Wrapper>
-        <CartHeader>
-          <div
-            css={css`
-              position: absolute;
-              top: 0;
-              left: 0;
-              height: 100%;
-              display: flex;
-              flex-direction: row;
-              justify-content: center;
-              align-items: center;
-              padding: 20px;
-            `}
-            onClick={() => onClose()}
-          >
-            <Icon
-              type="CLOSE_X"
-              height={30}
-              width={30}
-              css={css`
-                cursor: pointer;
-              `}
-            />
-          </div>
-          <Typography variant="h2" style={{ fontSize: '1.4rem' }}>
-            Your Cart ({totalItemCount})
-          </Typography>
-        </CartHeader>
+        <SlideoutHeader
+          onClose={onClose}
+          CenterText={
+            <Typography variant="h2" style={{ fontSize: '1.4rem' }}>
+              Your Cart ({totalItemCount})
+            </Typography>
+          }
+        />
         {/* <StoreClosedAlert /> */}
         <div
           css={css`

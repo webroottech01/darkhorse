@@ -59,7 +59,7 @@ a {
   text-decoration: none;
 
   &:visited {
-    color: var(--white);
+    color: var(--text-color);
   }
 }
 

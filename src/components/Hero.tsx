@@ -28,12 +28,29 @@ const HeroInner = styled.div`
   justify-content: space-between;
   color: var(--white);
   padding: 240px 60px 30px;
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    padding: 120px 40px 30px;
+  }
+
+  @media (max-width: ${MediaQuery.screenSm}) {
+    padding: 120px 20px 30px;
+  }
 `
 
 const HeroImage = styled(Image)`
   object-fit: cover;
   position: absolute;
   top: 0;
+
+  @media (max-width: ${MediaQuery.screenMd}) {
+    width: 120% !important;
+  }
+
+  @media (max-width: ${MediaQuery.screenSm}) {
+    height: 100%;
+    width: 220% !important;
+  }
 `
 
 const HeroH1 = styled(Typography).withConfig({
@@ -46,6 +63,7 @@ const HeroH1 = styled(Typography).withConfig({
 
   @media (max-width: ${MediaQuery.screenMd}) {
     font-size: 50px;
+    line-height: 1.2;
   }
 `
 
@@ -73,6 +91,16 @@ export default function Hero() {
             display: flex;
             flex-direction: row;
             gap: 20px;
+
+            @media (max-width: ${MediaQuery.screenSm}) {
+              flex-direction: column;
+              gap: 20px;
+              width: 100%;
+
+              button {
+                width: 100%;
+              }
+            }
           `}
         >
           <Link href="/shop">

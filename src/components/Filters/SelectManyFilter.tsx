@@ -101,7 +101,7 @@ function SelectManyFilter({
                       if (onChange) onChange()
                     }}
                   >
-                    <Typography variant="body" style={{ fontStyle: 'italic' }}>{option.label}</Typography>
+                    <Typography variant="body">{option.label}</Typography>
                   </Checkbox>
                 </DropdownItem>
               )

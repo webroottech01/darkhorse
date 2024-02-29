@@ -27,6 +27,7 @@ export type IconType =
   | 'SUBTRACT'
   | 'DELETE'
   | 'TRASH'
+  | 'HAMBURGER'
 
 type IconArgs = {
   type: IconType
@@ -1720,6 +1721,15 @@ const getIconByType = (type: IconType, color?: string) => {
           fillRule="evenodd"
           clipRule="evenodd"
           d="M22.9879 8C20.2472 8 17.9786 10.0213 17.5916 12.6545H10.9394C9.8683 12.6545 9 13.5228 9 14.5939C9 15.665 9.8683 16.5333 10.9394 16.5333L17.5334 16.5333H32.4667L39.0606 16.5333C40.1317 16.5333 41 15.665 41 14.5939C41 13.5228 40.1317 12.6545 39.0606 12.6545H32.4084C32.0214 10.0213 29.7529 8 27.0122 8H22.9879ZM13.2666 18.6667H36.7333L35.0289 36.6447C34.7339 39.7564 32.1209 42.1333 28.9953 42.1333H21.0046C17.879 42.1333 15.266 39.7564 14.971 36.6447L13.2666 18.6667Z"
+          fill={fill}
+        />
+      )
+    case 'HAMBURGER':
+      return (
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M5 10H45V13.3333H5V10ZM5 23.3333H45V26.6667H5V23.3333ZM45 36.6667H5V40H45V36.6667Z"
           fill={fill}
         />
       )

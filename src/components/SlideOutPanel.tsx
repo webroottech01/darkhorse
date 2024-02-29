@@ -11,6 +11,7 @@ export type SlideOutPanelProps = {
   level?: number
   width?: string
   onClose?(): void
+  side?: 'left' | 'right'
   'aria-labelledby'?: string
 }
 
@@ -31,10 +32,10 @@ const SlideOutPanelContainer = styled.div.withConfig({
   level: number
   open: boolean
   width?: string
+  side: 'left' | 'right'
 }>`
   position: fixed;
   top: 0;
-  right: ${({ open }) => (open ? 0 : -900)}px;
   z-index: ${({ level }) => 100 + level};
   background-color: #fff;
   transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -43,6 +44,15 @@ const SlideOutPanelContainer = styled.div.withConfig({
   max-width: ${({ width }) => (width ? width : '900px')};
   height: 100%;
   width: 100%;
+
+  ${(props) =>
+    props.side === 'left'
+      ? `
+  left: ${props.open ? 0 : -900}px;
+  `
+      : `
+  right: ${props.open ? 0 : -900}px;
+  `}
 
   box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2),
     0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
@@ -64,6 +74,7 @@ const SlideOutPanel = ({
   children,
   open = false,
   level = 0,
+  side = 'right',
   width,
   onClose,
   ['aria-labelledby']: ariaLabelledBy,
@@ -99,6 +110,7 @@ const SlideOutPanel = ({
       <SlideOutPanelContainer
         role="dialog"
         aria-modal="true"
+        side={side}
         level={level}
         width={width}
         open={isVisible}

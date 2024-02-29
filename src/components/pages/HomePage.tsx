@@ -9,6 +9,7 @@ import Typography from '../Typography'
 import Image from 'next/image'
 import Container from '../Container'
 import { Product, ProductType } from '@/types/product'
+import { MediaQuery } from '@/utils/mediaQueries'
 
 const categories = [
   {
@@ -124,6 +125,10 @@ export default function HomePage({ products }: { products: Product[] }) {
           padding: 160px 0;
           text-align: center;
           color: var(--white);
+
+          @media (max-width: ${MediaQuery.screenSm}) {
+            padding: 60px 0;
+          }
         `}
       >
         <Typography variant="h1" as="h3" style={{ color: 'var(--white)' }}>
@@ -132,14 +137,6 @@ export default function HomePage({ products }: { products: Product[] }) {
           Leaf by leaf.
         </Typography>
       </div>
-      <div
-        css={css`
-          background: var(--blue);
-          padding: 40px 0;
-          text-align: center;
-          color: var(--white);
-        `}
-      ></div>
     </main>
   )
 }

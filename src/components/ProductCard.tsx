@@ -33,6 +33,10 @@ const CardTop = styled.div`
   padding: 20px;
   flex: 1;
   min-height: 300px;
+
+  @media (max-width: ${MediaQuery.screenSm}) {
+    min-height: 200px;
+  }
 `
 
 const CardBottom = styled.div`

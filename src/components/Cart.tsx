@@ -32,6 +32,7 @@ import DispenseError from '@/api/dispenseError'
 import cartService from '@/api/cartService'
 import ProductImage from './ProductImage'
 import SlideoutHeader from './SlideoutHeader'
+import { addQueryStringParams } from '@/utils/url'
 
 // const cartFormSchema = z.object({
 //   items: z.array(
@@ -505,8 +506,18 @@ export default function Cart({ onClose }: { onClose: () => void }) {
               onClick={(e) => {
                 e.preventDefault()
 
-                // window.location.href = q_cart?.data?.checkoutUrl!
-                window.location.href = `https://menus-dev.dispenseapp.com/${q_venue?.data?.id}/menu/${q_cart?.data?.id}/checkout`
+                // window.location.href = addQueryStringParams(
+                //   q_cart?.data?.checkoutUrl!,
+                //   {
+                //     back: window.location.href,
+                //   }
+                // )
+                window.location.href = addQueryStringParams(
+                  `https://menus-dev.dispenseapp.com/${q_venue?.data?.id}/menu/${q_cart?.data?.id}/checkout`,
+                  {
+                    back: window.location.href,
+                  }
+                )
               }}
             >
               Checkout

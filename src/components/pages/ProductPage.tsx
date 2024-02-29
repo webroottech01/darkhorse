@@ -34,6 +34,7 @@ const LeftCol = styled.div`
   @media (max-width: ${MediaQuery.screenMd}) {
     border: none;
     width: 100%;
+    padding: 40px 15px;
   }
 `
 
@@ -47,6 +48,7 @@ const RightCol = styled.div`
 
   @media (max-width: ${MediaQuery.screenMd}) {
     width: 100%;
+    padding: 0 20px;
   }
 `
 
@@ -70,17 +72,17 @@ export default function ProductPage({ product }: { product: Product }) {
             css={css`
               border-radius: 10px;
               margin: 0 auto;
-              width: 100%;
 
               display: inline-block;
-              max-height: 600px;
-              min-height: 500px;
+              max-height: 500px;
+              min-height: 300px;
               position: relative !important;
               height: auto !important;
               width: auto !important;
+              object-fit: contain;
 
               @media (max-width: ${MediaQuery.screenSm}) {
-                max-height: auto;
+                max-height: 0;
               }
             `}
             alt={`${product.name} image at ${q_venue?.data?.name}`}
@@ -103,7 +105,9 @@ export default function ProductPage({ product }: { product: Product }) {
             __html: product.description ?? '',
           }}
         />
-        <div>
+        <div css={css`
+          padding: 20px 0;
+        `}>
           <Button
             variant="primary"
             onClick={async (e) => {

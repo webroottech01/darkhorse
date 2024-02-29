@@ -32,6 +32,8 @@ export const getMetaData = ({
   // const pathname = new URL(window.location.href).pathname
   const pathname = '/'
 
+  console.log('data.venue.seoMenuMetaData', data.venue.seoMenuMetaData)
+
   let metaData: Metadata = {}
 
   switch (routeName) {
@@ -40,14 +42,11 @@ export const getMetaData = ({
         venue: data.venue,
         baseUrl,
         pathname,
-        titleTemplateStr: '',
-        descTemplateStr: '',
-        data: {},
-        // titleTemplateStr: data.venue.seoMenuMetaData?.home?.title ?? '',
-        // descTemplateStr: data.venue.seoMenuMetaData?.home?.description ?? '',
-        // data: {
-        //   ...convertVenueToMergeVariables(data.venue),
-        // },
+        titleTemplateStr: data.venue.seoMenuMetaData?.home?.title ?? '',
+        descTemplateStr: data.venue.seoMenuMetaData?.home?.description ?? '',
+        data: {
+          ...convertVenueToMergeVariables(data.venue),
+        },
       })
       break
     default:
@@ -55,14 +54,11 @@ export const getMetaData = ({
         venue: data.venue,
         baseUrl,
         pathname,
-        titleTemplateStr: '',
-        descTemplateStr: '',
-        data: {},
-        // titleTemplateStr: data.venue.seoMenuMetaData?.home?.title ?? '',
-        // descTemplateStr: data.venue.seoMenuMetaData?.home?.description ?? '',
-        // data: {
-        //   ...convertVenueToMergeVariables(data.venue),
-        // },
+        titleTemplateStr: data.venue.seoMenuMetaData?.home?.title ?? '',
+        descTemplateStr: data.venue.seoMenuMetaData?.home?.description ?? '',
+        data: {
+          ...convertVenueToMergeVariables(data.venue),
+        },
       })
       break
   }

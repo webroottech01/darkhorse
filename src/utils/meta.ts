@@ -49,6 +49,40 @@ export const getMetaData = ({
         },
       })
       break
+    case RouteName.PRODUCT_CATEGORY:
+      metaData = _getMetaData({
+        venue: data.venue,
+        baseUrl,
+        pathname,
+        titleTemplateStr:
+          data.venue.seoMenuMetaData?.productCategory?.title ?? '',
+        descTemplateStr:
+          data.venue.seoMenuMetaData?.productCategory?.description ?? '',
+        data: {
+          ...convertVenueToMergeVariables(data.venue),
+          ...{
+            productCategory: data?.productCategoryName,
+          },
+        },
+      })
+      break
+    case RouteName.PRODUCT:
+      metaData = _getMetaData({
+        venue: data.venue,
+        baseUrl,
+        pathname,
+        titleTemplateStr:
+          data.venue.seoMenuMetaData?.productDetail?.title ?? '',
+        descTemplateStr:
+          data.venue.seoMenuMetaData?.productDetail?.description ?? '',
+        data: {
+          ...convertVenueToMergeVariables(data.venue),
+          ...(data?.product
+            ? convertProductToMergeVariables(data?.product)
+            : {}),
+        },
+      })
+      break
     default:
       metaData = _getMetaData({
         venue: data.venue,

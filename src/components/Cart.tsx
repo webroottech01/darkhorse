@@ -513,7 +513,7 @@ export default function Cart({ onClose }: { onClose: () => void }) {
                 //   }
                 // )
                 window.location.href = addQueryStringParams(
-                  `https://menus-dev.dispenseapp.com/${q_venue?.data?.id}/menu/${q_cart?.data?.id}/checkout`,
+                  `https://menus.dispenseapp.com/${q_venue?.data?.id}/menu/${q_cart?.data?.id}/checkout`,
                   {
                     back: window.location.href,
                   }

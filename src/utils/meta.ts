@@ -32,8 +32,6 @@ export const getMetaData = ({
   // const pathname = new URL(window.location.href).pathname
   const pathname = '/'
 
-  console.log('data.venue.seoMenuMetaData', data.venue.seoMenuMetaData)
-
   let metaData: Metadata = {}
 
   switch (routeName) {

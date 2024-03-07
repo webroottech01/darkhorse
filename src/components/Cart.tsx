@@ -506,18 +506,16 @@ export default function Cart({ onClose }: { onClose: () => void }) {
               onClick={(e) => {
                 e.preventDefault()
 
-                // window.location.href = addQueryStringParams(
-                //   q_cart?.data?.checkoutUrl!,
-                //   {
-                //     back: window.location.href,
-                //   }
-                // )
-                window.location.href = addQueryStringParams(
-                  `https://menus.dispenseapp.com/${q_venue?.data?.id}/menu/${q_cart?.data?.id}/checkout`,
+                const newUrl = addQueryStringParams(
+                  q_cart?.data?.checkoutUrl!,
                   {
                     back: window.location.href,
                   }
                 )
+
+                console.log('newUrl', newUrl)
+
+                // window.location.href = newUrl
               }}
             >
               Checkout

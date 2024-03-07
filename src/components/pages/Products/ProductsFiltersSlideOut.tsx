@@ -57,8 +57,6 @@ export default function ProductsFiltersSlideOut({
             triggerMode="onApply"
             value={searchParams as any}
             onChange={(val) => {
-              console.log('ON CHANGE')
-
               router.push(
                 addQueryStringParams(pathname, {
                   ...searchParams,

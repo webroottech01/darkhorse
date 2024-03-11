@@ -47,6 +47,7 @@ export const getMetaData = ({
         },
       })
       break
+    case RouteName.PRODUCTS:
     case RouteName.PRODUCT_CATEGORY:
       metaData = _getMetaData({
         venue: data.venue,

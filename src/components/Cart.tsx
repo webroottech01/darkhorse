@@ -513,9 +513,7 @@ export default function Cart({ onClose }: { onClose: () => void }) {
                   }
                 )
 
-                console.log('newUrl', newUrl)
-
-                // window.location.href = newUrl
+                window.location.href = newUrl
               }}
             >
               Checkout

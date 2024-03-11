@@ -10,7 +10,7 @@ export const getCurrentRouteName = (path: string) => {
 
   if (path === '/') {
     return RouteName.HOME
-  } else if (path === '/products') {
+  } else if (path === '/shop') {
     return RouteName.PRODUCTS
   } else if (path.match('/shop/*')) {
     return RouteName.PRODUCT_CATEGORY

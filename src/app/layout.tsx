@@ -63,7 +63,9 @@ export default async function RootLayout({
         <StyledComponentsRegistry>
           <Providers dehydratedState={dehydrate(queryClient)}>
             <AppInit />
-            <TopNav />
+            <Suspense>
+              <TopNav />
+            </Suspense>
             <Suspense>{children}</Suspense>
           </Providers>
         </StyledComponentsRegistry>

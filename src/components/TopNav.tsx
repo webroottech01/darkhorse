@@ -22,6 +22,7 @@ import Typography from './Typography'
 import DropdownItem from './Dropdown/DropdownItem'
 import SlideoutHeader from './SlideoutHeader'
 import Accordion from './Accordion'
+import useSearchParams from '@/hooks/useSearchParams'
 
 const topNavLinks = [
   {
@@ -274,6 +275,7 @@ const Links = () => {
 export default function TopNav() {
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
   const q_venue = useVenue()
   const q_cart = useCart()
   const [cartSlideOutOpen, setCartSlideOutOpen] = React.useState(false)
@@ -283,6 +285,12 @@ export default function TopNav() {
     setCartSlideOutOpen(false)
     setMobileSlideoutOpen(false)
   }, [pathname])
+
+  useEffect(() => {
+    if (searchParams.cart) {
+      setCartSlideOutOpen(true)
+    }
+  }, [searchParams])
 
   return (
     <>

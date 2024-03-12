@@ -506,14 +506,7 @@ export default function Cart({ onClose }: { onClose: () => void }) {
               onClick={(e) => {
                 e.preventDefault()
 
-                const newUrl = addQueryStringParams(
-                  q_cart?.data?.checkoutUrl!,
-                  {
-                    back: window.location.href,
-                  }
-                )
-
-                window.location.href = newUrl
+                router.push(`/${q_cart?.data?.id}/checkout`)
               }}
             >
               Checkout

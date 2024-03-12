@@ -16,13 +16,15 @@ import Cart from './Cart'
 import { MediaQuery } from '@/utils/mediaQueries'
 import { ProductType, ProductTypeName } from '@/types/product'
 import { addQueryStringParams } from '@/utils/url'
-import Dropdown, { DropdownTriggerProps } from './Dropdown/Dropdown'
+import Dropdown from './Dropdown/Dropdown'
 import DropdownTrigger from './Dropdown/DropdownTrigger'
 import Typography from './Typography'
 import DropdownItem from './Dropdown/DropdownItem'
 import SlideoutHeader from './SlideoutHeader'
 import Accordion from './Accordion'
 import useSearchParams from '@/hooks/useSearchParams'
+import useRouteName from '@/hooks/useRouteName'
+import { RouteName } from '@/utils/route'
 
 const topNavLinks = [
   {
@@ -275,6 +277,7 @@ const Links = () => {
 export default function TopNav() {
   const router = useRouter()
   const pathname = usePathname()
+  const routeName = useRouteName()
   const searchParams = useSearchParams()
   const q_venue = useVenue()
   const q_cart = useCart()
@@ -294,7 +297,9 @@ export default function TopNav() {
 
   return (
     <>
-      <TopNavEl>
+      <TopNavEl
+        style={{ display: routeName === RouteName.CHECKOUT ? 'none' : 'flex' }}
+      >
         <MobileCenterText>
           <Link href="/">
             <Image

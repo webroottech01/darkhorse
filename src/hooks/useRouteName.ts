@@ -4,7 +4,6 @@ import React from 'react'
 import { usePathname } from 'next/navigation'
 
 import { RouteName, getCurrentRouteName } from '@/utils/route'
-import path from 'path'
 
 export default function useRouteName() {
   const pathname = usePathname()
@@ -14,10 +13,6 @@ export default function useRouteName() {
   React.useEffect(() => {
     setCurrentRouteName(getCurrentRouteName(pathname))
   }, [pathname])
-
-  // React.useEffect(() => {
-  //   console.log('currentRouteName', currentRouteName)
-  // }, [currentRouteName])
 
   return currentRouteName
 }

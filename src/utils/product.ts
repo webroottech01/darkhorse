@@ -10,6 +10,31 @@ import {
 } from '../types/product'
 import { slugifyBrand } from './string'
 
+const sizeSorts: Record<string, number> = {
+  small: 0,
+  sm: 0,
+  sml: 0,
+  medium: 1,
+  med: 1,
+  large: 2,
+  lg: 2,
+  xlarge: 3,
+  xl: 3,
+}
+
+export const getSortedVariants = (variants: Product[]) => {
+  return variants.sort((a, b) => {
+    if (a.size && b.size) {
+      return sizeSorts[a.size.toLowerCase()] > sizeSorts[b.size.toLowerCase()]
+        ? 1
+        : -1
+    }
+
+    //TODO: how can we sort accessories with a size (ex. Small, Medium, Large)
+    return (a.weight ?? 0) > (b.weight ?? 0) ? 1 : -1
+  })
+}
+
 export const getProductHref = ({
   brand,
   slug,

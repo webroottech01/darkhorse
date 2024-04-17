@@ -22,16 +22,20 @@ export default function useSearchParams<T extends { [key: string]: any }>() {
 //nextjs search params are Record<string, string>
 //but we need array values to be arrays
 function convertNextParams(nextSearchParams: URLSearchParams) {
-  const params = Object.fromEntries(nextSearchParams.entries())
+  const params = nextSearchParams?.entries()
+    ? Object.fromEntries(nextSearchParams?.entries())
+    : {}
   const outputParams: Record<string, any> = {}
 
   Object.keys(params).forEach((key) => {
     const value = params[key]
 
     if (value && value.indexOf(',') > -1) {
-      outputParams[key] = value.split(',')
-    } else {
       outputParams[key] = value
+        .split(',')
+        .map((v) => v.replace(/[\[\]']+/g, ''))
+    } else {
+      outputParams[key] = value.replace(/[\[\]']+/g, '')
     }
   })
 

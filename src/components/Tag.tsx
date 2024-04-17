@@ -1,87 +1,208 @@
-'use client'
-
+import { CannabisType, ProductType, TerpeneType, CannabisTypeName, TerpeneName, ProductTypeName } from '@/types/product'
 import React from 'react'
 import styled, { css } from 'styled-components'
+import Icon, { IconType } from './Icon'
+import Typography, { TypographyProps } from './Typography'
+import { cannabisTypeToIconType, terpeneTypeToIconType, productTypeToIconType } from '@/utils/icon'
 
-import { CannabisType, CannabisTypeName } from '@/types/product'
 
-const SpanEl = styled.span.withConfig({
-  shouldForwardProp: (prop) => !['cannabisType', 'variant'].includes(prop),
-})<{
-  variant?: 'primary'
-  cannabisType?: CannabisType
-}>`
+const TagDefault = styled.span<Partial<TagProps>>`
+  box-sizing: border-box;
   display: inline-flex;
-  padding: 4px 8px;
-  justify-content: center;
   align-items: center;
-  gap: 5px;
-  font-size: 12px;
+  justify-content: center;
+  outline: none;
+  transition: background-color 0.3s ease;
+  background-color: var(--white);
+  white-space: nowrap;
+  height: 36px;
 
   ${(props) =>
-    props.variant === 'primary' &&
+    props.clickable &&
     css`
-      background: var(--brand-primary);
-      color: white;
+      cursor: pointer;
     `}
 
   ${(props) =>
-    props.cannabisType === CannabisType.SATIVA &&
+    !props.inline &&
     css`
       border-radius: 4px;
-      border: 1px solid var(--orange);
-      color: var(--orange);
-      background: rgba(238, 135, 15, 0.2);
+      border: 1px solid var(--gray-light);
+      padding: 8px 15px;
     `}
 
-${(props) =>
-    props.cannabisType === CannabisType.INDICA &&
+  ${(props) =>
+    props.disabled &&
     css`
-      border-radius: 4px;
-      border: 1px solid var(--purple);
-      color: var(--purple);
-      background: rgba(108, 67, 255, 0.2);
+      pointer-events: none;
+      opacity: 0.6;
     `}
 
-${(props) =>
-    props.cannabisType === CannabisType.HYBRID &&
+  ${(props) =>
+    props.size === 'medium' &&
     css`
-      border-radius: 4px;
-      border: 1px solid var(--green);
+      padding: 5px 7px;
+      height: 30px;
+
+      * {
+        font-size: 0.85rem;
+      }
+    `}
+    
+    ${(props) =>
+    props.size === 'small' &&
+    css`
+      padding: 3px 5px;
+      height: 24px;
+
+      * {
+        font-size: 0.65rem;
+      }
+    `}
+
+  ${(props) =>
+    props.variant === 'gray' &&
+    css`
+      background: var(--gray-light);
+
+      * {
+        color: var(--black);
+      }
+    `}
+
+  ${(props) =>
+    props.variant === 'green' &&
+    css`
+      border-color: var(--green);
       color: var(--green);
-      background: rgba(19, 181, 16, 0.2);
+    `}
+
+  ${(props) =>
+    props.variant === 'red' &&
+    css`
+      border-color: var(--brand-danger);
+      color: var(--brand-danger);
+    `}
+
+  ${(props) =>
+    props.variant === 'tag-primary' &&
+    css`
+      border-color: var(--gray-light);
+      background-color: var(--brand-primary-lightest);
+
+      &:hover {
+        background: var(--brand-primary-lighter);
+      }
+
+      * {
+        color: var(--black);
+      }
     `}
 `
 
-export default function Tag({
-  variant,
-  children,
-  style,
-  cannabisType,
-}: {
-  variant?: 'primary'
+const TagIcon = styled(Icon)`
+  color: var(--black);
+`
+
+const TagWithIcon = styled(TagDefault)`
+  ${(props) =>
+    !props.inline &&
+    css`
+      padding: 0 14px 0 10px;
+    `}
+`
+
+const TagText = styled(Typography)`
+  color: var(--black);
+`
+
+const TagTextWithIcon = styled(TagText)`
+  margin-left: 5px;
+`
+
+export type TagProps = {
+  text?: string
   children?: React.ReactNode
-  style?: React.CSSProperties
-  cannabisType?: CannabisType
-}) {
-  if (
-    cannabisType === CannabisType.HYBRID_INDICA ||
-    cannabisType === CannabisType.HYBRID_SATIVA
-  ) {
-    cannabisType = CannabisType.HYBRID
-  }
+  icon?: IconType
+  inline?: boolean
+  clickable?: boolean
+  labelTextVariant?: TypographyProps['variant']
+  role?: string
+  disabled?: boolean
+  size?: 'small' | 'medium'
+} & (
+  | {
+      variant?: 'default'
+    }
+  | {
+      variant: 'cannabisType'
+      type: CannabisType
+    }
+  | {
+      variant: 'productType'
+      type: ProductType
+    }
+  | {
+      variant: 'terpeneType'
+      type: TerpeneType
+    }
+  | {
+      variant: 'gray'
+    }
+  | {
+      variant: 'green'
+    }
+  | {
+      variant: 'red'
+    }
+  | {
+      variant: 'tag-primary'
+    }
+)
 
-  if (!!cannabisType) {
-    return (
-      <SpanEl style={style} variant={variant} cannabisType={cannabisType}>
-        {CannabisTypeName[cannabisType]}
-      </SpanEl>
-    )
+const Tag = ({
+  labelTextVariant = 'body-sm',
+  ...props
+}: TagProps & React.ComponentPropsWithoutRef<'span'>) => {
+  switch (props.variant) {
+    case 'cannabisType':
+      return (
+        <TagWithIcon {...props}>
+          <TagIcon height={20} width={20} type={cannabisTypeToIconType[props.type]}></TagIcon>
+          <TagTextWithIcon variant={labelTextVariant}>
+            {CannabisTypeName[props.type]}
+          </TagTextWithIcon>
+        </TagWithIcon>
+      )
+    case 'terpeneType':
+      return (
+        <TagWithIcon {...props}>
+          <TagIcon height={20} width={20} type={terpeneTypeToIconType[props.type]}></TagIcon>
+          <TagTextWithIcon variant={labelTextVariant}>{TerpeneName[props.type]}</TagTextWithIcon>
+        </TagWithIcon>
+      )
+    case 'productType':
+      return (
+        <TagWithIcon {...props}>
+          <TagIcon height={20} width={20} type={productTypeToIconType[props.type]}></TagIcon>
+          <TagTextWithIcon variant={labelTextVariant}>
+            {props.text ? props.text : ProductTypeName[props.type]}
+          </TagTextWithIcon>
+        </TagWithIcon>
+      )
+    case 'default':
+    default:
+      return props.icon ? (
+        <TagDefault {...props}>
+          <TagIcon height={20} width={20} type={props.icon}></TagIcon>
+          <TagTextWithIcon variant={labelTextVariant}>{props.children}</TagTextWithIcon>
+        </TagDefault>
+      ) : (
+        <TagDefault {...props}>
+          <TagText variant={labelTextVariant}>{props.children}</TagText>
+        </TagDefault>
+      )
   }
-
-  return (
-    <SpanEl style={style} variant={variant}>
-      {children}
-    </SpanEl>
-  )
 }
+
+export default Tag

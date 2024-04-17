@@ -1,4 +1,5 @@
 import { ListParams } from './constants'
+import { DiscountType } from './pricing'
 
 export const ProductDefaultImage =
   'https://imgix.dispenseapp.com/default-image.png'
@@ -12,13 +13,23 @@ export type Product = {
   image?: string
   description?: string
   seoDescription?: string
+  discountAmount?: number
+  discountAmountFinal?: number
+  discountValueFinal?: number
+  discountTypeFinal?: DiscountType
   brand?: {
     name?: string
     logo?: string
   }
+  new?: boolean
+  featured?: boolean
+  weight?: number
+  weightUnit?: ProductWeightUnit
+  size?: string
   type: ProductType
   subType?: string
   cannabisType?: CannabisType
+  tiers?: ProductTier[]
   variants?: Product[]
   effects?: CannabisEffect[]
   weightFormatted?: string
@@ -88,6 +99,21 @@ export type ProductsResponse = {
   pageCount: number
 }
 
+export type ProductTier = {
+  id: string
+  price: number
+  weight?: number
+  weightUnit?: ProductWeightUnit
+  weightFormatted?: string
+  quantityAvailable?: number
+  purchaseQuantity?: number
+  discountValue?: number
+  discountAmount?: number
+  discountAmountFinal?: number
+  discountValueFinal?: number
+  discountTypeFinal?: DiscountType
+}
+
 export enum ProductType {
   FLOWER = 'FLOWER',
   PRE_ROLLS = 'PRE_ROLLS',
@@ -99,6 +125,14 @@ export enum ProductType {
   ACCESSORIES = 'ACCESSORIES',
   BEVERAGES = 'BEVERAGES',
   MERCHANDISE = 'MERCHANDISE',
+}
+
+export enum ProductWeightUnit {
+  GRAMS = 'GRAMS',
+  MILLIGRAMS = 'MILLIGRAMS',
+  OUNCES = 'OUNCES',
+  UNKNOWN = 'UNKNOWN',
+  EACH = 'EACH',
 }
 
 export enum ProductPriceType {
@@ -121,6 +155,7 @@ export enum CannabisType {
   HYBRID_INDICA = 'HYBRID_INDICA',
   CBD = 'CBD',
   NA = 'NA',
+  MIXED = 'MIXED',
 }
 
 export enum CannabisTypeName {
@@ -131,6 +166,7 @@ export enum CannabisTypeName {
   HYBRID = 'Hybrid',
   CBD = 'CBD',
   NA = 'N/A',
+  MIXED = 'Mixed',
 }
 
 export enum CannabisEffect {
@@ -199,12 +235,30 @@ export enum CannabisEffectName {
   ANXIOUS = 'Anxious',
 }
 
+export type TerpeneIcon =
+  | 'ALPHAPINENE'
+  | 'BETACARYOPHYLLENE'
+  | 'BETAEUDESMOL'
+  | 'BETAMYRCENE'
+  | 'BETAPINENE'
+  | 'BISABOLOL'
+  | 'CARYOPHYLLENEOXIDE'
+  | 'GUAIOL'
+  | 'HUMULENE'
+  | 'LIMONENE'
+  | 'LINALOOL'
+  | 'OCIMENE'
+  | 'TERPINENE'
+  | 'TERPINOLENE'
+  | 'THREECARENE'
+  | 'TRANSNEROLIDOL'
+
 export type TerpeneStrength = {
   name: string
   relativeValue: number
   value: number
   context: string
-  // iconName: TerpeneIcon
+  iconName: TerpeneIcon
   contentUnit: 'px' | 'em' | 'rem' | '%' | 'vw' | 'vh'
 }
 

@@ -318,6 +318,9 @@ function Button(
             css`
               background-color: var(--gray-light);
               border-color: var(--gray-light);
+              * {
+                color: var(--black);
+              }
             `}
           }
         `}

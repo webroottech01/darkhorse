@@ -28,7 +28,10 @@ class ProductService {
       path: `/products/${params.id}`,
       options: {
         ...options,
-        params,
+        params: {
+          ...params,
+          group: true,
+        },
       },
     })
   }

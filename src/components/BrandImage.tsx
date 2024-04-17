@@ -5,10 +5,11 @@ import styled from 'styled-components'
 import Image from 'next/image'
 
 export type BrandImageProps = {
-  image: string
+  src: string
   height: number
   width: number
   alt: string
+  priority?: boolean
 }
 
 const ImageEl = styled(Image)<Pick<BrandImageProps, 'height' | 'width'>>`
@@ -31,8 +32,8 @@ const ImageEl = styled(Image)<Pick<BrandImageProps, 'height' | 'width'>>`
   }
 `
 
-const BrandImage = ({ image, height, width, alt }: BrandImageProps) => {
-  return <ImageEl src={image} height={height} width={width} alt={alt} />
+const BrandImage = ({ src, height, width, alt, priority }: BrandImageProps) => {
+  return <ImageEl src={src} height={height} width={width} alt={alt} />
 }
 
 export default BrandImage

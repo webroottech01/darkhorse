@@ -102,7 +102,7 @@ export default function ProductCard({
           <CardBottom>
             {!!product.cannabisType &&
               product.cannabisType !== CannabisType.NA && (
-                <Tag cannabisType={product.cannabisType}></Tag>
+                <Tag variant="cannabisType" type={product.cannabisType}></Tag>
               )}
             {!!product.brand?.name && (
               <Typography variant="body-sm">{product.brand.name}</Typography>

@@ -413,7 +413,7 @@ export default function ProductPage({ product }: { product: Product }) {
     ? getSortedVariants(product.variants)
     : []
 
-  console.log('VARIANTS', sortedVariants)
+  console.log('VARIANTS', product.variants)
 
   return (
     <>

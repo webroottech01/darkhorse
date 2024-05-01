@@ -44,7 +44,7 @@ export default function ProductImage({ product }: { product: Product }) {
       <BrandImage
         height={70}
         width={70}
-        image={product.brand.logo}
+        src={product.brand.logo}
         alt={product.brand.name ?? 'brand logo'}
       />
     </div>

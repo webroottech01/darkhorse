@@ -17,8 +17,14 @@ export default function CheckoutPage() {
 
   React.useEffect(() => {
     window.addEventListener('message', function (e) {
-      if (e.data === 'GO_BACK') {
+      if (e.data?.event === 'GO_BACK') {
         router.back()
+      }
+    })
+
+    window.addEventListener('message', function (e) {
+      if (e.data?.event === 'ORDER_COMPLETE') {
+        console.log('ORDER COMPLETE', e.data?.data)
       }
     })
   }, [])

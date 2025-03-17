@@ -11,7 +11,7 @@ import { addQueryStringParams } from '@/utils/url'
 
 const Banner = styled.div`
   position: relative;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -80,10 +80,10 @@ export default function Hero() {
             color: 'var(--white)',
           }}
         >
-          High Score Cannabis
+          Dark Horse Cannabis
         </Typography>
-        <HeroH1 variant="h1" as="h1" style={{ margin: 0, maxWidth: '700px' }}>
-          Where Every Strain is a High Score
+        <HeroH1 variant="h1" as="h1" style={{ margin: 0, maxWidth: '720px' }}>
+        From the Shadows to the Spotlight
         </HeroH1>
         <div
           css={css`

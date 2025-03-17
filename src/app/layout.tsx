@@ -27,19 +27,19 @@ if (!process.env.NEXT_PUBLIC_DISPENSE_API_KEY)
 const font1 = localFont({
   src: [
     {
-      path: '../fonts/Gotham-Book.woff2',
+      path: '../fonts/LibreFranklin-Regular.woff2',
       weight: 'normal',
       style: 'normal',
     },
     {
-      path: '../fonts/Gotham-Bold.woff2',
+      path: '../fonts/LibreFranklin-SemiBold.woff2',
     },
   ],
   display: 'swap',
   variable: '--font-family-primary',
 })
 const font2 = localFont({
-  src: '../fonts/GentyDemo-Regular.woff2',
+  src: '../fonts/PlayfairDisplay-Bold.woff2',
   display: 'swap',
   variable: '--font-family-secondary',
 })

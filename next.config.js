@@ -3,10 +3,9 @@ const path = require('path')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['assets.dispenseapp.com', 'dispense-images.imgix.net'],
-    loader: 'custom',
-    loaderFile: './src/imageLoader.js',
-    formats: ['image/avif', 'image/webp'],
+    loader: 'imgix',
+    path: '',
+    disableStaticImages: true
   },
   compiler: {
     styledComponents: true,
@@ -15,7 +14,6 @@ const nextConfig = {
     config.resolve.alias['styled-components'] = path.resolve(
       './node_modules/styled-components'
     )
-
     return config
   },
 }

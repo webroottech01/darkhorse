@@ -1,6 +1,6 @@
 :root {
   --brand-primary: #52583F;
-  --brand-secondary: #58cb6e;
+  --brand-secondary: #52583F;
 
   /* Colors */
   --bg-color: #F7F5E1;
@@ -28,6 +28,7 @@
   --gray-lightest: #fafbfc;
   --gray-light: #e2e6ed;
   --gray: #787c84;
+  --cream: #F7F5E1;
   --white: #ffffff;
   --black: #181818;
   /* Shared Components */
@@ -36,6 +37,9 @@
   --dropdown-backdrop: rgba(0, 0, 0, 0.3);
   --box-shadow: rgba(0, 0, 0, 0.15);
 }
+
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
 
 body {
   margin: 0;

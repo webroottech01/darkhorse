@@ -21,28 +21,28 @@ const BadgeEl = styled(Typography)<{
   margin: 0;
   border-radius: 100%;
   background-color: var(--gray);
-  color: var(--white);
+  color: var(--cream);
   font-size: 12px;
 
   ${({ badgeVariant }) =>
     badgeVariant === 'primary' &&
     `
     background-color: var(--brand-primary);
-    color: var(--white);
+    color: var(--cream);
   `};
 
   ${({ badgeVariant }) =>
     badgeVariant === 'secondary' &&
     `
     background-color: var(--brand-secondary);
-    color: var(--white);
+    color: var(--cream);
   `};
 
   ${({ badgeVariant }) =>
     badgeVariant === 'danger' &&
     `
     background-color: var(--brand-danger);
-    color: var(--white);
+    color: var(--cream);
   `};
 `
 

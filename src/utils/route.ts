@@ -4,6 +4,7 @@ export enum RouteName {
   PRODUCT_CATEGORY = 'PRODUCT_CATEGORY',
   PRODUCT = 'PRODUCT',
   CHECKOUT = 'CHECKOUT',
+  BLOG = 'blogs',
 }
 
 export const getCurrentRouteName = (path: string) => {
@@ -21,6 +22,8 @@ export const getCurrentRouteName = (path: string) => {
     return RouteName.PRODUCT
   } else if (path.match(/\/[0-9A-Z&\-%]*\/[0-9A-Z&\-%]*/i)) {
     return RouteName.PRODUCT
+  } else if (path.match('/blog/*')) {
+    return RouteName.BLOG
   }
 
   return null

@@ -5,38 +5,47 @@ import styled, { css } from 'styled-components'
 
 import { ProductsList } from '@/components/ProductsList'
 import Hero from '../Hero'
+
 import Typography from '../Typography'
 import Image from 'next/image'
 import Container from '../Container'
+import ContainerFluid from '../Containerfluid'
 import { Product, ProductType } from '@/types/product'
 import { MediaQuery } from '@/utils/mediaQueries'
+import Reviews from '../Reviews'
 
 const categories = [
   {
     name: 'Flower',
-    image: 'https://assets.dispenseapp.com/highscore-cannabis/hs-flower.svg',
-    type: ProductType.FLOWER,
+    image: '/cat-images/hs-flower.png',
+    type: ProductType.FLOWER,  
   },
   {
     name: 'Vapes',
-    image: 'https://assets.dispenseapp.com/highscore-cannabis/hs-vapes.svg',
+    image: '/cat-images/hs-vapes.png',
     type: ProductType.VAPORIZERS,
   },
   {
     name: 'Edibles',
-    image: 'https://assets.dispenseapp.com/highscore-cannabis/hs-edibles.svg',
+    image: '/cat-images/hs-edibles.png',
     type: ProductType.EDIBLES,
   },
   {
     name: 'Pre Rolls',
-    image: 'https://assets.dispenseapp.com/highscore-cannabis/hs-pre-rolls.svg',
+    image: '/cat-images/hs-pre-rolls.png',
     type: ProductType.PRE_ROLLS,
   },
   {
-    name: 'Topicals',
-    image: 'https://assets.dispenseapp.com/highscore-cannabis/hs-topicals.svg',
-    type: ProductType.TOPICALS,
+    name: 'Concentrates',
+    image: '/cat-images/hs-concentrates.png',
+    type: ProductType.CONCENTRATES,
   },
+  {
+    name: 'Tinctures',
+    image: '/cat-images/hs-tinctures.png',
+    type: ProductType.TINCTURES,
+  }
+  
 ]
 
 const Section = styled(Container)`
@@ -48,6 +57,7 @@ export default function HomePage({ products }: { products: Product[] }) {
   return (
     <main>
       <Hero />
+      {/* <HomeBanner /> */}
       <Section
         as="section"
         css={css`
@@ -67,10 +77,9 @@ export default function HomePage({ products }: { products: Product[] }) {
           Shop by Category
         </Typography>
       </Section>
-      <Container
+      <ContainerFluid
         css={css`
           overflow: hidden;
-          height: 180px;
           padding: 0;
         `}
       >
@@ -78,7 +87,7 @@ export default function HomePage({ products }: { products: Product[] }) {
           css={css`
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: space-evenly;
             width: 100%;
 
             padding: 20px 0 20px;
@@ -97,45 +106,46 @@ export default function HomePage({ products }: { products: Product[] }) {
                 flex-direction: column;
                 gap: 20px;
                 align-items: center;
-                min-width: 120px;
+                min-width: 200px;
               `}
             >
               <Image
                 src={category.image}
-                height={80}
-                width={80}
+                height={200}
+                width={200}
                 alt={category.name}
+                css={'width:100%;object-fit: contain;'}
               />
-              <Typography variant="h3" as="h3">
+              <Typography variant="h2" as="h2" css={'margin-top:0;line-height:1;'}>
                 {category.name}
               </Typography>
             </Link>
           ))}
         </div>
-      </Container>
+      </ContainerFluid>
       <Section>
         <Typography variant="h1" as="h2" style={{ marginTop: 0 }}>
           Shop Most Popular
         </Typography>
         <ProductsList products={products} />
       </Section>
+      
       <div
         css={css`
           background: var(--green);
           padding: 160px 0;
           text-align: center;
-          color: var(--white);
+          color: var(--cream);
 
           @media (max-width: ${MediaQuery.screenSm}) {
             padding: 60px 0;
           }
         `}
       >
-        <Typography variant="h1" as="h3" style={{ color: 'var(--white)' }}>
-          Legends grow here.
-          <br />
-          Leaf by leaf.
+        <Typography variant="h1" as="h3" style={{ color: 'var(--cream)' }}>
+        Testimonials & Reviews
         </Typography>
+        <Reviews />
       </div>
     </main>
   )

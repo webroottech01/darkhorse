@@ -34,7 +34,7 @@ export default function ProductImage({ product }: { product: Product }) {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        background-color: var(--white);
+        background-color: var(--cream);
 
         img {
           box-shadow: none;

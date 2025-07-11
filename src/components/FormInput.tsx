@@ -16,14 +16,14 @@ const LeftAdornment = styled.div`
   display: flex;
   align-items: center;
   padding-left: 8px;
-  background-color: var(--white);
+  background-color: var(--cream);
   pointer-events: none;
 `
 const RightAdornment = styled.div`
   color: var(--gray);
   display: flex;
   align-items: center;
-  background-color: var(--white);
+  background-color: var(--cream);
 `
 
 const ClearButton = styled.button<{ disabled?: boolean }>`

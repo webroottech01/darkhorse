@@ -13,7 +13,7 @@ const TagDefault = styled.span<Partial<TagProps>>`
   justify-content: center;
   outline: none;
   transition: background-color 0.3s ease;
-  background-color: var(--white);
+  background-color: var(--cream);
   white-space: nowrap;
   height: 36px;
 

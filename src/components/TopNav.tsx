@@ -73,12 +73,13 @@ const TopNavImage = styled(Image)`
   position: absolute;
   top: 0;
   z-index: -1;
+  display:none;
 `
 
 const TopNavLink = styled(Link)`
   font-family: var(--font-family-secondary);
   font-size: 1.6rem;
-  color: var(--white);
+  color: var(--cream);
 
   &:hover,
   &:active,
@@ -88,18 +89,18 @@ const TopNavLink = styled(Link)`
   }
 
   &:visited {
-    color: var(--white);
+    color: var(--cream);
   }
 
   path {
-    fill: var(--white) !important;
+    fill: var(--cream) !important;
   }
 `
 
 const MobileCenterText = styled(Typography)`
   position: absolute;
   font-family: var(--font-family-secondary);
-  color: var(--white);
+  color: var(--cream);
   text-align: center;
   width: 100%;
   inset: 0;
@@ -121,7 +122,7 @@ const MobileNavToggle = styled.a`
 
   svg {
     path {
-      fill: var(--white);
+      fill: var(--cream);
     }
   }
 
@@ -148,9 +149,14 @@ const LeftCol = styled.div`
   z-index: 1;
   flex: 0;
 `
+const CenterCol = styled.div`
+  z-index: 1;
+  margin: 0 auto;
+  flex: 0;
+`
 
 const RightCol = styled.div`
-  margin-left: auto;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -213,7 +219,7 @@ const Links = () => {
                     transform: none !important;
 
                     path {
-                      fill: var(--white) !important;
+                      fill: var(--cream) !important;
                     }
                   }
                 `}
@@ -298,7 +304,7 @@ export default function TopNav() {
   return (
     <>
       <TopNavEl
-        style={{ display: routeName === RouteName.CHECKOUT ? 'none' : 'flex' }}
+        style={{ display: routeName === RouteName.CHECKOUT ? 'none' : 'flex', backgroundColor: 'var(--brand-primary)',}}
       >
         <MobileCenterText>
           <Link href="/">
@@ -307,7 +313,7 @@ export default function TopNav() {
                 display: block;
               `}
               alt={`${q_venue?.data?.name} logo`}
-              src="https://dispense-images.imgix.net/highscore/v2/hs-logo-white-icon.png"
+              src="/images/darkhorse-logo.svg"
               height={47}
               width={150}
               priority={false}
@@ -331,14 +337,18 @@ export default function TopNav() {
                 display: block;
               `}
               alt={`${q_venue?.data?.name} logo`}
-              src="https://dispense-images.imgix.net/highscore/v2/hs-logo-white-icon.png"
-              height={62}
-              width={200}
+              src="/images/darkhorse-logo.svg"
+              height={90}
+              width={268}
               priority={false}
             />
           </Logo>
-          <Links />
+          {/* <Links /> */}
         </LeftCol>
+        <CenterCol>
+
+        <Links />
+        </CenterCol>
         <RightCol>
           <a
             href="#"

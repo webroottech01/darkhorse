@@ -82,7 +82,7 @@ export default function ProductsFiltersSlideOut({
           flex-direction: row;
           gap: 20px;
           justify-content: space-between;
-          background: var(--white);
+          background: var(--cream);
           border-top: 1px solid var(--gray-lightest);
 
           @media (max-width: ${MediaQuery.screenMd}) {

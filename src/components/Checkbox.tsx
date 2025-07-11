@@ -75,10 +75,10 @@ function Checkbox(
           display: flex;
           justify-content: center;
           align-items: center;
-          color: var(--white);
+          color: var(--cream);
           background-color: ${checked
             ? 'var(--brand-primary)'
-            : 'var(--white)'};
+            : 'var(--cream)'};
           transition: background-color 0.15s, border 0.15s;
           ${size === 'small'
             ? css`

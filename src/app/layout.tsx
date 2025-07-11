@@ -6,6 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { QueryClient, dehydrate } from '@tanstack/react-query'
 
 import './globals.css'
+import './App.scss'
 import StyledComponentsRegistry from '@/components/registry'
 import TopNav from '@/components/TopNav'
 import Providers from './providers'
@@ -13,7 +14,8 @@ import { QueryClientKey } from '@/utils/queryClient'
 import AppInit from './AppInit'
 import venueService from '@/api/venueService'
 import { Suspense } from 'react'
-
+import TopBar from '@/components/TopBar'
+import {Footer} from '@/components/shared/Footer/Footer'
 if (!process.env.NEXT_PUBLIC_ENV) throw new Error('NEXT_PUBLIC_ENV')
 if (!process.env.NEXT_PUBLIC_AUTH_COOKIE)
   throw new Error('NEXT_PUBLIC_AUTH_COOKIE')
@@ -27,19 +29,19 @@ if (!process.env.NEXT_PUBLIC_DISPENSE_API_KEY)
 const font1 = localFont({
   src: [
     {
-      path: '../fonts/LibreFranklin-Regular.woff2',
+      path: '../fonts/JosefinSans-Regular.woff2',
       weight: 'normal',
       style: 'normal',
     },
     {
-      path: '../fonts/LibreFranklin-SemiBold.woff2',
+      path: '../fonts/JosefinSans-SemiBold.woff2',
     },
   ],
   display: 'swap',
   variable: '--font-family-primary',
 })
 const font2 = localFont({
-  src: '../fonts/PlayfairDisplay-Bold.woff2',
+  src: '../fonts/YesevaOne-Regular.woff2',
   display: 'swap',
   variable: '--font-family-secondary',
 })
@@ -64,13 +66,17 @@ export default async function RootLayout({
           <Providers dehydratedState={dehydrate(queryClient)}>
             <AppInit />
             <Suspense>
+              {/* <TopBar /> */}
               <TopNav />
+              
+            
             </Suspense>
             <Suspense>{children}</Suspense>
           </Providers>
         </StyledComponentsRegistry>
         <Analytics />
         <SpeedInsights />
+        <Footer />
       </body>
     </html>
   )

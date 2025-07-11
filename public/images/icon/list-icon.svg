@@ -1,0 +1,18 @@
+<svg id="Details" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #6a4633;
+        fill-opacity: 0;
+        stroke: #ffd800;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+  <g id="Custom_Listing_Stlyes_" data-name="Custom Listing Stlyes ">
+    <g id="Dots">
+      <circle class="cls-1" cx="7.563" cy="7.547" r="7"/>
+    </g>
+  </g>
+</svg>

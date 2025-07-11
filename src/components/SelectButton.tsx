@@ -34,7 +34,7 @@ const Select = styled.select<Omit<SelectButtonArgs, 'onChange'>>`
   border-radius: 40px;
   border-width: 2px;
   border-color: var(--gray-light);
-  background: var(--white);
+  background: var(--cream);
   padding: 0 calc(30px + var(--select-arrow-padding)) 0 30px;
   outline: none;
   font-size: ${({ size }) =>

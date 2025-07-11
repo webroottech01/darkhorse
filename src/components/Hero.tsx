@@ -26,7 +26,7 @@ const HeroInner = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  color: var(--white);
+  color: var(--cream);
   padding: 240px 60px 30px;
 
   @media (max-width: ${MediaQuery.screenMd}) {
@@ -56,7 +56,7 @@ const HeroImage = styled(Image)`
 const HeroH1 = styled(Typography).withConfig({
   shouldForwardProp: (prop) => !['variant'].includes(prop),
 })`
-  color: var(--white);
+  color: var(--cream);
   font-size: 80px;
   font-family: var(--font-family-secondary);
   margin: 0 0 -20px;
@@ -69,7 +69,7 @@ const HeroH1 = styled(Typography).withConfig({
 
 export default function Hero() {
   return (
-    <Banner>
+    <Banner className='homebanner'>
       <HeroInner>
         <Typography
           variant="body"
@@ -77,7 +77,7 @@ export default function Hero() {
           style={{
             fontSize: '1.4rem',
             margin: '0 0 20px 0',
-            color: 'var(--white)',
+            color: 'var(--cream)',
           }}
         >
           Dark Horse Cannabis
@@ -139,7 +139,7 @@ export default function Hero() {
           width: '100%',
           height: 'auto',
         }}
-        src={'https://dispense-images.imgix.net/highscore/v2/hs-hero-3.png'}
+        src={'./images/pattern_med_03_med_08-1.png'}
       />
     </Banner>
   )

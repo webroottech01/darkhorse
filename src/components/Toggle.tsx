@@ -23,7 +23,7 @@ const ToggleContainer = styled.div<ToggleProps>`
 
 const Handle = styled.button<ToggleProps>`
   outline: none;
-  background-color: var(--white);
+  background-color: var(--cream);
   height: 30px;
   width: 30px;
   border-radius: 50%;
@@ -32,7 +32,7 @@ const Handle = styled.button<ToggleProps>`
 
   &:focus-visible {
     border-color: var(--brand-primary);
-    box-shadow: 0 0 0 1pt var(--white);
+    box-shadow: 0 0 0 1pt var(--cream);
   }
   border: 2px solid
     ${(props) =>
@@ -41,12 +41,12 @@ const Handle = styled.button<ToggleProps>`
 `
 
 const OffIcon = styled(Icon)`
-  color: var(--white);
+  color: var(--cream);
   margin-right: 12px;
 `
 
 const OnIcon = styled(Icon)`
-  color: var(--white);
+  color: var(--cream);
   margin-left: 12px;
 `
 

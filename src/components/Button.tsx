@@ -14,13 +14,13 @@ const ButtonText = styled(Typography)<
   ${(props) =>
     props.buttonVariant === 'primary' &&
     css`
-      color: var(--white);
+      color: var(--cream);
     `}
 
   ${(props) =>
     props.buttonVariant === 'secondary' &&
     css`
-      color: var(--white);
+      color: var(--cream);
     `}
 
   ${(props) =>
@@ -80,7 +80,7 @@ const ButtonIcon = styled(Icon)`
     props.buttonVariant === 'primary' &&
     css`
       path {
-        fill: var(--white);
+        fill: var(--cream);
       }
     `}
 `
@@ -250,7 +250,7 @@ function Button(
           background-color: var(--brand-secondary);
           border-color: var(--green-dark);
           border-width: 3px;
-          color: var(--white);
+          color: var(--cream);
 
           ${round &&
           css`
@@ -273,7 +273,7 @@ function Button(
 
             &:focus:not(:active),
             &:focus-within:not(:active) {
-              border-color: var(--white);
+              border-color: var(--cream);
               box-shadow: 0 0 0 2px var(--brand-secondary);
             }
 
@@ -289,7 +289,7 @@ function Button(
         css`
           background-color: var(--blue);
           border-color: var(--green);
-          color: var(--white);
+          color: var(--cream);
           border-width: 3px;
 
           &:not(:disabled) {
@@ -301,7 +301,7 @@ function Button(
               // border-color: var(--green);
 
               // * {
-              //   color: var(--white);
+              //   color: var(--cream);
               // }
 
               path {
@@ -310,7 +310,7 @@ function Button(
             }
 
             &:focus-visible {
-              border-color: var(--white);
+              border-color: var(--cream);
               box-shadow: 0 0 0 2px var(--brand-primary);
             }
 

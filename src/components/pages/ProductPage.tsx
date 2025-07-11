@@ -73,7 +73,7 @@ const radioButtonGroupStyles = css`
 
     &.active {
       border-color: var(--brand-primary);
-      background-color: var(--white);
+      background-color: var(--cream);
 
       &:hover {
         border-color: var(--brand-primary);
@@ -81,7 +81,7 @@ const radioButtonGroupStyles = css`
 
       &:focus {
         border-color: var(--brand-primary);
-        background-color: var(--white);
+        background-color: var(--cream);
       }
     }
   }

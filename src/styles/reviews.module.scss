@@ -1,0 +1,96 @@
+.manualReviewsWrapper {
+    background: #52583F;
+    padding: 4rem 1rem;
+    color: #F7F5E1;
+ 
+
+}
+.slick-track {
+    display: flex !important;
+  }
+  .slick-slide {
+    min-height: 180px !important;
+  }
+  .manualReviewsHeading {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .manualReviewsHeading h4 {
+    letter-spacing: 1px;
+  }
+  
+  .manualReviewsHeading h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  
+  .manualReviewsSliderWrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .manualReviewCardName{
+    display: flex;
+    gap: 5px;
+    text-align: left;
+    flex-direction: column;
+}
+  .manualReviewCard {
+    background: #fff;
+    color: #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 0 0.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .manualReviewCardHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .manualReviewAvatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #52583F;
+    color: #F7F5E1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-right: 0.75rem;
+  }
+  
+  .manualReviewName {
+    font-weight: 600;
+  }
+  
+  .manualReviewDate {
+    font-size: 0.85rem;
+    color: #666;
+    text-align: right;
+  }
+  
+  .manualReviewGoogleIcon {
+    margin-left: auto;
+    color: #4285F4;
+  }
+  
+  .manualReviewStars {
+    // margin-bottom: 0.75rem;
+    color: #FFD700;
+  }
+  
+  .manualReviewText {
+    font-size: 0.95rem;
+    color: #444;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  

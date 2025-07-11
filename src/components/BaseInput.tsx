@@ -98,7 +98,7 @@ const inputRangeCss = css`
 `
 
 export const baseInputCss = css<BaseInputCssProps>`
-  background-color: var(--white);
+  background-color: var(--cream);
   color: var(--black);
   display: block;
   font-family: ${getFont('body')};

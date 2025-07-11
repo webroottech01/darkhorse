@@ -12,7 +12,7 @@ import { Product, CannabisType } from '@/types/product'
 
 const Card = styled.div`
   border: 1px solid var(--border-color);
-  background: var(--white);
+  background: var(--cream);
   border-radius: 20px;
   box-shadow: 0px 4px 0px 0px rgba(168, 175, 187, 0.3);
   cursor: pointer;

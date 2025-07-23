@@ -44,7 +44,7 @@ const categories = [
     name: 'Tinctures',
     image: '/cat-images/hs-tinctures.png',
     type: ProductType.TINCTURES,
-  }
+  },
   
 ]
 
@@ -58,7 +58,7 @@ export default function HomePage({ products }: { products: Product[] }) {
     <main>
       <Hero />
       {/* <HomeBanner /> */}
-      <Section
+      <Section className='bycatsmain'
         as="section"
         css={css`
           padding-top: 60px;
@@ -73,11 +73,11 @@ export default function HomePage({ products }: { products: Product[] }) {
           }
         `}
       >
-        <Typography variant="h1" as="h2" style={{ marginTop: 0 }}>
+        <Typography variant="h1" as="h2" style={{ marginTop: 0  }}>
           Shop by Category
         </Typography>
       </Section>
-      <ContainerFluid
+      <ContainerFluid className='homecategories'
         css={css`
           overflow: hidden;
           padding: 0;
@@ -111,10 +111,10 @@ export default function HomePage({ products }: { products: Product[] }) {
             >
               <Image
                 src={category.image}
-                height={200}
-                width={200}
+                height={150}
+                width={150}
                 alt={category.name}
-                css={'width:100%;object-fit: contain;'}
+                css={'width:100%;object-fit: contain;max-width:150px;'}
               />
               <Typography variant="h2" as="h2" css={'margin-top:0;line-height:1;'}>
                 {category.name}
@@ -123,14 +123,14 @@ export default function HomePage({ products }: { products: Product[] }) {
           ))}
         </div>
       </ContainerFluid>
-      <Section>
-        <Typography variant="h1" as="h2" style={{ marginTop: 0 }}>
+      <div className='container-large homeproducts'>
+        <Typography variant="h1" as="h2" style={{ marginTop: 0, marginBottom : 30}} className='text-center'>
           Shop Most Popular
         </Typography>
         <ProductsList products={products} />
-      </Section>
+      </div>
       
-      <div
+      <div className='reviewshome'
         css={css`
           background: var(--green);
           padding: 160px 0;

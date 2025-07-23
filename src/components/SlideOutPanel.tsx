@@ -102,10 +102,11 @@ const SlideOutPanel = ({
 
   return (
     <>
-      <Backdrop visible={level === 0 && isVisible} />
+      <Backdrop visible={level === 0 && isVisible} className='backdroppanel'/>
       {isVisible && <TransparentBackdrop onClick={close} />}
       <SlideOutPanelContainer
         role="dialog"
+        className="cartsidebar"
         aria-modal="true"
         side={side}
         level={level}

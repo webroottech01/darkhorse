@@ -34,6 +34,7 @@ export const getVariantStyles = (variant?: Variant) => {
       return `
         color: var(--gray);
         font-size: 0.8125rem;
+        font-weight:400;
       `
     case 'body-xs':
       return `
@@ -122,20 +123,18 @@ export const getVariantStyles = (variant?: Variant) => {
         color: var(--text-color);
         font-family: var(--font-family-secondary);
 
-        font-weight: 400;
+        font-weight: 600;
         line-height: 85px;
-        letter-spacing: 1.4px;
+        letter-spacing: 1.45px;
       `
     case 'h2':
       return `
         font-size: 2.00rem;
         color: var(--text-color);
-        font-weight: 800;
         font-family: var(--font-family-primary);
-
-        font-weight: 400;
+        font-weight: 600;
         line-height: 54px; /* 81.818% */
-        letter-spacing: 0.4px;
+        letter-spacing: 1.45px;
       `
     case 'h3':
       return `
@@ -155,7 +154,8 @@ export const getVariantStyles = (variant?: Variant) => {
     default:
       return `
         color: var(--text-color);
-        font-size: 1rem;
+        font-size: 1.1rem;
+        font-weight:400;
       `
   }
 }
@@ -171,11 +171,11 @@ export const getFont = (variant?: Variant) => 'var(--font-family-primary)'
 
 export const getTypographyStyles = (variant?: Variant) =>
   `
-  font-weight: 200;
+  font-weight: 600;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: 1.25px;
+  letter-spacing: 1.45px;
   ${getVariantStyles(variant)}
 `
 const Typography = styled.div<TypographyProps>`

@@ -97,8 +97,7 @@ export default function Reviews() {
       return (
         <div className={styles.manualReviewsWrapper}>
           <div className={styles.manualReviewsHeading}>
-            <h4>OUR CUSTOMERS</h4>
-            <h2>Testimonials & Reviews</h2>
+            
           </div>
           <div className={styles.manualReviewsSliderWrapper}>
             <Slider {...settings}>

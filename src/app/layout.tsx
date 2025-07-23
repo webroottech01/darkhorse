@@ -7,15 +7,17 @@ import { QueryClient, dehydrate } from '@tanstack/react-query'
 
 import './globals.css'
 import './App.scss'
+import "../../public/assets/css/bootstrap.min.css";
+import "../../public/assets/css/plugins.css";
+import "../../public/assets/css/style.css";
 import StyledComponentsRegistry from '@/components/registry'
-import TopNav from '@/components/TopNav'
 import Providers from './providers'
 import { QueryClientKey } from '@/utils/queryClient'
 import AppInit from './AppInit'
 import venueService from '@/api/venueService'
 import { Suspense } from 'react'
-import TopBar from '@/components/TopBar'
-import {Footer} from '@/components/shared/Footer/Footer'
+import HeaderOne from '@/components/header/HeaderOne'
+import FooterTwo from '@/components/footer/FooterTwo'
 if (!process.env.NEXT_PUBLIC_ENV) throw new Error('NEXT_PUBLIC_ENV')
 if (!process.env.NEXT_PUBLIC_AUTH_COOKIE)
   throw new Error('NEXT_PUBLIC_AUTH_COOKIE')
@@ -29,19 +31,19 @@ if (!process.env.NEXT_PUBLIC_DISPENSE_API_KEY)
 const font1 = localFont({
   src: [
     {
-      path: '../fonts/JosefinSans-Regular.woff2',
+      path: '../fonts/Grift-Regular.woff2',
       weight: 'normal',
       style: 'normal',
     },
     {
-      path: '../fonts/JosefinSans-SemiBold.woff2',
-    },
+      path: '../fonts/Grift-Medium.woff2',
+    }
   ],
   display: 'swap',
   variable: '--font-family-primary',
 })
 const font2 = localFont({
-  src: '../fonts/YesevaOne-Regular.woff2',
+  src: '../fonts/Kattelyn-Regular.woff2',
   display: 'swap',
   variable: '--font-family-secondary',
 })
@@ -65,9 +67,11 @@ export default async function RootLayout({
         <StyledComponentsRegistry>
           <Providers dehydratedState={dehydrate(queryClient)}>
             <AppInit />
+            {/* <TopNav /> */}
+            <HeaderOne />
             <Suspense>
               {/* <TopBar /> */}
-              <TopNav />
+              
               
             
             </Suspense>
@@ -76,7 +80,8 @@ export default async function RootLayout({
         </StyledComponentsRegistry>
         <Analytics />
         <SpeedInsights />
-        <Footer />
+        <FooterTwo />
+        {/* <Footer /> */}
       </body>
     </html>
   )

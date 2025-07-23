@@ -27,7 +27,7 @@ const HeroInner = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   color: var(--cream);
-  padding: 240px 60px 30px;
+  padding: 240px 20px 30px;
 
   @media (max-width: ${MediaQuery.screenMd}) {
     padding: 120px 40px 30px;
@@ -57,12 +57,12 @@ const HeroH1 = styled(Typography).withConfig({
   shouldForwardProp: (prop) => !['variant'].includes(prop),
 })`
   color: var(--cream);
-  font-size: 80px;
+  font-size: 75px; 
   font-family: var(--font-family-secondary);
   margin: 0 0 -20px;
 
   @media (max-width: ${MediaQuery.screenMd}) {
-    font-size: 50px;
+    font-size: 40px;
     line-height: 1.2;
   }
 `
@@ -70,7 +70,7 @@ const HeroH1 = styled(Typography).withConfig({
 export default function Hero() {
   return (
     <Banner className='homebanner'>
-      <HeroInner>
+      <HeroInner className='container'>
         <Typography
           variant="body"
           as="h2"
@@ -80,11 +80,23 @@ export default function Hero() {
             color: 'var(--cream)',
           }}
         >
-          Dark Horse Cannabis
+          Welcome to Dark Horse
         </Typography>
         <HeroH1 variant="h1" as="h1" style={{ margin: 0, maxWidth: '720px' }}>
         From the Shadows to the Spotlight
         </HeroH1>
+        <Typography
+          variant="body"
+          as="h2"
+          style={{
+            fontSize: '1rem',
+            margin: '20px 0 0px 0',
+            color: 'var(--cream)',
+            maxWidth : '650px'
+          }}
+        >
+          In an industry full of loud players, we are proud to be the dark horse, providing refined, authentic canna products for the discerning connoisseur.
+        </Typography>
         <div
           css={css`
             padding: 40px 0;

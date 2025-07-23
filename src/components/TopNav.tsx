@@ -357,12 +357,13 @@ export default function TopNav() {
 
               setCartSlideOutOpen(true)
             }}
-            className="cart-icon"
+            className="cart-icon header-cart"
             css={css`
               position: relative;
             `}
           >
-            <Icon height={52} width={52} type="CART" />
+            {/* <Icon height={52} width={52} type="CART" /> */}
+            <i className="fa-sharp fa-regular fa-cart-shopping" />
             {q_cart?.data?.items && q_cart?.data?.items.length ? (
               <Badge
                 style={{ position: 'absolute', top: '-5px', right: '10px' }}

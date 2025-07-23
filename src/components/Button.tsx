@@ -9,7 +9,7 @@ const ButtonText = styled(Typography)<
   ButtonOptions & { buttonVariant: ButtonOptions['variant'] }
 >`
   color: var(--black);
-  font-weight: bold;
+  font-weight: regular;
 
   ${(props) =>
     props.buttonVariant === 'primary' &&
@@ -332,7 +332,7 @@ function Button(
           color: var(--black);
           padding: 0;
           height: auto;
-
+          font-weight:400;
           &:not(:disabled) {
             &:hover,
             &:active,

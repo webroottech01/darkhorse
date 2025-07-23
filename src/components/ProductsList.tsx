@@ -17,7 +17,7 @@ export function ProductsList({
   products?: Product[]
 }) {
   return (
-    <div
+    <div className='productlistmain'
       css={css`
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;

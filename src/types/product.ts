@@ -127,6 +127,19 @@ export enum ProductType {
   MERCHANDISE = 'MERCHANDISE',
 }
 
+export enum ProductTypeImage {
+  FLOWER = 'cat-images/hs-flower.png',
+  PRE_ROLLS = 'cat-images/hs-prerolls.png',
+  VAPORIZERS = 'cat-images/hs-vapes.png',
+  CONCENTRATES = 'cat-images/hs-concentrates.png',
+  EDIBLES = 'cat-images/hs-edibles.png',
+  TINCTURES = 'cat-images/hs-tinctures.png',
+  TOPICALS = 'cat-images/hs-topicals.png',
+  ACCESSORIES = 'cat-images/hs-accessories.png',
+  BEVERAGES = 'cat-images/hs-beverages.png',
+  MERCHANDISE = 'cat-images/hs-merch.png',
+}
+
 export enum ProductWeightUnit {
   GRAMS = 'GRAMS',
   MILLIGRAMS = 'MILLIGRAMS',

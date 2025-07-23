@@ -256,7 +256,7 @@ export default function ProductsPage({ category }: { category?: ProductType }) {
   return (
     <>
       <Wrapper>
-        <div
+        <div className='shopall'
           css={css`
             display: flex;
             flex-direction: row;
@@ -266,7 +266,7 @@ export default function ProductsPage({ category }: { category?: ProductType }) {
             }
           `}
         >
-          <LeftNav>
+          <LeftNav className='leftfilters'>
             {/* <div
               css={css`
                 margin: 20px 0;
@@ -274,6 +274,7 @@ export default function ProductsPage({ category }: { category?: ProductType }) {
             >
               <MenuBackLink />
             </div> */}
+            
             <Filters
               value={searchParams}
               filterDefs={filterDefs}
@@ -358,11 +359,11 @@ export default function ProductsPage({ category }: { category?: ProductType }) {
                 }
               `}
             >
-              <Typography variant="h1" as="h1" style={{ margin: 0 }}>
+              <Typography className='shopcatshead' variant="h1" as="h1" style={{ margin: 0 }}>
                 {pageTitle}
               </Typography>
             </div>
-            <ProductsGrid>
+            <ProductsGrid className='shoppagegrid'>
               {q_products?.data?.pages
                 ?.map((p) => p.data)
                 .flat()

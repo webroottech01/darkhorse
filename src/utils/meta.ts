@@ -5,11 +5,33 @@ import { Metadata } from 'next'
 import { RouteName } from './route'
 import { Product, ProductTypeName, CannabisTypeName } from '@/types/product'
 import { Venue } from '@/types/venue'
+import { fetchProductMeta } from '@/types/productmetanew'
+
 // import { RouteName } from './route'
 // import { getFullVenueUrl } from '@/utils/ssr'
 // import { capitalize } from './string'
 
-export const getMetaData = ({
+
+// const params = useParams();
+// const productId = params.id as string;
+  
+// useEffectOnce(() => {
+//   async function getMeta() {
+//     const meta = await fetchProductMeta(productId)
+//     console.log('Fetched product meta:', meta)
+//     console.log('Fetched product meta:', meta?.meta_title)
+//     console.log('Fetched product meta:', meta?.meta_description)
+//     console.log('productId:', productId);
+//   }
+
+//   if (productId) {
+//     getMeta()
+//   }
+
+// })
+
+
+export const getMetaData = async ({
   routeName,
   data,
 }: {
@@ -28,7 +50,7 @@ export const getMetaData = ({
   // const { baseUrl, fullUrl, pathname } = getFullVenueUrl({
   //   venue: data.venue,
   // })
-  const baseUrl = 'http://staging.darkhorse-ny.com/'
+  const baseUrl = 'https://darkhorse-ny.com'
   // const pathname = new URL(window.location.href).pathname
   const pathname = '/'
 
@@ -65,23 +87,28 @@ export const getMetaData = ({
         },
       })
       break
-    case RouteName.PRODUCT:
-      metaData = _getMetaData({
-        venue: data.venue,
-        baseUrl,
-        pathname,
-        titleTemplateStr:
-          data.venue.seoMenuMetaData?.productDetail?.title ?? '',
-        descTemplateStr:
-          data.venue.seoMenuMetaData?.productDetail?.description ?? '',
-        data: {
-          ...convertVenueToMergeVariables(data.venue),
-          ...(data?.product
-            ? convertProductToMergeVariables(data?.product)
-            : {}),
-        },
-      })
-      break
+      case RouteName.PRODUCT:
+        let productMeta = null;
+        if (data.product?.id) {
+          productMeta = await fetchProductMeta(data.product.id);
+        }
+      
+        metaData = _getMetaData({
+          venue: data.venue,
+          baseUrl,
+          pathname,
+          titleTemplateStr:
+            productMeta?.meta_title || data.venue.seoMenuMetaData?.productDetail?.title || '',
+          descTemplateStr:
+            productMeta?.meta_description || data.venue.seoMenuMetaData?.productDetail?.description || '',
+          data: {
+            ...convertVenueToMergeVariables(data.venue),
+            ...(data?.product
+              ? convertProductToMergeVariables(data?.product)
+              : {}),
+          },
+        })
+        break;
     default:
       metaData = _getMetaData({
         venue: data.venue,

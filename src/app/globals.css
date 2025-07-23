@@ -3,7 +3,7 @@
   --brand-secondary: #52583F;
 
   /* Colors */
-  --bg-color: #F7F5E1;
+  --bg-color: #f7f5e1;
   --text-color: var(--blue-dark);
   --border-color: #c2bc9c;
   --brand-danger: #ef4d61;
@@ -52,6 +52,8 @@ body {
   min-height: 100vh;
   -webkit-text-size-adjust: 100%;
   line-height: normal;
+  padding-top: 133px; 
+  /* overflow: scroll; */
 
   &.no-scroll {
     overflow: hidden;
@@ -77,4 +79,117 @@ code {
 
 button{
   font-family: var(--font-family-primary);
+}
+
+
+
+.accont-wishlist-cart-area-header .cart span.number{
+  background: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+.leftfilters {
+  top: 133px !important; 
+}
+.homebanner button {
+  background: #f7f5e1;
+}
+.homebanner button div {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+
+
+@media only screen and (max-width:768px) {
+  body{
+    padding-top: 95px;
+  }
+  .accont-wishlist-cart-area-header .menu-btn svg{
+    background-color: unset !important;
+  }
+  .logo-area img.logo {
+    max-width: 180px;
+}
+.productlistmain {
+  padding: 0 10px;
+}
+.productlistmain > a {
+  overflow: hidden;
+}
+.productlistmain > a button{
+  padding: 7px 10px;
+  height: fit-content;
+  border-radius: 20px;
+}
+.shoppagegrid > a {
+  overflow: hidden;
+}
+.shoppagegrid > a button{
+  padding: 7px 10px;
+  height: fit-content;
+  border-radius: 20px;
+}
+.reviewshome > div {
+  padding: 0 35px;
+}
+.bycatsmain h2 {
+  font-size: 35px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.homeproducts h2{
+  font-size: 35px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.shopcatshead {
+  font-size: 40px !important;
+  text-align: center;
+  line-height: 1 !important;
+  margin-top: 20px !important;
+}
+.productcard span.cardtitle {
+  display: block;
+  width: fit-content;
+  word-break: break-all;
+  font-size: 16px;
+}
+.cardaddtocart div {
+  margin-left: 2px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.productcard form {
+  width: 100%;
+}
+.reviewshome h3 {
+  font-size: 35px;
+  padding: 0 10px;
+  line-height: 1;
+}
+.footer-two-main-wrapper > div {
+  width: 100%;
+}
+.footer-two-main-wrapper .start p.disc {
+  max-width: 100% !important;
+}
+.rts-footer-area-two .logo-area img.logo {
+  max-width: 250px;
+}
+.social-and-payment-area-wrapper {
+  justify-content: left;
+  align-items: flex-start;
+  padding: 0;
+}
+.rts-footer-area-two {
+  padding: 60px 0 40px 0 !important;
+}
+.homecategories > div > a {
+  min-width: fit-content;
+  padding: 0 10px;
+  gap: 5px;
+}
+.homecategories h2 {
+font-size: 20px;
+}
 }

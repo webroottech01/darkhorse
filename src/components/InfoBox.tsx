@@ -118,14 +118,14 @@ const InfoBox = (props: InfoBoxProps) => {
   return (
     <InfoBoxDefault {...props} backgroundColor={backgroundColor}>
       {icon && (
-        <InfoBoxIcon
+        <><InfoBoxIcon
           iconColor={iconColor}
           type={iconType}
           infoType={props.type}
           height={30}
-          width={30}
-        />
+          width={30} /><i className="fa fa-warning" style={{ marginRight: '8px' }}></i></>
       )}
+      {/* <i className="fa fa-warning" style={{ marginRight: '8px' }}></i> */}
       <InfoBoxText>{props.children}</InfoBoxText>
       {closeable ? (
         <CloseButton

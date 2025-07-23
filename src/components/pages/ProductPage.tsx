@@ -8,7 +8,7 @@ import { useMutation } from '@tanstack/react-query'
 import Image from 'next/image'
 import { zodResolver } from '@hookform/resolvers/zod/dist/zod.js'
 import Link from 'next/link'
-
+// import { fetchProductMeta } from '@/types/productmetanew'
 import useVenue from '@/hooks/useVenue'
 import {
   getQuantity,
@@ -46,6 +46,7 @@ import { CartItemStatus } from '@/types/cart'
 import { RadioButtonGroup } from '../RadioButton'
 import { venueCurrency } from '@/utils/venue'
 import cartService from '@/api/cartService'
+// import { useParams } from 'next/navigation'
 
 const productFormSchema = z.object({
   quantity: z.number().min(1),
@@ -394,7 +395,21 @@ export default function ProductPage({ product }: { product: Product }) {
     return cart
   })
 
+  // const productId = product.id;
+  
   useEffectOnce(() => {
+    // async function getMeta() {
+    //   const meta = await fetchProductMeta(productId)
+    //   console.log('Fetched product meta:', meta)
+    //   console.log('Fetched product meta:', meta?.meta_title)
+    //   console.log('Fetched product meta:', meta?.meta_description)
+    //   console.log('productId:', productId);
+    // }
+
+    // if (productId) {
+    //   getMeta()
+    // }
+
     const data = product
 
     if (data.priceType !== ProductPriceType.REGULAR && data.tiers?.length) {
@@ -414,6 +429,7 @@ export default function ProductPage({ product }: { product: Product }) {
     : []
 
   console.log('VARIANTS', product.variants)
+  // console.log('id' , product.id)
 
   return (
     <>
@@ -786,6 +802,7 @@ export default function ProductPage({ product }: { product: Product }) {
                       css={css`
                         display: none;
                         margin-top: 20px;
+                        display: flex !important;
 
                         @media (min-width: 700px) {
                           display: flex;

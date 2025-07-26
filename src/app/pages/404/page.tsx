@@ -2,7 +2,7 @@
 import HeaderOne from "@/components/header/HeaderOne";
 import ShortService from "@/components/service/ShortService";
 
-import FooterOne from "@/components/footer/FooterOne";
+import FooterTwo from "@/components/footer/FooterTwo";
 
 export default function Home() {
   return (
@@ -38,7 +38,7 @@ export default function Home() {
 
 
       <ShortService />
-      <FooterOne />
+      <FooterTwo />
 
     </div>
   );

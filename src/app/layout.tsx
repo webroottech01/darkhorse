@@ -4,12 +4,11 @@ import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { QueryClient, dehydrate } from '@tanstack/react-query'
-
 import './globals.css'
 import './App.scss'
-import "../../public/assets/css/bootstrap.min.css";
-import "../../public/assets/css/plugins.css";
-import "../../public/assets/css/style.css";
+import '../../public/assets/css/bootstrap.min.css'
+import '../../public/assets/css/plugins.css'
+import '../../public/assets/css/style.css'
 import StyledComponentsRegistry from '@/components/registry'
 import Providers from './providers'
 import { QueryClientKey } from '@/utils/queryClient'
@@ -18,6 +17,9 @@ import venueService from '@/api/venueService'
 import { Suspense } from 'react'
 import HeaderOne from '@/components/header/HeaderOne'
 import FooterTwo from '@/components/footer/FooterTwo'
+import TopNav from '@/components/TopNav'
+import AgeGate from '@/components/AgeGate'
+import ClientLayout from '@/components/ClientLayout'
 if (!process.env.NEXT_PUBLIC_ENV) throw new Error('NEXT_PUBLIC_ENV')
 if (!process.env.NEXT_PUBLIC_AUTH_COOKIE)
   throw new Error('NEXT_PUBLIC_AUTH_COOKIE')
@@ -37,15 +39,20 @@ const font1 = localFont({
     },
     {
       path: '../fonts/Grift-Medium.woff2',
-    }
+    },
   ],
   display: 'swap',
   variable: '--font-family-primary',
 })
 const font2 = localFont({
-  src: '../fonts/Kattelyn-Regular.woff2',
+  src: '../fonts/Mosie-Black.woff2',
   display: 'swap',
   variable: '--font-family-secondary',
+})
+const font3 = localFont({
+  src: '../fonts/Mosie-ExtraBold.woff2',
+  display: 'swap',
+  variable: '--font-family-bold',
 })
 
 export default async function RootLayout({
@@ -62,27 +69,26 @@ export default async function RootLayout({
   queryClient.setQueryData(QueryClientKey.VENUE, venue)
 
   return (
-    <html lang="en" className={`${font1.variable} ${font2.variable}`}>
-      <body>
-        <StyledComponentsRegistry>
-          <Providers dehydratedState={dehydrate(queryClient)}>
-            <AppInit />
-            {/* <TopNav /> */}
-            <HeaderOne />
-            <Suspense>
-              {/* <TopBar /> */}
-              
-              
-            
-            </Suspense>
-            <Suspense>{children}</Suspense>
-          </Providers>
-        </StyledComponentsRegistry>
-        <Analytics />
-        <SpeedInsights />
-        <FooterTwo />
-        {/* <Footer /> */}
-      </body>
-    </html>
+<html lang="en" className={`${font1.variable} ${font2.variable}`}>
+  <body>
+    <StyledComponentsRegistry>
+      <Providers dehydratedState={dehydrate(queryClient)}>
+        <AppInit />
+        <AgeGate />
+
+        {/* <TopNav /> */}
+        <HeaderOne />
+        <Suspense>
+          <ClientLayout>{children}</ClientLayout>
+        </Suspense>
+      </Providers>
+    </StyledComponentsRegistry>
+
+    <Analytics />
+    <SpeedInsights />
+    <FooterTwo />
+  </body>
+</html>
+
   )
 }

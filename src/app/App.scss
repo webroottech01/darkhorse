@@ -1,7 +1,7 @@
 /* reset */
 $min-width: 320px; 
 $max-width: 1220px;
-$base-bg: #FFF; 
+$base-bg: var(--color-cream); 
 $base-font-size: 16px; 
 $base-line-height: 18px; 
 $base-font-family: '__font1_d743af', sans-serif; 
@@ -41,8 +41,11 @@ $line-height-h3: 56px;
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  background: var(--color-cream) !important;
+}
 .logo-area img.logo {
-  max-width: 290px;
+  max-width: 250px;
 }
 // html, body {
 //   width: 100%;
@@ -214,9 +217,99 @@ canvas#bg-canvas {
   width: 60px;
 }
 
+.overlayloader {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background: var(--color-cream);
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-direction: column;
+}
+.overlayloader img{
+  width: 110px;
+}
 
-/* Home */
-.homeproducts {
-  margin-bottom: 70px;
-  margin-top: 30px;
+.overlayloader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/pattern_med_03_med_08-1.png');
+  background-size: 12%;
+  background-position: center;
+  opacity: 0.5; 
+  z-index: 0;
+}
+.age-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--color-primary); // semi-transparent black
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-image: url(/images/pattern_med_03_med_08-1.png) !important;
+    background-repeat: repeat;
+
+  &__content {
+    background: var(--color-cream); // or a soft yellow
+    padding: 2rem 2.5rem;
+    border-radius: 10px;
+    max-width: 90%;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+    font-family: var(--font-family-primary);
+  }
+
+  &__text {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #444;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    .age-gate__btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+
+      &.accept {
+        background-color: #4caf50;
+        color: white;
+
+        &:hover {
+          background-color: #45a049;
+        }
+      }
+
+      &.decline {
+        background-color: #e53935;
+        color: white;
+
+        &:hover {
+          background-color: #d32f2f;
+        }
+      }
+    }
+  } 
 }

@@ -12,6 +12,8 @@ import Link from 'next/link'
 import CartCounter from '../countCart'
 import WishList from './WishList'
 import SearchBar from './searchbar'
+import NavBar from './Navbar'
+import Loader from '../Loader'
 
 function HeaderOne() {
   // header sticky
@@ -90,7 +92,7 @@ function HeaderOne() {
             </div>
           </div>
         </div>
-
+{/* <Loader /> */}
         <div className="search-header-area-main">
           <div className="container">
             <div className="row">
@@ -103,7 +105,8 @@ function HeaderOne() {
                       className="logo"
                     />
                   </Link>
-                  <HeaderNav />
+                  {/* <HeaderNav /> */}
+                  <NavBar />
                   <div className="accont-wishlist-cart-area-header">
                     <div className="actions-area">
                       <div

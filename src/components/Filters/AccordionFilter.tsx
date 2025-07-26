@@ -67,10 +67,10 @@ export default function AccordionFilter({
         borderBottom: '1px solid var(--gray-light)',
       }}
       trigger={
-        <Typography variant="label">
+        <Typography variant="label" className='filterlabel'>
           {filterDef.label}
           {appliedCount && appliedCount > 0 ? (
-            <Typography style={{ display: 'inline' }} variant="body-sm">
+            <Typography style={{ display: 'inline' }} variant="body-sm" className='sssssss'>
               {' '}
               ({appliedCount})
             </Typography>

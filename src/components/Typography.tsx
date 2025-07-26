@@ -123,7 +123,7 @@ export const getVariantStyles = (variant?: Variant) => {
         color: var(--text-color);
         font-family: var(--font-family-secondary);
 
-        font-weight: 600;
+        font-weight: 400;
         line-height: 85px;
         letter-spacing: 1.45px;
       `
@@ -132,7 +132,7 @@ export const getVariantStyles = (variant?: Variant) => {
         font-size: 2.00rem;
         color: var(--text-color);
         font-family: var(--font-family-primary);
-        font-weight: 600;
+        font-weight: 400;
         line-height: 54px; /* 81.818% */
         letter-spacing: 1.45px;
       `
@@ -171,7 +171,7 @@ export const getFont = (variant?: Variant) => 'var(--font-family-primary)'
 
 export const getTypographyStyles = (variant?: Variant) =>
   `
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;

@@ -37,10 +37,11 @@ import { CartItemStatus } from '@/types/cart'
 import cartService from '@/api/cartService'
 import { z } from 'zod'
 const Card = styled.div`
-  border: 1px solid var(--border-color);
+border: 2px solid #52583fa1;
+    border-radius: 15px;
   background: var(--cream);
   border-radius: 20px;
-  box-shadow: 0px 4px 0px 0px rgba(168, 175, 187, 0.3);
+  box-shadow: #52583f 4px 4px 10px -6px;
   cursor: pointer;
   width: 100%;
   padding: 0;

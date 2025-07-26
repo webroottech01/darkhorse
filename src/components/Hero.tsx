@@ -27,7 +27,7 @@ const HeroInner = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   color: var(--cream);
-  padding: 240px 20px 30px;
+  padding: 240px 20px 60px;
 
   @media (max-width: ${MediaQuery.screenMd}) {
     padding: 120px 40px 30px;

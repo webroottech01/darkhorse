@@ -13,38 +13,45 @@ import ContainerFluid from '../Containerfluid'
 import { Product, ProductType } from '@/types/product'
 import { MediaQuery } from '@/utils/mediaQueries'
 import Reviews from '../Reviews'
+import OfferAdd from '../common/OfferAdd'
+import OffersSlider from '../OffersSlider'
 
 const categories = [
   {
     name: 'Flower',
-    image: '/cat-images/hs-flower.png',
+    image: '/cat-images/flowers.webp',
     type: ProductType.FLOWER,  
   },
   {
     name: 'Vapes',
-    image: '/cat-images/hs-vapes.png',
+    image: '/cat-images/vapes.webp',
     type: ProductType.VAPORIZERS,
   },
   {
     name: 'Edibles',
-    image: '/cat-images/hs-edibles.png',
+    image: '/cat-images/edibles.webp',
     type: ProductType.EDIBLES,
   },
   {
     name: 'Pre Rolls',
-    image: '/cat-images/hs-pre-rolls.png',
+    image: '/cat-images/prerolls.webp',
     type: ProductType.PRE_ROLLS,
   },
   {
     name: 'Concentrates',
-    image: '/cat-images/hs-concentrates.png',
+    image: '/cat-images/concentrates.webp',
     type: ProductType.CONCENTRATES,
   },
   {
     name: 'Tinctures',
-    image: '/cat-images/hs-tinctures.png',
+    image: '/cat-images/Tinctures.webp',
     type: ProductType.TINCTURES,
   },
+  {
+    name: 'Beverages',
+    image: '/cat-images/beverages.webp',
+    type: ProductType.BEVERAGES,
+  }
   
 ]
 
@@ -58,26 +65,47 @@ export default function HomePage({ products }: { products: Product[] }) {
     <main>
       <Hero />
       {/* <HomeBanner /> */}
-      <Section className='bycatsmain'
+      <Section className='offersouter'
         as="section"
         css={css`
-          padding-top: 60px;
-          padding-bottom: 0;
-
-          @media (min-width: 780px) {
-            width: 780px;
-          }
+          padding-top: 40px;
+          padding-bottom: 40px;
+          width: 100%;
 
           @media (max-width: 780px) {
             width: 100%;
           }
         `}
       >
-        <Typography variant="h1" as="h2" style={{ marginTop: 0  }}>
+        {/* <p>Don't Miss out on our</p> */}
+        <p className='mb-0'>Don't Miss out our</p>
+        <Typography variant="h1" as="h2" style={{ marginTop: 0 , marginBottom : '30px' }}>
+        Big Savings! 
+        </Typography>
+        
+      <OffersSlider />
+      </Section>
+      
+      <Section className='bycatsmain'
+        as="section"
+        css={css`
+          padding-top: 60px;
+          padding-bottom: 60px;
+          width: 100%;
+
+          @media (max-width: 780px) {
+            width: 100%;
+          }
+        `}
+      >
+        <p className='mb-0'>Find What Fits Your Lifestyle</p>
+        <Typography variant="h1" as="h2" style={{ marginTop: 0 , marginBottom : '30px'  }}>
           Shop by Category
         </Typography>
-      </Section>
-      <ContainerFluid className='homecategories'
+        
+
+
+        <ContainerFluid className='homecategories container'
         css={css`
           overflow: hidden;
           padding: 0;
@@ -111,10 +139,10 @@ export default function HomePage({ products }: { products: Product[] }) {
             >
               <Image
                 src={category.image}
-                height={150}
-                width={150}
+                height={200}
+                width={200}
                 alt={category.name}
-                css={'width:100%;object-fit: contain;max-width:150px;'}
+                css={'width:100%;object-fit: contain;max-width:200px;'}
               />
               <Typography variant="h2" as="h2" css={'margin-top:0;line-height:1;'}>
                 {category.name}
@@ -123,13 +151,23 @@ export default function HomePage({ products }: { products: Product[] }) {
           ))}
         </div>
       </ContainerFluid>
+
+
+      </Section>
+      
+      
+      <div className='homeproductsmain'>
+      <div className='homeproductsinner'>
       <div className='container-large homeproducts'>
-        <Typography variant="h1" as="h2" style={{ marginTop: 0, marginBottom : 30}} className='text-center'>
+        <p className='prefixtxt'>Our Products</p>
+        <Typography variant="h1" as="h2" style={{ marginTop: 0}} className='text-center'>
           Shop Most Popular
         </Typography>
+        <p>Tried, tested, and loved by our customers! These top-selling products are fan favorites for a reason—shop the most popular picks today.</p>
         <ProductsList products={products} />
       </div>
-      
+      </div>
+      </div>
       <div className='reviewshome'
         css={css`
           background: var(--green);

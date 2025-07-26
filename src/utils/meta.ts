@@ -50,7 +50,7 @@ export const getMetaData = async ({
   // const { baseUrl, fullUrl, pathname } = getFullVenueUrl({
   //   venue: data.venue,
   // })
-  const baseUrl = 'https://darkhorse-ny.com'
+  const baseUrl = 'https://darkhorse-ny.com/stagingapp'
   // const pathname = new URL(window.location.href).pathname
   const pathname = '/'
 

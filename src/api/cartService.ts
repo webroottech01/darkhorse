@@ -11,7 +11,7 @@ import { QueryClientKey, queryClientUtils } from '@/utils/queryClient'
 import { ProductPriceType, ProductType } from '@/types/product'
 import venueService from './venueService'
 
-const CART_ITEMS_KEY = 'highscore_cart_items'
+const CART_ITEMS_KEY = 'darkhorse_cart_items'
 
 class CartService {
   async addProduct(

@@ -46,7 +46,7 @@ NEXT_PUBLIC_ENV = dev
 NEXT_PUBLIC_DISPENSE_BASE_URL = https://api.dispenseapp.com/2023-03
 NEXT_PUBLIC_DISPENSE_API_KEY = your dispense api key here
 NEXT_PUBLIC_DISPENSE_VENUE_ID = your dispense venue/retailer id here
-NEXT_PUBLIC_AUTH_COOKIE = 'highscore-auth //use whatever name you'd like for the auth cookie
+NEXT_PUBLIC_AUTH_COOKIE = 'Darkhorse-auth //use whatever name you'd like for the auth cookie
 ```
 
 To start the development server, run the following command:

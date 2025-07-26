@@ -3,7 +3,7 @@ import cookie from 'js-cookie'
 import { queryClientUtils, QueryClientKey } from '@/utils/queryClient'
 import { Venue } from '@/types/venue'
 
-const authCookie = 'highscore-auth'
+const authCookie = 'Darkhorse-auth'
 
 class AuthUtils {
   isLoggedIn: boolean = false
